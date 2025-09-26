@@ -236,14 +236,16 @@ Generate the complete HTML code with embedded JavaScript:"""
             
             input_messages.append({"role": "user", "content": current_prompt})
 
-            # Call OpenAI using NEW Responses API with conversation history
-            response = openai.responses.create(
+            # Call OpenAI using standard Chat Completions API
+            response = openai.chat.completions.create(
                 model=GPT_MODEL,
-                input=input_messages
+                messages=input_messages,
+                max_tokens=MAX_TOKENS,
+                temperature=TEMPERATURE
             )
 
-            # Extract the generated HTML from new Responses API
-            generated_html = response.output_text.strip()
+            # Extract the generated HTML from standard API
+            generated_html = response.choices[0].message.content.strip()
             
             # Clean up the response (remove any markdown formatting)
             if generated_html.startswith('```html'):
