@@ -910,7 +910,7 @@
                 <span class="close" onclick="closeChat()">&times;</span>
             </div>
             <div class="modal-body">
-                <iframe src="http://localhost:6969/" class="modal-iframe"></iframe>
+                <iframe src="/ai-assistant/" class="modal-iframe"></iframe>
             </div>
         </div>
     </div>
@@ -1331,7 +1331,7 @@
                 console.log('Sending request with session_id:', sessionId);
                 console.log('Request body:', requestBody);
                 
-                const response = await fetch('http://localhost:5000/api/generate', {
+                const response = await fetch('/api/generate', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1415,7 +1415,7 @@
         // Clear conversation session
         async function clearSession() {
             try {
-                const response = await fetch('http://localhost:5000/api/clear-session', {
+                const response = await fetch('/api/clear-session', {
                     method: 'POST'
                 });
                 
