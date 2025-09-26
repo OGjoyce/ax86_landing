@@ -44,7 +44,8 @@ app.add_middleware(
 app.add_middleware(SessionMiddleware, secret_key=os.getenv("SESSION_SECRET_KEY", "ax86_ai_website_generator_secret_key_2025"))
 
 # OpenAI API configuration
-openai.api_key = "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"
+import os
+os.environ["OPENAI_API_KEY"] = "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"
 
 # GPT-4 model configuration
 GPT_MODEL = "gpt-4"
