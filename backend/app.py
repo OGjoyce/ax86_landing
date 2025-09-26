@@ -44,9 +44,7 @@ app.add_middleware(
 app.add_middleware(SessionMiddleware, secret_key=os.getenv("SESSION_SECRET_KEY", "ax86_ai_website_generator_secret_key_2025"))
 
 # OpenAI API configuration
-openai_client = openai.OpenAI(
-    api_key="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"
-)
+openai.api_key = "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"
 
 # GPT-4 model configuration
 GPT_MODEL = "gpt-4"
@@ -239,7 +237,7 @@ Generate the complete HTML code with embedded JavaScript:"""
             input_messages.append({"role": "user", "content": current_prompt})
 
             # Call OpenAI using standard Chat Completions API with conversation history
-            response = openai_client.chat.completions.create(
+            response = openai.chat.completions.create(
                 model=GPT_MODEL,
                 messages=input_messages,
                 max_tokens=MAX_TOKENS,
