@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX86 - Enterprise AI Technology Platform | AssemblerX86</title>
+    <meta name="description" content="AX86 delivers enterprise-grade AI solutions for medium and large businesses. Custom MCP tools, intelligent assistants, and autonomous technology that accelerates growth and response times.">
+    
+    <!-- Helvetica Font -->
+    <style>
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/helvetica-light-587ebe5a59211.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+    </style>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sapphire: #0D52BA;
+            --sapphire-light: #1E6BCC;
+            --sapphire-dark: #0A4296;
+            --gold: #D4AF36;
+            --gold-light: #E6C547;
+            --gold-dark: #B8941F;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --gray-800: #343A40;
+            --gray-900: #212529;
+        }
+        
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(13, 82, 186, 0.15);
+        }
+        
+        .btn-primary {
+            background: var(--sapphire);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            background: var(--sapphire-dark);
+            border-color: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(13, 82, 186, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--sapphire);
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--sapphire);
+            transform: translateY(-2px);
+        }
+        
+        .language-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .language-dropdown-content a {
+            color: var(--gray-700);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+        }
+        
+        .language-dropdown-content a:hover {
+            background-color: var(--gray-100);
+        }
+        
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+        
+        /* Floating Chat Button */
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(212, 175, 54, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(212, 175, 54, 0.4);
+            background: rgba(212, 175, 54, 0.1);
+        }
+        
+        .chat-button img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            background: var(--sapphire);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close:hover {
+            color: var(--gold);
+        }
+        
+        .modal-body {
+            height: calc(100% - 60px);
+            padding: 0;
+        }
+        
+        .modal-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        /* Gold accents for cards and links */
+        .card-gold {
+            border: 1px solid var(--gold);
+        }
+        
+        .link-gold {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .link-gold:hover {
+            color: var(--gold-light);
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="#home">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-700 hover:text-sapphire transition-colors">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-sapphire transition-colors">About</a>
+                    <a href="#solutions" class="text-gray-700 hover:text-sapphire transition-colors">Solutions</a>
+                    <a href="mcp_information.html" class="text-gray-700 hover:text-sapphire transition-colors">MCP Tools</a>
+                    <a href="ai_assistants.html" class="text-gray-700 hover:text-sapphire transition-colors">AI Assistants</a>
+                    <a href="enterprise_integration.html" class="text-gray-700 hover:text-sapphire transition-colors">Enterprise</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-sapphire transition-colors">Pricing</a>
+                    <a href="#test" class="text-gray-700 hover:text-sapphire transition-colors">Test Power</a>
+                    <a href="#ai-creation" class="text-gray-700 hover:text-sapphire transition-colors">AI Creation</a>
+                    <a href="#contact" class="text-gray-700 hover:text-sapphire transition-colors">Contact</a>
+                    <div class="language-dropdown">
+                        <button class="text-gray-700 hover:text-sapphire transition-colors flex items-center space-x-1">
+                            <span>EN</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown-content">
+                            <a href="#" onclick="changeLanguage('en')">English</a>
+                            <a href="#" onclick="changeLanguage('es')">Español</a>
+                            <a href="#" onclick="changeLanguage('zh')">中文</a>
+                            <a href="#" onclick="changeLanguage('fr')">Français</a>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-primary">Get in touch</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="mb-6">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-20 w-auto">
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
+                        Finally, someone put all the pieces together.
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+                        In AX86's model, the business wins and the technology wins. Enterprise AI solutions that accelerate growth and deliver unprecedented response times.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary text-lg px-8 py-4">Experience Our Power</button>
+                        <button class="btn-secondary text-lg px-8 py-4">Learn More</button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
+                        <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <div class="w-8 h-8 bg-sapphire rounded-full"></div>
+                            </div>
+                            <h3 class="text-xl font-semibold text-black">AI Assistant Demo</h3>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="text-gray-700">"Hey Scott, I've analyzed your business data and can save you $50,000 annually in operational costs!"</p>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-sapphire text-white px-4 py-2 rounded-lg text-sm font-medium">
+                                    Optimize Operations
+                                </button>
+                                <button class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">
+                                    Reduce Costs
+                                </button>
+                            </div>
+                            <div class="text-center">
+                                <button class="text-sapphire text-sm font-medium">View Analytics</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Success indicator -->
+                    <div class="absolute -top-4 -right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">$50K</div>
+                            <div class="text-xs">Saved!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Our AI Solutions</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Custom MCP tools, intelligent assistants, and enterprise-grade AI technology that transforms how businesses operate.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg card-gold card-hover">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-sapphire rounded"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-4">Custom MCP Tools</h3>
+                    <p class="text-gray-600 mb-6">We create specialized Model Context Protocol tools for your business. From pizza sales analytics to complex data processing, our AI tools integrate seamlessly with your existing systems.</p>
+                    <a href="mcp_information.html" class="link-gold font-medium hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 shadow-lg card-gold card-hover">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-sapphire rounded-full"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-4">Intelligent Assistants</h3>
+                    <p class="text-gray-600 mb-6">Deploy AI assistants that understand your business context and provide instant, accurate responses to customer inquiries. Reduce response times from hours to seconds.</p>
+                    <a href="ai_assistants.html" class="link-gold font-medium hover:underline">Learn more →</a>
+                </div>
+                
+                <div class="bg-white rounded-xl p-8 shadow-lg card-gold card-hover">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-6">
+                        <div class="w-6 h-6 bg-sapphire" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-4">Enterprise Integration</h3>
+                    <p class="text-gray-600 mb-6">Our solutions scale from medium businesses to large enterprises. Built on x86 architecture principles, ensuring compatibility, performance, and reliability.</p>
+                    <a href="enterprise_integration.html" class="link-gold font-medium hover:underline">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Our Power Section -->
+    <section id="test" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Test Our Power</h2>
+                <p class="text-lg md:text-xl text-gray-600">
+                    Create a landing page in minutes! Experience AI-powered web development with our integrated AX86 tool.
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-semibold text-black mb-2">AI Website Generator</h3>
+                    <p class="text-gray-600">Describe your website and watch AI create it instantly with interactive features, forms, and animations</p>
+                </div>
+                
+                        <textarea 
+                            class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sapphire focus:border-transparent resize-none"
+                            rows="3"
+                            placeholder="Try commands like: 'Create a modern tech startup landing page with interactive animations', 'Build a restaurant website with working order form', 'Make a portfolio site with image gallery and contact form', 'Design a fitness gym homepage with membership calculator', 'Create an e-commerce site with shopping cart functionality'..."
+                            id="websitePrompt"
+                        ></textarea>
+                
+                <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 mt-6">
+                    <button onclick="generateWebsite()" class="btn-primary">Generate Website</button>
+                    <button onclick="clearPreview()" class="btn-secondary">Clear Preview</button>
+                    <button onclick="clearSession()" class="btn-secondary bg-red-600 hover:bg-red-700 text-white">Clear Session</button>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="loadingState" class="hidden mt-6 text-center">
+                    <div class="inline-flex items-center space-x-2">
+                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-sapphire"></div>
+                        <span class="text-gray-600">Generating your website...</span>
+                    </div>
+                </div>
+                
+                        <!-- Preview Area -->
+                        <div id="previewArea" class="hidden mt-8">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                                <h4 class="text-lg font-semibold text-black mb-4">Generated Website Preview:</h4>
+                                <iframe id="websitePreview" class="w-full h-[600px] border border-gray-200 rounded-lg" frameborder="0" style="background: white; width: 80%; margin: 0 auto;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-black mb-8">About AX86</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        AX86 is more than a technological solution: it's a revolution in customer support and sales efficiency. Inspired by x86 architecture, a milestone in computational evolution, AX86 represents a new era: autonomous AI, real-time decisions, and integrated, radically personalized experiences.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        We define the identity that guides every interaction with our clients, partners, and users, under a strategic, elegant, and disruptive approach. Our mission is to empower businesses with intelligent technology that accelerates growth and delivers exceptional results.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">99.9%</div>
+                            <div class="text-gray-600">System Uptime</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">50ms</div>
+                            <div class="text-gray-600">Response Time</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">500+</div>
+                            <div class="text-gray-600">Enterprise Clients</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">24/7</div>
+                            <div class="text-gray-600">AI Support</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="bg-gradient-to-br from-sapphire to-sapphire-light rounded-2xl p-8 md:p-12 text-center text-white mb-8">
+                        <div class="text-4xl md:text-6xl font-bold mb-4">AX86</div>
+                        <div class="text-lg md:text-xl opacity-90">Enterprise AI Technology Platform</div>
+                    </div>
+                    
+                    <!-- AX86 Logos Grid -->
+                    <div class="bg-gray-50 rounded-2xl p-6">
+                        <h3 class="text-xl font-semibold text-black mb-6 text-center">Our Brand Identity</h3>
+                        <div class="grid grid-cols-3 gap-4">
+                            <!-- Row 1 -->
+                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+                                <img src="resources/PNG/Logo Azul - Amarillo .png" alt="AX86 Blue Yellow Logo" class="w-full h-16 object-contain">
+                            </div>
+                            <div class="bg-black rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+                                <img src="resources/PNG/Logo Full Blanco .png" alt="AX86 White Logo" class="w-full h-16 object-contain">
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+                                <img src="resources/PNG/Logo Full Negro.png" alt="AX86 Black Logo" class="w-full h-16 object-contain">
+                            </div>
+                            
+                            <!-- Row 2 -->
+                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+                                <img src="resources/PNG/Logo Marfil + Amarillo .png" alt="AX86 Ivory Yellow Logo" class="w-full h-16 object-contain">
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+                                <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Black Yellow Logo" class="w-full h-16 object-contain">
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
+                                <img src="resources/PNG/Logo Verde - Amarillo .png" alt="AX86 Green Yellow Logo" class="w-full h-16 object-contain">
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600 text-center mt-4">Professional branding for every application</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Pricing Plans</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Choose the perfect AI solution for your business. All plans include 24/7 support and regular updates.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Basic AI Agent Plan -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-gold card-hover">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div class="w-8 h-8 bg-sapphire rounded"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-2">Basic AI Agent</h3>
+                        <p class="text-gray-600">Perfect for small to medium businesses</p>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <div class="text-4xl font-bold text-sapphire mb-2">$250</div>
+                        <div class="text-gray-600">per month</div>
+                        <div class="text-sm text-green-600 font-medium mt-2">
+                            Save 25% with annual billing ($187.50/month)
+                        </div>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Custom AI Agent</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Up to 50 documents for training</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Natural language processing</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">24/7 AI support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Email support</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full btn-secondary">Get Started</button>
+                </div>
+                
+                <!-- Advanced AI Agent Plan -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-gold card-hover relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-gold text-black px-4 py-2 rounded-full text-sm font-bold">Most Popular</span>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div class="w-8 h-8 bg-sapphire rounded-full"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-2">Advanced AI Agent</h3>
+                        <p class="text-gray-600">Ideal for growing businesses</p>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <div class="text-4xl font-bold text-sapphire mb-2">$350</div>
+                        <div class="text-gray-600">per month</div>
+                        <div class="text-sm text-green-600 font-medium mt-2">
+                            Save 25% with annual billing ($262.50/month)
+                        </div>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Custom AI Agent</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Up to 100 documents for training</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Advanced natural language processing</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Priority 24/7 AI support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Phone & email support</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Advanced analytics</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full btn-primary">Get Started</button>
+                </div>
+                
+                <!-- MCP Tool Integration Plan -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-gold card-hover">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <div class="w-8 h-8 bg-sapphire" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                        </div>
+                        <h3 class="text-2xl font-bold text-black mb-2">MCP Tool Integration</h3>
+                        <p class="text-gray-600">For businesses needing API integration</p>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <div class="text-4xl font-bold text-sapphire mb-2">$1,000</div>
+                        <div class="text-gray-600">per month</div>
+                    </div>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Custom MCP Tool Integration</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">API integration with your systems</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">AI agent with action capabilities</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Real-time dashboard</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Prompt usage analytics</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">API call monitoring</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                <div class="w-2 h-2 bg-white rounded-full"></div>
+                            </div>
+                            <span class="text-gray-700">Dedicated account manager</span>
+                        </li>
+                    </ul>
+                    
+                    <button class="w-full btn-secondary">Get Started</button>
+                </div>
+            </div>
+            
+            <!-- Enterprise Plan -->
+            <div class="mt-16 bg-gradient-to-r from-sapphire to-sapphire-light rounded-2xl p-8 text-white text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h3 class="text-3xl font-bold mb-4">Enterprise Plan</h3>
+                    <p class="text-xl mb-6 opacity-90">
+                        Fully customized technology solutions designed specifically for your business needs. 
+                        Our experts will create a tailored AI ecosystem to accelerate your growth.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div class="text-left">
+                            <h4 class="text-xl font-semibold mb-4">What's Included:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>Custom AI development</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>Unlimited document training</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>Full system integration</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>White-label solutions</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="text-xl font-semibold mb-4">Expert Support:</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>Dedicated development team</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>24/7 priority support</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>Regular strategy meetings</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
+                                        <div class="w-2 h-2 bg-white rounded-full"></div>
+                                    </div>
+                                    <span>Custom training & onboarding</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="bg-gold text-sapphire px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold-light transition-colors">
+                            Schedule a Meeting
+                        </button>
+                        <p class="text-sm mt-4 opacity-80">
+                            Let's discuss how we can help your business grow
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Creation Section -->
+    <section id="ai-creation" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-black mb-8">How We Created This Website</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        As an AI-oriented company, we understand the power of intelligent automation. This entire website was created using advanced AI technology, demonstrating our commitment to efficiency and innovation.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Our AI development process saves significant time in website creation and technology development. We leverage cutting-edge AI tools to build sophisticated, professional solutions that would traditionally take weeks or months to develop manually.
+                    </p>
+                    <a href="index2.html" class="btn-primary">View Development Process</a>
+                </div>
+                
+                <div class="relative">
+                    <img src="resources/images/image.png" alt="AI Development Process" class="rounded-2xl shadow-2xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-black mb-8">Ready to Transform Your Business?</h2>
+            <p class="text-lg md:text-xl text-gray-600 mb-12">
+                Let's discuss how AX86 can accelerate your business growth with intelligent AI solutions.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 bg-sapphire rounded"></div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-black mb-2">Email</h3>
+                    <a href="mailto:admin@ax86.tech" class="link-gold hover:underline">admin@ax86.tech</a>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 bg-sapphire rounded-full"></div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-black mb-2">Website</h3>
+                    <a href="https://ax86.tech" class="link-gold hover:underline">ax86.tech</a>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="w-8 h-8 bg-sapphire" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                    </div>
+                    <h3 class="text-lg font-semibold text-black mb-2">Enterprise</h3>
+                    <p class="text-gray-600">Custom AI Solutions</p>
+                </div>
+            </div>
+            
+            <button class="btn-primary text-lg px-8 py-4">Get Started Today</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-8 w-auto">
+                        <span class="text-xl font-bold">AX86</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Enterprise AI Technology Platform</p>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Solutions</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">MCP Tools</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Assistants</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Enterprise Integration</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Creation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>admin@ax86.tech</li>
+                        <li>ax86.tech</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 AX86 - AssemblerX86. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <div class="chat-button" onclick="openChat()">
+            <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 AI Chat">
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>AX86 AI Assistant</h3>
+                <span class="close" onclick="closeChat()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <iframe src="http://localhost:6969/" class="modal-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language switching functionality
+        const translations = {
+            en: {
+                nav: {
+                    home: "Home",
+                    about: "About",
+                    solutions: "Solutions",
+                    test: "Test Power",
+                    aiCreation: "AI Creation",
+                    contact: "Contact"
+                },
+                hero: {
+                    title: "Finally, someone put all the pieces together.",
+                    subtitle: "In AX86's model, the business wins and the technology wins. Enterprise AI solutions that accelerate growth and deliver unprecedented response times.",
+                    cta1: "Experience Our Power",
+                    cta2: "Learn More"
+                },
+                solutions: {
+                    title: "Our AI Solutions",
+                    subtitle: "Custom MCP tools, intelligent assistants, and enterprise-grade AI technology that transforms how businesses operate."
+                },
+                about: {
+                    title: "About AX86",
+                    description1: "AX86 is more than a technological solution: it's a revolution in customer support and sales efficiency. Inspired by x86 architecture, a milestone in computational evolution, AX86 represents a new era: autonomous AI, real-time decisions, and integrated, radically personalized experiences.",
+                    description2: "We define the identity that guides every interaction with our clients, partners, and users, under a strategic, elegant, and disruptive approach. Our mission is to empower businesses with intelligent technology that accelerates growth and delivers exceptional results."
+                },
+                test: {
+                    title: "Test Our Power",
+                    subtitle: "Experience the future of web interaction. Modify this page's appearance in real-time using natural language commands."
+                },
+                aiCreation: {
+                    title: "How We Created This Website",
+                    description1: "As an AI-oriented company, we understand the power of intelligent automation. This entire website was created using advanced AI technology, demonstrating our commitment to efficiency and innovation.",
+                    description2: "Our AI development process saves significant time in website creation and technology development. We leverage cutting-edge AI tools to build sophisticated, professional solutions that would traditionally take weeks or months to develop manually."
+                },
+                contact: {
+                    title: "Ready to Transform Your Business?",
+                    subtitle: "Let's discuss how AX86 can accelerate your business growth with intelligent AI solutions."
+                },
+                pricing: {
+                    title: "Pricing Plans",
+                    subtitle: "Choose the perfect AI solution for your business. All plans include 24/7 support and regular updates.",
+                    basic: {
+                        name: "Basic AI Agent",
+                        description: "Perfect for small to medium businesses",
+                        price: "$250",
+                        period: "per month",
+                        savings: "Save 25% with annual billing ($187.50/month)"
+                    },
+                    advanced: {
+                        name: "Advanced AI Agent",
+                        description: "Ideal for growing businesses",
+                        price: "$350",
+                        period: "per month",
+                        savings: "Save 25% with annual billing ($262.50/month)",
+                        popular: "Most Popular"
+                    },
+                    mcp: {
+                        name: "MCP Tool Integration",
+                        description: "For businesses needing API integration",
+                        price: "$1,000",
+                        period: "per month"
+                    },
+                    enterprise: {
+                        title: "Enterprise Plan",
+                        description: "Fully customized technology solutions designed specifically for your business needs. Our experts will create a tailored AI ecosystem to accelerate your growth.",
+                        cta: "Schedule a Meeting",
+                        subtitle: "Let's discuss how we can help your business grow"
+                    }
+                }
+            },
+            es: {
+                nav: {
+                    home: "Inicio",
+                    about: "Acerca de",
+                    solutions: "Soluciones",
+                    test: "Probar Poder",
+                    aiCreation: "Creación IA",
+                    contact: "Contacto"
+                },
+                hero: {
+                    title: "Finalmente, alguien puso todas las piezas juntas.",
+                    subtitle: "En el modelo de AX86, la empresa gana y la tecnología gana. Soluciones de IA empresarial que aceleran el crecimiento y ofrecen tiempos de respuesta sin precedentes.",
+                    cta1: "Experimenta Nuestro Poder",
+                    cta2: "Saber Más"
+                },
+                solutions: {
+                    title: "Nuestras Soluciones de IA",
+                    subtitle: "Herramientas MCP personalizadas, asistentes inteligentes y tecnología de IA de nivel empresarial que transforma la forma en que operan las empresas."
+                },
+                about: {
+                    title: "Acerca de AX86",
+                    description1: "AX86 es más que una solución tecnológica: es una revolución en la eficiencia del soporte al cliente y ventas. Inspirado en la arquitectura x86, un hito en la evolución computacional, AX86 representa una nueva era: IA autónoma, decisiones en tiempo real y una experiencia integrada, radicalmente personalizada.",
+                    description2: "Aquí se define la identidad que guiará cada interacción con nuestros clientes, socios y usuarios, bajo un enfoque estratégico, elegante y disruptivo. Nuestra misión es empoderar a las empresas con tecnología inteligente que acelera el crecimiento y entrega resultados excepcionales."
+                },
+                test: {
+                    title: "Prueba Nuestro Poder",
+                    subtitle: "Experimenta el futuro de la interacción web. Modifica la apariencia de esta página en tiempo real usando comandos de lenguaje natural."
+                },
+                aiCreation: {
+                    title: "Cómo Creamos Este Sitio Web",
+                    description1: "Como empresa orientada a la IA, entendemos el poder de la automatización inteligente. Todo este sitio web fue creado usando tecnología de IA avanzada, demostrando nuestro compromiso con la eficiencia y la innovación.",
+                    description2: "Nuestro proceso de desarrollo de IA ahorra tiempo significativo en la creación de sitios web y desarrollo de tecnología. Aprovechamos herramientas de IA de vanguardia para construir soluciones sofisticadas y profesionales que tradicionalmente tomarían semanas o meses desarrollar manualmente."
+                },
+                contact: {
+                    title: "¿Listo para Transformar Tu Negocio?",
+                    subtitle: "Hablemos sobre cómo AX86 puede acelerar el crecimiento de tu negocio con soluciones de IA inteligentes."
+                },
+                pricing: {
+                    title: "Planes de Precios",
+                    subtitle: "Elige la solución de IA perfecta para tu negocio. Todos los planes incluyen soporte 24/7 y actualizaciones regulares.",
+                    basic: {
+                        name: "Agente IA Básico",
+                        description: "Perfecto para pequeñas y medianas empresas",
+                        price: "$250",
+                        period: "por mes",
+                        savings: "Ahorra 25% con facturación anual ($187.50/mes)"
+                    },
+                    advanced: {
+                        name: "Agente IA Avanzado",
+                        description: "Ideal para empresas en crecimiento",
+                        price: "$350",
+                        period: "por mes",
+                        savings: "Ahorra 25% con facturación anual ($262.50/mes)",
+                        popular: "Más Popular"
+                    },
+                    mcp: {
+                        name: "Integración MCP",
+                        description: "Para empresas que necesitan integración API",
+                        price: "$1,000",
+                        period: "por mes"
+                    },
+                    enterprise: {
+                        title: "Plan Empresarial",
+                        description: "Soluciones tecnológicas completamente personalizadas diseñadas específicamente para las necesidades de tu negocio. Nuestros expertos crearán un ecosistema de IA a medida para acelerar tu crecimiento.",
+                        cta: "Programar una Reunión",
+                        subtitle: "Hablemos sobre cómo podemos ayudar a crecer tu negocio"
+                    }
+                }
+            },
+            zh: {
+                nav: {
+                    home: "首页",
+                    about: "关于",
+                    solutions: "解决方案",
+                    test: "测试功能",
+                    aiCreation: "AI创建",
+                    contact: "联系我们"
+                },
+                hero: {
+                    title: "终于，有人把所有碎片拼在一起了。",
+                    subtitle: "在AX86的模式中，企业获胜，技术获胜。企业AI解决方案加速增长并提供前所未有的响应时间。",
+                    cta1: "体验我们的力量",
+                    cta2: "了解更多"
+                },
+                solutions: {
+                    title: "我们的AI解决方案",
+                    subtitle: "定制MCP工具、智能助手和企业级AI技术，改变企业的运营方式。"
+                },
+                about: {
+                    title: "关于AX86",
+                    description1: "AX86不仅仅是一个技术解决方案：它是客户支持和销售效率的革命。受x86架构启发，这是计算进化的里程碑，AX86代表着一个新时代：自主AI、实时决策和集成、彻底个性化的体验。",
+                    description2: "我们定义了指导与客户、合作伙伴和用户每次互动的身份，采用战略性、优雅和颠覆性的方法。我们的使命是用加速增长并提供卓越结果的智能技术赋能企业。"
+                },
+                test: {
+                    title: "测试我们的力量",
+                    subtitle: "体验网络交互的未来。使用自然语言命令实时修改此页面的外观。"
+                },
+                aiCreation: {
+                    title: "我们如何创建这个网站",
+                    description1: "作为一家AI导向的公司，我们理解智能自动化的力量。整个网站都是使用先进的AI技术创建的，展示了我们对效率和创新的承诺。",
+                    description2: "我们的AI开发过程在网站创建和技术开发中节省了大量时间。我们利用尖端的AI工具构建复杂的专业解决方案，这些解决方案传统上需要数周或数月的手动开发。"
+                },
+                contact: {
+                    title: "准备改变您的业务？",
+                    subtitle: "让我们讨论AX86如何通过智能AI解决方案加速您的业务增长。"
+                },
+                pricing: {
+                    title: "定价计划",
+                    subtitle: "为您的业务选择完美的AI解决方案。所有计划都包括24/7支持和定期更新。",
+                    basic: {
+                        name: "基础AI代理",
+                        description: "适合中小型企业",
+                        price: "$250",
+                        period: "每月",
+                        savings: "年付节省25% ($187.50/月)"
+                    },
+                    advanced: {
+                        name: "高级AI代理",
+                        description: "适合成长型企业",
+                        price: "$350",
+                        period: "每月",
+                        savings: "年付节省25% ($262.50/月)",
+                        popular: "最受欢迎"
+                    },
+                    mcp: {
+                        name: "MCP工具集成",
+                        description: "需要API集成的企业",
+                        price: "$1,000",
+                        period: "每月"
+                    },
+                    enterprise: {
+                        title: "企业计划",
+                        description: "完全定制的技术解决方案，专为您的业务需求设计。我们的专家将创建一个量身定制的AI生态系统来加速您的增长。",
+                        cta: "安排会议",
+                        subtitle: "让我们讨论如何帮助您的业务增长"
+                    }
+                }
+            },
+            fr: {
+                nav: {
+                    home: "Accueil",
+                    about: "À propos",
+                    solutions: "Solutions",
+                    test: "Tester Puissance",
+                    aiCreation: "Création IA",
+                    contact: "Contact"
+                },
+                hero: {
+                    title: "Enfin, quelqu'un a mis toutes les pièces ensemble.",
+                    subtitle: "Dans le modèle d'AX86, l'entreprise gagne et la technologie gagne. Solutions d'IA d'entreprise qui accélèrent la croissance et offrent des temps de réponse sans précédent.",
+                    cta1: "Découvrez Notre Puissance",
+                    cta2: "En Savoir Plus"
+                },
+                solutions: {
+                    title: "Nos Solutions d'IA",
+                    subtitle: "Outils MCP personnalisés, assistants intelligents et technologie d'IA de niveau entreprise qui transforme la façon dont les entreprises opèrent."
+                },
+                about: {
+                    title: "À propos d'AX86",
+                    description1: "AX86 est plus qu'une solution technologique : c'est une révolution dans l'efficacité du support client et des ventes. Inspiré par l'architecture x86, un jalon dans l'évolution computationnelle, AX86 représente une nouvelle ère : IA autonome, décisions en temps réel et expérience intégrée, radicalement personnalisée.",
+                    description2: "Nous définissons l'identité qui guide chaque interaction avec nos clients, partenaires et utilisateurs, sous une approche stratégique, élégante et disruptive. Notre mission est d'autonomiser les entreprises avec une technologie intelligente qui accélère la croissance et livre des résultats exceptionnels."
+                },
+                test: {
+                    title: "Testez Notre Puissance",
+                    subtitle: "Découvrez l'avenir de l'interaction web. Modifiez l'apparence de cette page en temps réel en utilisant des commandes en langage naturel."
+                },
+                aiCreation: {
+                    title: "Comment Nous Avons Créé Ce Site Web",
+                    description1: "En tant qu'entreprise orientée IA, nous comprenons le pouvoir de l'automatisation intelligente. Tout ce site web a été créé en utilisant une technologie d'IA avancée, démontrant notre engagement envers l'efficacité et l'innovation.",
+                    description2: "Notre processus de développement IA économise un temps significatif dans la création de sites web et le développement technologique. Nous exploitons des outils d'IA de pointe pour construire des solutions sophistiquées et professionnelles qui prendraient traditionnellement des semaines ou des mois à développer manuellement."
+                },
+                contact: {
+                    title: "Prêt à Transformer Votre Entreprise ?",
+                    subtitle: "Discutons de comment AX86 peut accélérer la croissance de votre entreprise avec des solutions d'IA intelligentes."
+                },
+                pricing: {
+                    title: "Plans Tarifaires",
+                    subtitle: "Choisissez la solution d'IA parfaite pour votre entreprise. Tous les plans incluent un support 24/7 et des mises à jour régulières.",
+                    basic: {
+                        name: "Agent IA Basique",
+                        description: "Parfait pour les petites et moyennes entreprises",
+                        price: "$250",
+                        period: "par mois",
+                        savings: "Économisez 25% avec la facturation annuelle ($187.50/mois)"
+                    },
+                    advanced: {
+                        name: "Agent IA Avancé",
+                        description: "Idéal pour les entreprises en croissance",
+                        price: "$350",
+                        period: "par mois",
+                        savings: "Économisez 25% avec la facturation annuelle ($262.50/mois)",
+                        popular: "Le Plus Populaire"
+                    },
+                    mcp: {
+                        name: "Intégration MCP",
+                        description: "Pour les entreprises nécessitant une intégration API",
+                        price: "$1,000",
+                        period: "par mois"
+                    },
+                    enterprise: {
+                        title: "Plan Entreprise",
+                        description: "Solutions technologiques entièrement personnalisées conçues spécifiquement pour les besoins de votre entreprise. Nos experts créeront un écosystème d'IA sur mesure pour accélérer votre croissance.",
+                        cta: "Planifier une Réunion",
+                        subtitle: "Discutons de comment nous pouvons aider votre entreprise à croître"
+                    }
+                }
+            }
+        };
+
+        function changeLanguage(lang) {
+            const t = translations[lang];
+            if (!t) return;
+
+            // Update navigation
+            document.querySelector('a[href="#home"]').textContent = t.nav.home;
+            document.querySelector('a[href="#about"]').textContent = t.nav.about;
+            document.querySelector('a[href="#solutions"]').textContent = t.nav.solutions;
+            document.querySelector('a[href="#test"]').textContent = t.nav.test;
+            document.querySelector('a[href="#ai-creation"]').textContent = t.nav.aiCreation;
+            document.querySelector('a[href="#contact"]').textContent = t.nav.contact;
+
+            // Update hero section
+            document.querySelector('#home h1').textContent = t.hero.title;
+            document.querySelector('#home p').textContent = t.hero.subtitle;
+            document.querySelector('#home .btn-primary').textContent = t.hero.cta1;
+            document.querySelector('#home .btn-secondary').textContent = t.hero.cta2;
+
+            // Update solutions section
+            document.querySelector('#solutions h2').textContent = t.solutions.title;
+            document.querySelector('#solutions p').textContent = t.solutions.subtitle;
+
+            // Update about section
+            document.querySelector('#about h2').textContent = t.about.title;
+            const aboutParagraphs = document.querySelectorAll('#about p');
+            if (aboutParagraphs.length >= 2) {
+                aboutParagraphs[0].textContent = t.about.description1;
+                aboutParagraphs[1].textContent = t.about.description2;
+            }
+
+            // Update test section
+            document.querySelector('#test h2').textContent = t.test.title;
+            document.querySelector('#test p').textContent = t.test.subtitle;
+
+            // Update AI creation section
+            document.querySelector('#ai-creation h2').textContent = t.aiCreation.title;
+            const aiParagraphs = document.querySelectorAll('#ai-creation p');
+            if (aiParagraphs.length >= 2) {
+                aiParagraphs[0].textContent = t.aiCreation.description1;
+                aiParagraphs[1].textContent = t.aiCreation.description2;
+            }
+
+            // Update contact section
+            document.querySelector('#contact h2').textContent = t.contact.title;
+            document.querySelector('#contact p').textContent = t.contact.subtitle;
+
+            // Update language dropdown button
+            document.querySelector('.language-dropdown button span').textContent = lang.toUpperCase();
+        }
+
+        // Chat functionality
+        function openChat() {
+            document.getElementById('chatModal').style.display = 'block';
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('chatModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // AI Website Generator functionality with cookie-based session management
+        let currentSessionId = null;
+        
+        // Get session ID from cookie or create new one
+        function getSessionId() {
+            console.log('getSessionId() called');
+            console.log('Current cookies:', document.cookie);
+            
+            // Try to get from cookie first
+            const cookies = document.cookie.split(';');
+            console.log('Split cookies:', cookies);
+            
+            for (let cookie of cookies) {
+                const [name, value] = cookie.trim().split('=');
+                console.log('Checking cookie:', name, '=', value);
+                if (name === 'ax86_session_id' && value && value !== 'undefined') {
+                    currentSessionId = value;
+                    console.log('Found existing session ID from cookie:', value);
+                    return value;
+                }
+            }
+            
+            // Create new session ID if not found
+            currentSessionId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
+            document.cookie = `ax86_session_id=${currentSessionId}; path=/; max-age=86400`; // 24 hours
+            console.log('Created new session ID:', currentSessionId);
+            console.log('Cookie set, now cookies are:', document.cookie);
+            return currentSessionId;
+        }
+        
+        async function generateWebsite() {
+            const prompt = document.getElementById('websitePrompt').value.trim();
+            if (!prompt) {
+                showNotification('Please describe the website you want to create!', 'error');
+                return;
+            }
+
+            // Get or create session ID
+            const sessionId = getSessionId();
+
+            // Show loading state
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('previewArea').classList.add('hidden');
+
+            try {
+                // Call the real AX86 API with session ID
+                const requestBody = { 
+                    prompt: prompt,
+                    session_id: sessionId  // Send session ID from cookie
+                };
+                
+                console.log('Sending request with session_id:', sessionId);
+                console.log('Request body:', requestBody);
+                
+                const response = await fetch('http://localhost:5000/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Store session ID in cookie and memory
+                    console.log('Result from backend:', result);
+                    console.log('result.session_id:', result.session_id);
+                    console.log('result.metadata.session_id:', result.metadata?.session_id);
+                    
+                    // Get session ID from either location
+                    currentSessionId = result.session_id || result.metadata?.session_id;
+                    console.log('Setting cookie with session ID:', currentSessionId);
+                    document.cookie = `ax86_session_id=${currentSessionId}; path=/; max-age=86400`; // 24 hours
+                    
+                    // Hide loading state
+                    document.getElementById('loadingState').classList.add('hidden');
+                    
+                    // Show preview
+                    const preview = document.getElementById('websitePreview');
+                    const previewArea = document.getElementById('previewArea');
+                    
+                    // Create a data URL for the generated HTML with aggressive cache busting
+                    const timestamp = Date.now();
+                    let htmlWithCacheBust = result.html;
+                    
+                    // Replace Tailwind CDN with cache-busted version
+                    htmlWithCacheBust = htmlWithCacheBust.replace(
+                        'https://cdn.tailwindcss.com',
+                        `https://cdn.tailwindcss.com?t=${timestamp}`
+                    );
+                    
+                    // Also add fallback CDN if not present
+                    if (!htmlWithCacheBust.includes('cdn.jsdelivr.net')) {
+                        htmlWithCacheBust = htmlWithCacheBust.replace(
+                            '</head>',
+                            `    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css?t=${timestamp}" rel="stylesheet">\n</head>`
+                        );
+                    }
+                    
+                    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(htmlWithCacheBust);
+                    preview.src = dataUrl;
+                    
+                    previewArea.classList.remove('hidden');
+                    
+                    // Show success message with conversation context
+                    const conversationLength = result.metadata.conversation_length || 0;
+                    const sessionId = result.session_id || result.metadata?.session_id || 'unknown';
+                    showNotification(`Website generated successfully! (Session: ${sessionId.substring(0, 8)}..., Context: ${conversationLength} conversations)`, 'success');
+                    
+                    // Log the generation details
+                    console.log('Website generated:', result.metadata);
+                    console.log('Session ID:', sessionId);
+                    console.log('Conversation History Length:', conversationLength);
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                document.getElementById('loadingState').classList.add('hidden');
+                showNotification('Error generating website: ' + error.message, 'error');
+                console.error('Generation error:', error);
+            }
+        }
+
+
+        function clearPreview() {
+            document.getElementById('websitePrompt').value = '';
+            document.getElementById('previewArea').classList.add('hidden');
+            document.getElementById('loadingState').classList.add('hidden');
+            
+            // Clear iframe source
+            const preview = document.getElementById('websitePreview');
+            preview.src = '';
+        }
+
+        // Clear conversation session
+        async function clearSession() {
+            try {
+                const response = await fetch('http://localhost:5000/api/clear-session', {
+                    method: 'POST'
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Clear frontend session ID and cookie
+                    currentSessionId = null;
+                    document.cookie = 'ax86_session_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+                    showNotification('Conversation history cleared! Next generation will start fresh.', 'success');
+                    console.log('Session cleared:', result.message);
+                } else {
+                    showNotification('No active session to clear.', 'info');
+                }
+            } catch (error) {
+                showNotification('Error clearing session: ' + error.message, 'error');
+                console.error('Clear session error:', error);
+            }
+        }
+
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 1rem 2rem;
+                background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+                color: white;
+                border-radius: 6px;
+                z-index: 10000;
+                font-family: 'Helvetica', sans-serif;
+                font-weight: 600;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+    </script>
+
+    <style>
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</body>
+</html>

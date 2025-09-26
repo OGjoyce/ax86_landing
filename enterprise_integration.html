@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise AI Integration | AX86 - Luxury Brand Solutions</title>
+    <meta name="description" content="Transform enterprise operations with AX86's AI solutions. Save millions annually with custom AI assistants and MCP integration for luxury brands like Porsche, Prada, Ferrari, Coca-Cola.">
+    
+    <!-- Helvetica Font -->
+    <style>
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/helvetica-light-587ebe5a59211.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+    </style>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --black: #000000;
+            --gold: #D4AF36;
+            --yellow: #FFD700;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --gray-800: #343A40;
+            --gray-900: #212529;
+        }
+        
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gold-border {
+            border: 2px solid var(--gold);
+        }
+        
+        .gold-button {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+        
+        .gold-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 54, 0.3);
+        }
+        
+        .luxury-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+        }
+        
+        .luxury-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(212, 175, 54, 0.2);
+        }
+        
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(212, 175, 54, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(212, 175, 54, 0.4);
+            background: rgba(212, 175, 54, 0.1);
+        }
+        
+        .chat-button img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 0;
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            color: var(--black);
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            height: calc(100% - 80px);
+            padding: 0;
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .close {
+            color: var(--black);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b-2 border-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-gold transition-colors">Home</a>
+                    <a href="mcp_information.html" class="text-gray-700 hover:text-gold transition-colors">MCP Tools</a>
+                    <a href="ai_assistants.html" class="text-gray-700 hover:text-gold transition-colors">AI Assistants</a>
+                    <a href="enterprise_integration.html" class="text-gold font-medium">Enterprise</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-gold transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-gradient-to-br from-black to-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Logo" class="h-24 w-auto mx-auto mb-8">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Enterprise <span class="gradient-text">AI Integration</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                    Transform your enterprise operations and save millions annually. Custom AI solutions designed for luxury brands, global corporations, and industry leaders like Porsche, Prada, Ferrari, and Coca-Cola.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#savings" class="gold-button px-8 py-3 rounded-lg font-semibold">
+                        See Potential Savings
+                    </a>
+                    <a href="#contact" class="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-colors">
+                        Schedule Consultation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Challenge Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-black mb-6">
+                        The <span class="gradient-text">Enterprise Challenge</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Global enterprises face unprecedented operational complexity. Manual processes, disconnected systems, and human limitations cost millions annually in inefficiency, missed opportunities, and customer dissatisfaction.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">$</span>
+                            </div>
+                            <p class="text-gray-700"><strong>$50M+ annually</strong> lost to operational inefficiencies</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">$</span>
+                            </div>
+                            <p class="text-gray-700"><strong>40% of customer inquiries</strong> require human escalation</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">$</span>
+                            </div>
+                            <p class="text-gray-700"><strong>72 hours average</strong> response time for complex queries</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">$</span>
+                            </div>
+                            <p class="text-gray-700"><strong>200+ systems</strong> operating in silos across departments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200">
+                    <h3 class="text-2xl font-bold text-black mb-6">Current Enterprise Costs</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Manual Process Costs:</span>
+                            <span class="text-red-600 font-bold text-xl">$2.3M/month</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Customer Service Overhead:</span>
+                            <span class="text-red-600 font-bold text-xl">$1.8M/month</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">System Integration Costs:</span>
+                            <span class="text-red-600 font-bold text-xl">$3.2M/month</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Lost Revenue (Inefficiency):</span>
+                            <span class="text-red-600 font-bold text-xl">$4.1M/month</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t-2 border-red-300 pt-4">
+                            <span class="text-lg font-bold text-black">Total Monthly Loss:</span>
+                            <span class="text-red-600 font-bold text-2xl">$11.4M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Brand Solutions -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                <span class="gradient-text">Luxury Brand</span> Solutions
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Porsche -->
+                <div class="luxury-card p-6 rounded-2xl text-white">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🏎️</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Porsche</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        AI-powered customer concierge for luxury car sales, service scheduling, and personalized recommendations across 50+ countries.
+                    </p>
+                    <div class="text-xs text-gold">
+                        <div class="flex justify-between mb-1">
+                            <span>Response Time:</span>
+                            <span class="text-green-400">2 minutes</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span>Languages:</span>
+                            <span class="text-green-400">25+</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Savings:</span>
+                            <span class="text-green-400">$2.1M/year</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Prada -->
+                <div class="luxury-card p-6 rounded-2xl text-white">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">👗</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Prada</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Intelligent fashion consultant AI that understands luxury fashion trends, sizing, and personal style preferences for global customers.
+                    </p>
+                    <div class="text-xs text-gold">
+                        <div class="flex justify-between mb-1">
+                            <span>Response Time:</span>
+                            <span class="text-green-400">1 minute</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span>Languages:</span>
+                            <span class="text-green-400">30+</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Savings:</span>
+                            <span class="text-green-400">$3.2M/year</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ferrari -->
+                <div class="luxury-card p-6 rounded-2xl text-white">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🏁</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Ferrari</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Exclusive AI concierge for supercar enthusiasts, handling everything from custom orders to track day bookings and maintenance.
+                    </p>
+                    <div class="text-xs text-gold">
+                        <div class="flex justify-between mb-1">
+                            <span>Response Time:</span>
+                            <span class="text-green-400">30 seconds</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span>Languages:</span>
+                            <span class="text-green-400">20+</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Savings:</span>
+                            <span class="text-green-400">$1.8M/year</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coca-Cola -->
+                <div class="luxury-card p-6 rounded-2xl text-white">
+                    <div class="text-center mb-4">
+                        <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🥤</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Coca-Cola</h3>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Global supply chain AI that optimizes distribution, manages inventory across 200+ countries, and predicts demand patterns.
+                    </p>
+                    <div class="text-xs text-gold">
+                        <div class="flex justify-between mb-1">
+                            <span>Response Time:</span>
+                            <span class="text-green-400">Real-time</span>
+                        </div>
+                        <div class="flex justify-between mb-1">
+                            <span>Languages:</span>
+                            <span class="text-green-400">50+</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Savings:</span>
+                            <span class="text-green-400">$15.6M/year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator Section -->
+    <section id="savings" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                <span class="gradient-text">ROI Calculator</span> - Enterprise Scale
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-r from-gold/10 to-yellow/10 p-8 rounded-2xl gold-border">
+                        <h3 class="text-2xl font-bold text-black mb-6">Annual Savings Breakdown</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Customer Service Automation:</span>
+                                <span class="text-green-600 font-bold text-xl">$8.4M</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Process Optimization:</span>
+                                <span class="text-green-600 font-bold text-xl">$12.2M</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">System Integration Savings:</span>
+                                <span class="text-green-600 font-bold text-xl">$6.8M</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Revenue Increase (Efficiency):</span>
+                                <span class="text-green-600 font-bold text-xl">$18.6M</span>
+                            </div>
+                            <div class="flex justify-between items-center border-t-2 border-gold pt-4">
+                                <span class="text-2xl font-bold text-black">Total Annual Savings:</span>
+                                <span class="text-green-600 font-bold text-3xl">$46M</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-black text-white p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text">Implementation Timeline</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-gold rounded-full flex items-center justify-center">
+                                    <span class="text-black font-bold text-sm">1</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Months 1-2: Analysis & Planning</h4>
+                                    <p class="text-gray-300 text-sm">System audit, requirements gathering, custom solution design</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-gold rounded-full flex items-center justify-center">
+                                    <span class="text-black font-bold text-sm">2</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Months 3-6: Development & Integration</h4>
+                                    <p class="text-gray-300 text-sm">Custom AI training, MCP tool development, system integration</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-8 h-8 bg-gold rounded-full flex items-center justify-center">
+                                    <span class="text-black font-bold text-sm">3</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Months 7-8: Testing & Deployment</h4>
+                                    <p class="text-gray-300 text-sm">Pilot testing, staff training, full deployment</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-br from-sapphire to-sapphire-dark p-8 rounded-2xl text-white">
+                        <h3 class="text-2xl font-bold mb-6">Enterprise Features</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>Unlimited document training</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>Unlimited API integrations</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>Custom MCP tool development</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>Dedicated account manager</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>On-site training and support</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>Custom SLA agreements</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>White-label solutions</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-gold">✓</span>
+                                <span>Global deployment support</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gold/20 to-yellow/20 p-8 rounded-2xl gold-border">
+                        <h3 class="text-2xl font-bold text-black mb-4">Investment vs. Return</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-700">Implementation Cost:</span>
+                                <span class="text-black font-bold">$2.5M</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-700">Annual Operating Cost:</span>
+                                <span class="text-black font-bold">$1.2M</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-700">Total Year 1 Investment:</span>
+                                <span class="text-black font-bold">$3.7M</span>
+                            </div>
+                            <div class="flex justify-between border-t border-gold pt-3">
+                                <span class="text-lg font-bold text-black">Net Year 1 Savings:</span>
+                                <span class="text-green-600 font-bold text-xl">$42.3M</span>
+                            </div>
+                            <div class="text-center mt-4">
+                                <span class="text-3xl font-bold text-green-600">1,143% ROI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-black text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">
+                Ready to <span class="gradient-text">Transform</span> Your Enterprise?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Join industry leaders who have already saved millions with AX86's enterprise AI solutions. Schedule a confidential consultation with our enterprise team.
+            </p>
+            <div class="space-y-6">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="mailto:admin@ax86.tech" class="gold-button px-8 py-3 rounded-lg font-semibold">
+                        Schedule Enterprise Demo
+                    </a>
+                    <a href="tel:+50259307820" class="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-colors">
+                        Call Carlos: +502 5930-7820
+                    </a>
+                </div>
+                <div class="text-gray-400">
+                    <p>Confidential consultation • Custom ROI analysis • No obligation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Logo" class="h-12 w-auto mx-auto mb-4">
+                <p class="text-gray-400">&copy; 2025 AX86 - AssemblerX86. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <div class="chat-button" onclick="openChat()">
+            <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 AI Chat">
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-bold">AX86 AI Assistant</h3>
+                <span class="close" onclick="closeChat()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <iframe src="https://ax86.tech/nostrumcapital/" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openChat() {
+            document.getElementById('chatModal').style.display = 'block';
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('chatModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

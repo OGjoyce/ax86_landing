@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sales Assistants | AX86 - Intelligent Sales Performance</title>
+    <meta name="description" content="Transform your sales team with AX86's intelligent AI assistants. Boost performance, improve response times, and close more deals with multilingual AI support.">
+    
+    <!-- Helvetica Font -->
+    <style>
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/helvetica-light-587ebe5a59211.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+    </style>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sapphire: #0D52BA;
+            --sapphire-light: #1E6BCC;
+            --sapphire-dark: #0A4296;
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --gray-800: #343A40;
+            --gray-900: #212529;
+        }
+        
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .sapphire-button {
+            background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .sapphire-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 82, 186, 0.3);
+        }
+        
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--sapphire);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(13, 82, 186, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(13, 82, 186, 0.4);
+            background: rgba(13, 82, 186, 0.1);
+        }
+        
+        .chat-button img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 0;
+            border: 3px solid var(--sapphire);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            height: calc(100% - 80px);
+            padding: 0;
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .close {
+            color: var(--white);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b-2 border-sapphire">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-sapphire transition-colors">Home</a>
+                    <a href="mcp_information.html" class="text-gray-700 hover:text-sapphire transition-colors">MCP Tools</a>
+                    <a href="ai_assistants.html" class="text-sapphire font-medium">AI Assistants</a>
+                    <a href="enterprise_integration.html" class="text-gray-700 hover:text-sapphire transition-colors">Enterprise</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-sapphire transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-gradient-to-br from-sapphire/5 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-24 w-auto mx-auto mb-8">
+                <h1 class="text-5xl md:text-6xl font-bold text-black mb-6">
+                    Intelligent <span class="gradient-text">Sales Assistants</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Transform your sales performance with AI assistants that understand your business, speak every language, and are available 24/7. Let humans focus on closing deals while AI handles everything else.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#performance" class="sapphire-button px-8 py-3 rounded-lg font-semibold">
+                        See Performance Gains
+                    </a>
+                    <a href="#pricing" class="border-2 border-sapphire text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-sapphire hover:text-white transition-colors">
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-black mb-6">
+                        The <span class="gradient-text">Sales Challenge</span>
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Your sales team spends 80% of their time on administrative tasks, research, and responding to basic inquiries. Only 20% is spent on actual selling and closing deals. This is costing you millions in lost opportunities.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">✗</span>
+                            </div>
+                            <p class="text-gray-700">Sales reps spend hours researching prospects</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">✗</span>
+                            </div>
+                            <p class="text-gray-700">Slow response times lose potential customers</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">✗</span>
+                            </div>
+                            <p class="text-gray-700">Language barriers limit global reach</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-white font-bold text-sm">✗</span>
+                            </div>
+                            <p class="text-gray-700">Inconsistent information sharing across teams</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-red-50 to-orange-50 p-8 rounded-2xl border-2 border-red-200">
+                    <h3 class="text-2xl font-bold text-black mb-4">Current Sales Inefficiency</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Time spent on admin tasks:</span>
+                            <span class="text-red-600 font-bold text-xl">80%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Time spent on actual selling:</span>
+                            <span class="text-red-600 font-bold text-xl">20%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Average response time:</span>
+                            <span class="text-red-600 font-bold text-xl">24+ hours</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-700">Lost opportunities:</span>
+                            <span class="text-red-600 font-bold text-xl">40%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Solution Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                The <span class="gradient-text">AX86 Solution</span>
+            </h2>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- AI Assistant -->
+                <div class="bg-white p-8 rounded-2xl border-2 border-sapphire text-center">
+                    <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">🤖</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Intelligent AI Assistant</h3>
+                    <p class="text-gray-600 mb-6">
+                        Your AI assistant handles all preliminary inquiries, research, and customer questions. It understands your products, pricing, and processes perfectly.
+                    </p>
+                    <ul class="text-left space-y-2 text-sm text-gray-700">
+                        <li>• Instant responses to customer queries</li>
+                        <li>• 24/7 availability in any timezone</li>
+                        <li>• Multilingual support (50+ languages)</li>
+                        <li>• Learns from every interaction</li>
+                    </ul>
+                </div>
+                
+                <!-- Human Handoff -->
+                <div class="bg-white p-8 rounded-2xl border-2 border-sapphire text-center">
+                    <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">👥</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Smart Human Handoff</h3>
+                    <p class="text-gray-600 mb-6">
+                        AI identifies when human expertise is needed and seamlessly transfers qualified leads to your sales team with complete context.
+                    </p>
+                    <ul class="text-left space-y-2 text-sm text-gray-700">
+                        <li>• Qualifies leads before handoff</li>
+                        <li>• Provides complete conversation history</li>
+                        <li>• Suggests next best actions</li>
+                        <li>• Only brings in humans for closing</li>
+                    </ul>
+                </div>
+                
+                <!-- Performance Analytics -->
+                <div class="bg-white p-8 rounded-2xl border-2 border-sapphire text-center">
+                    <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl text-white">📊</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Performance Analytics</h3>
+                    <p class="text-gray-600 mb-6">
+                        Real-time insights into sales performance, customer interactions, and AI effectiveness. Make data-driven decisions to optimize your sales process.
+                    </p>
+                    <ul class="text-left space-y-2 text-sm text-gray-700">
+                        <li>• Real-time performance dashboards</li>
+                        <li>• Conversion rate optimization</li>
+                        <li>• Customer satisfaction metrics</li>
+                        <li>• ROI tracking and reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Gains Section -->
+    <section id="performance" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                Measurable <span class="gradient-text">Performance Gains</span>
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-green-600">⚡</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black mb-2">10x Faster Response Times</h3>
+                            <p class="text-gray-600">From 24+ hours to under 2 minutes. Customers get instant answers, leading to higher satisfaction and conversion rates.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-green-600">🌍</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black mb-2">Global Market Access</h3>
+                            <p class="text-gray-600">Break language barriers and serve customers worldwide. Your AI speaks 50+ languages fluently and understands cultural nuances.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl text-green-600">📈</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black mb-2">300% Increase in Qualified Leads</h3>
+                            <p class="text-gray-600">AI pre-qualifies leads and only brings humans into conversations that are ready to close. Your sales team focuses on high-value activities.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-sapphire to-sapphire-dark p-8 rounded-2xl text-white">
+                    <h3 class="text-2xl font-bold mb-6">ROI Calculator</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span>Current Sales Team Size:</span>
+                            <span class="font-bold">10 reps</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Time Saved per Rep:</span>
+                            <span class="font-bold">6 hours/day</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Additional Deals Closed:</span>
+                            <span class="font-bold">+40%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Global Market Reach:</span>
+                            <span class="font-bold">+200%</span>
+                        </div>
+                        <div class="flex justify-between border-t border-white pt-4">
+                            <span class="text-lg font-bold">Monthly Revenue Increase:</span>
+                            <span class="font-bold text-xl">$150,000+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-World Examples -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                <span class="gradient-text">Real-World</span> Success Stories
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl border-2 border-sapphire">
+                    <h3 class="text-xl font-bold text-black mb-4">Tech Startup (50 employees)</h3>
+                    <p class="text-gray-600 mb-4">
+                        "Our AI assistant handles 80% of customer inquiries automatically. Our sales team now focuses only on qualified prospects, increasing our close rate by 250%."
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Response Time:</span>
+                            <span class="text-green-600 font-bold">24 hours → 2 minutes</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Close Rate:</span>
+                            <span class="text-green-600 font-bold">+250%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Revenue Growth:</span>
+                            <span class="text-green-600 font-bold">+180%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-2xl border-2 border-sapphire">
+                    <h3 class="text-xl font-bold text-black mb-4">Manufacturing Company (500 employees)</h3>
+                    <p class="text-gray-600 mb-4">
+                        "We expanded to 15 new countries in 6 months. Our AI assistant speaks every language and handles complex technical questions our sales team couldn't before."
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">New Markets:</span>
+                            <span class="text-green-600 font-bold">15 countries</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">Languages Supported:</span>
+                            <span class="text-green-600 font-bold">25 languages</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600">International Sales:</span>
+                            <span class="text-green-600 font-bold">+400%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                <span class="gradient-text">AI Assistant</span> Pricing
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-2xl border-2 border-gray-200 p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-black mb-2">Basic AI Agent</h3>
+                        <p class="text-gray-600">Perfect for small to medium businesses</p>
+                    </div>
+                    
+                    <div class="text-4xl font-bold text-black mb-6">
+                        $250<span class="text-lg text-gray-500">/month</span>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Up to 50 documents for training</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Standard business process training</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Basic customer service optimization</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Email support</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Monthly performance reports</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="index.html#contact" class="w-full border-2 border-sapphire text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-sapphire hover:text-white transition-colors text-center block">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Professional Plan -->
+                <div class="bg-white rounded-2xl border-2 border-sapphire p-8 relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-sapphire text-white px-4 py-1 rounded-full text-sm font-bold">Most Popular</span>
+                    </div>
+                    
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-black mb-2">Professional AI Agent</h3>
+                        <p class="text-gray-600">Advanced features for growing businesses</p>
+                    </div>
+                    
+                    <div class="text-4xl font-bold text-black mb-6">
+                        $350<span class="text-lg text-gray-500">/month</span>
+                    </div>
+                    
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Up to 100 documents for training</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Advanced business process training</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Sales process automation</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Priority email support</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Weekly performance reports</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span class="text-sapphire">✓</span>
+                            <span>Custom response templates</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="index.html#contact" class="w-full sapphire-button px-8 py-3 rounded-lg font-semibold text-center block">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <p class="text-gray-600 mb-4">💰 25% discount on annual billing • 30-day money-back guarantee</p>
+                <a href="enterprise_integration.html" class="text-sapphire hover:underline font-medium">
+                    Need enterprise solutions? Learn more →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-sapphire text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">
+                Ready to <span class="text-yellow-300">Transform</span> Your Sales?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8">
+                Join thousands of businesses already using AI assistants to boost sales performance and customer satisfaction.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html#contact" class="bg-white text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    Schedule Demo
+                </a>
+                <a href="mcp_information.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-sapphire transition-colors">
+                    Learn About MCP Tools
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto mx-auto mb-4">
+                <p class="text-gray-400">&copy; 2025 AX86 - AssemblerX86. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <div class="chat-button" onclick="openChat()">
+            <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 AI Chat">
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-bold">AX86 AI Assistant</h3>
+                <span class="close" onclick="closeChat()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <iframe src="https://ax86.tech/nostrumcapital/" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openChat() {
+            document.getElementById('chatModal').style.display = 'block';
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('chatModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

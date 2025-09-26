@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom MCP Tools | AX86 - Revolutionary Business Integration</title>
+    <meta name="description" content="Discover how AX86's Custom MCP Tools revolutionize business operations from small startups to enterprise giants. Seamless AI integration that transforms your workflow.">
+    
+    <!-- Helvetica Font -->
+    <style>
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/helvetica-light-587ebe5a59211.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+    </style>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --black: #000000;
+            --gold: #D4AF36;
+            --yellow: #FFD700;
+            --white: #FFFFFF;
+            --gray-100: #F8F9FA;
+            --gray-200: #E9ECEF;
+            --gray-300: #DEE2E6;
+            --gray-400: #CED4DA;
+            --gray-500: #ADB5BD;
+            --gray-600: #6C757D;
+            --gray-700: #495057;
+            --gray-800: #343A40;
+            --gray-900: #212529;
+        }
+        
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gold-border {
+            border: 2px solid var(--gold);
+        }
+        
+        .gold-button {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+        
+        .gold-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 54, 0.3);
+        }
+        
+        .floating-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(212, 175, 54, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(212, 175, 54, 0.4);
+            background: rgba(212, 175, 54, 0.1);
+        }
+        
+        .chat-button img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 0;
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            height: 80%;
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            color: var(--black);
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            height: calc(100% - 80px);
+            padding: 0;
+        }
+        
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .close {
+            color: var(--black);
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-white text-black">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b-2 border-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-gold transition-colors">Home</a>
+                    <a href="mcp_information.html" class="text-gold font-medium">MCP Tools</a>
+                    <a href="ai_assistants.html" class="text-gray-700 hover:text-gold transition-colors">AI Assistants</a>
+                    <a href="enterprise_integration.html" class="text-gray-700 hover:text-gold transition-colors">Enterprise</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-gold transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Logo" class="h-24 w-auto mx-auto mb-8">
+                <h1 class="text-5xl md:text-6xl font-bold text-black mb-6">
+                    Custom <span class="gradient-text">MCP Tools</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Revolutionary Model Context Protocol tools that transform your business operations from small startups to enterprise giants. Seamless AI integration that works with your existing systems.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#how-it-works" class="gold-button px-8 py-3 rounded-lg font-semibold">
+                        See How It Works
+                    </a>
+                    <a href="#pricing" class="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-colors">
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is MCP Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-black mb-6">
+                        What is <span class="gradient-text">MCP Technology</span>?
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Model Context Protocol (MCP) is our proprietary technology that creates intelligent bridges between your business systems and AI. Think of it as a universal translator that allows AI to understand and interact with any software, database, or API your business uses.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-gold rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-black font-bold text-sm">✓</span>
+                            </div>
+                            <p class="text-gray-700">Works with any existing business software</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-gold rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-black font-bold text-sm">✓</span>
+                            </div>
+                            <p class="text-gray-700">No need to replace your current systems</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-gold rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <span class="text-black font-bold text-sm">✓</span>
+                            </div>
+                            <p class="text-gray-700">Real-time data processing and analysis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-gold/10 to-yellow/10 p-8 rounded-2xl gold-border">
+                    <h3 class="text-2xl font-bold text-black mb-4">Real-World Example</h3>
+                    <p class="text-gray-700 mb-4">
+                        <strong>Pizza Store Scenario:</strong> Your MCP tool connects to your POS system, inventory database, and customer management software. When someone asks "How many pizzas were sold today?", the AI instantly queries all systems and provides a comprehensive answer with sales data, popular toppings, and customer insights.
+                    </p>
+                    <div class="bg-black text-gold p-4 rounded-lg">
+                        <code class="text-sm">
+                            User: "How many pizzas were sold today?"<br>
+                            AI: "Today you sold 47 pizzas, generating $1,180 in revenue. Margherita was the most popular (18 orders), and peak sales were between 7-9 PM."
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                How <span class="gradient-text">MCP Integration</span> Works
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-8 rounded-2xl gold-border text-center">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-black">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Connect Your Systems</h3>
+                    <p class="text-gray-600">
+                        We analyze your existing software, databases, and APIs. Our team creates custom MCP tools that seamlessly integrate with your current infrastructure.
+                    </p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="bg-white p-8 rounded-2xl gold-border text-center">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-black">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Train the AI</h3>
+                    <p class="text-gray-600">
+                        Your AI learns your business processes, terminology, and data structures. It understands your specific industry and can provide contextually relevant responses.
+                    </p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="bg-white p-8 rounded-2xl gold-border text-center">
+                    <div class="w-16 h-16 bg-gold rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold text-black">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-4">Deploy & Scale</h3>
+                    <p class="text-gray-600">
+                        Your MCP tools go live, providing instant access to business intelligence. Scale from simple queries to complex analytics as your needs grow.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Benefits Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                Transform Your <span class="gradient-text">Business Operations</span>
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">⚡</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black mb-2">Instant Data Access</h3>
+                            <p class="text-gray-600">Get answers to complex business questions in seconds, not hours. No more waiting for reports or digging through multiple systems.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">🔗</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black mb-2">Seamless Integration</h3>
+                            <p class="text-gray-600">Works with your existing software. No need to replace systems or retrain staff. MCP tools adapt to your workflow.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl">📊</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-black mb-2">Smart Analytics</h3>
+                            <p class="text-gray-600">AI-powered insights that identify trends, patterns, and opportunities you might miss with traditional reporting.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-black to-gray-800 p-8 rounded-2xl text-white">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">ROI Calculator</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between">
+                            <span>Time Saved per Query:</span>
+                            <span class="text-gold font-bold">45 minutes</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Queries per Day:</span>
+                            <span class="text-gold font-bold">20</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Daily Time Saved:</span>
+                            <span class="text-gold font-bold">15 hours</span>
+                        </div>
+                        <div class="flex justify-between border-t border-gold pt-4">
+                            <span class="text-lg font-bold">Monthly Savings:</span>
+                            <span class="text-gold font-bold text-xl">$12,000+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-black mb-12">
+                <span class="gradient-text">MCP Integration</span> Pricing
+            </h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl gold-border p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-3xl font-bold text-black mb-2">MCP Integration Package</h3>
+                        <p class="text-gray-600">Everything you need to transform your business operations</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="text-4xl font-bold text-black mb-4">
+                                $1,000<span class="text-lg text-gray-500">/month</span>
+                            </div>
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center space-x-3">
+                                    <span class="text-gold">✓</span>
+                                    <span>Custom MCP tool development</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <span class="text-gold">✓</span>
+                                    <span>API integration (up to 5 endpoints)</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <span class="text-gold">✓</span>
+                                    <span>Real-time dashboard access</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <span class="text-gold">✓</span>
+                                    <span>24/7 technical support</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <span class="text-gold">✓</span>
+                                    <span>Performance monitoring</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <span class="text-gold">✓</span>
+                                    <span>Monthly optimization reviews</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-gold/10 p-6 rounded-lg">
+                            <h4 class="text-xl font-bold text-black mb-4">Setup Fees</h4>
+                            <div class="space-y-2 text-gray-700">
+                                <div class="flex justify-between">
+                                    <span>Basic Implementation:</span>
+                                    <span class="font-bold">$500</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Standard Implementation:</span>
+                                    <span class="font-bold">$1,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Complex Implementation:</span>
+                                    <span class="font-bold">$2,000</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-gold/20 rounded">
+                                <p class="text-sm text-black font-medium">
+                                    💰 25% discount on annual billing
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="index.html#contact" class="gold-button px-8 py-3 rounded-lg font-semibold text-lg">
+                            Get Started Today
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-black text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">
+                Ready to <span class="gradient-text">Revolutionize</span> Your Business?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Join hundreds of businesses already using MCP technology to streamline operations and boost productivity.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html#contact" class="bg-gold text-black px-8 py-3 rounded-lg font-semibold hover:bg-yellow transition-colors">
+                    Schedule Consultation
+                </a>
+                <a href="ai_assistants.html" class="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-colors">
+                    Learn About AI Assistants
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Logo" class="h-12 w-auto mx-auto mb-4">
+                <p class="text-gray-400">&copy; 2025 AX86 - AssemblerX86. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <div class="chat-button" onclick="openChat()">
+            <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 AI Chat">
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-bold">AX86 AI Assistant</h3>
+                <span class="close" onclick="closeChat()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <iframe src="https://ax86.tech/nostrumcapital/" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openChat() {
+            document.getElementById('chatModal').style.display = 'block';
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('chatModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
