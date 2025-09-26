@@ -133,11 +133,11 @@ RESPONSE FORMAT:
             # Get conversation history for this session
             conversation_history = self.conversation_history[session_id]
             
-            # Build input array with conversation history using new Responses API format
+            # Build input array with conversation history
             input_messages = []
             
-            # Add system prompt as first user message
-            input_messages.append({"role": "user", "content": self.system_prompt})
+            # Add system prompt as first message
+            input_messages.append({"role": "system", "content": self.system_prompt})
             
             # Add conversation history
             for turn in conversation_history:
@@ -236,7 +236,7 @@ Generate the complete HTML code with embedded JavaScript:"""
             
             input_messages.append({"role": "user", "content": current_prompt})
 
-            # Call OpenAI using standard Chat Completions API
+            # Call OpenAI using standard Chat Completions API with conversation history
             response = openai.chat.completions.create(
                 model=GPT_MODEL,
                 messages=input_messages,
