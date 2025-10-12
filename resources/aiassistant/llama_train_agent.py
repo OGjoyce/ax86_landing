@@ -15,10 +15,8 @@ from PIL import Image
 import cv2
 import numpy as np
 
-
-os.environ["OPENAI_API_KEY"] = "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"
-
 # ——— Llama-Index setup ———
+# Note: OPENAI_API_KEY should be set via environment variable
 from llama_index.core.agent.workflow import FunctionAgent
 from llama_index.llms.openai import OpenAI
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
@@ -28,6 +26,10 @@ import uvicorn
 
 # FastAPI app
 app = FastAPI()
+
+# Verify OpenAI API key is set
+if not os.getenv("OPENAI_API_KEY"):
+    raise ValueError("OPENAI_API_KEY environment variable is not set!")
 
 # Serve static files (for logo)
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -359,7 +361,7 @@ async def get_chat(request: Request):
             }});
             
             try {{
-              const response = await fetch('/', {{
+              const response = await fetch('/ai-assistant/', {{
                 method: 'POST',
                 body: formData
               }});
