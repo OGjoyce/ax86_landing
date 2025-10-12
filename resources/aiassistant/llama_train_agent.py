@@ -196,7 +196,7 @@ async def get_chat(request: Request):
       <div class=\"flex flex-col h-screen\">
 
         <header class=\"bg-white border-b-4 border-yellow-400 flex items-center px-6 py-4 shadow-sm\">
-          <img src=\"static/ax86_logo.png\" alt=\"AX86 Logo\" class=\"h-16 w-auto mr-6\"/>
+          <img src=\"https://ax86.tech/resources/PNG/Logo%20Negro%20-%20Amarillo.png\" alt=\"AX86 Logo\" class=\"h-16 w-auto mr-6\"/>
           <div class=\"flex-1\">
             <h1 class=\"text-3xl font-bold text-black\">AX86 AI Assistant</h1>
             <p class=\"text-sm text-gray-600\">Powered by AssemblerX86 Technology</p>
