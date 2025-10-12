@@ -59,6 +59,16 @@
                 padding-right: 1rem;
             }
             
+            /* Navigation adjustments */
+            nav .max-w-7xl {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            nav img {
+                height: 2.5rem;
+            }
+            
             .hero-title {
                 font-size: 2.5rem !important;
                 line-height: 1.2;
@@ -377,20 +387,17 @@
                         <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
                     </a>
                 </div>
-                <div class="hidden md:flex space-x-8 items-center">
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex space-x-6 items-center">
                     <a href="#home" class="text-gray-700 hover:text-sapphire transition-colors">Home</a>
                     <a href="#about" class="text-gray-700 hover:text-sapphire transition-colors">About</a>
                     <a href="#solutions" class="text-gray-700 hover:text-sapphire transition-colors">Solutions</a>
-                    <a href="mcp_information.html" class="text-gray-700 hover:text-sapphire transition-colors">MCP Tools</a>
-                    <a href="ai_assistants.html" class="text-gray-700 hover:text-sapphire transition-colors">AI Assistants</a>
-                    <a href="enterprise_integration.html" class="text-gray-700 hover:text-sapphire transition-colors">Enterprise</a>
-                    <a href="#pricing" class="text-gray-700 hover:text-sapphire transition-colors">Pricing</a>
-                    <a href="#test" class="text-gray-700 hover:text-sapphire transition-colors">Test Power</a>
-                    <a href="#ai-creation" class="text-gray-700 hover:text-sapphire transition-colors">AI Creation</a>
+                    <a href="#test" class="text-gray-700 hover:text-sapphire transition-colors">Test</a>
                     <a href="#contact" class="text-gray-700 hover:text-sapphire transition-colors">Contact</a>
                     <div class="language-dropdown">
                         <button class="text-gray-700 hover:text-sapphire transition-colors flex items-center space-x-1">
-                            <span>EN</span>
+                            <span>ES</span>
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -403,7 +410,54 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn-primary">Get in touch</button>
+                
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-sapphire transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop CTA Button -->
+                <div class="hidden lg:block">
+                    <button class="btn-primary">Get in touch</button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Home</a>
+                    <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">About</a>
+                    <a href="#solutions" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Solutions</a>
+                    <a href="mcp_information.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">MCP Tools</a>
+                    <a href="ai_assistants.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">AI Assistants</a>
+                    <a href="enterprise_integration.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Enterprise</a>
+                    <a href="#test" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Test Power</a>
+                    <a href="#ai-creation" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">AI Creation</a>
+                    <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Contact</a>
+                    <div class="px-3 py-2">
+                        <div class="language-dropdown">
+                            <button class="text-gray-700 hover:text-sapphire transition-colors flex items-center space-x-1">
+                                <span>ES</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown-content">
+                                <a href="#" onclick="changeLanguage('en')">English</a>
+                                <a href="#" onclick="changeLanguage('es')">Español</a>
+                                <a href="#" onclick="changeLanguage('zh')">中文</a>
+                                <a href="#" onclick="changeLanguage('fr')">Français</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-3 py-2">
+                        <button class="btn-primary w-full">Get in touch</button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -1376,6 +1430,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Set Spanish as default language
             changeLanguage('es');
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Close mobile menu when clicking on a link
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
         });
 
         // Smooth scrolling for navigation links
