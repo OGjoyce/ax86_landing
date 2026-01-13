@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AX86 - Enterprise AI Technology Platform | AssemblerX86</title>
-    <meta name="description" content="AX86 delivers enterprise-grade AI solutions for medium and large businesses. Custom MCP tools, intelligent assistants, and autonomous technology that accelerates growth and response times.">
+    <title>AX86 - Enterprise AI Software Solutions | OpenAI, Claude, AWS Bedrock, LlamaIndex</title>
+    <meta name="description" content="AX86 builds enterprise AI software using OpenAI v5.2 (GPT-4), Claude Opus & Sonnet, AWS Bedrock, LlamaIndex, MCP Servers, Perplexity, and Anthropic. Production-ready AI software solutions for enterprise workflows.">
     
     <!-- Helvetica Font -->
     <style>
@@ -30,6 +30,13 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Chart.js for Business Growth Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     
     <style>
         :root {
@@ -196,38 +203,71 @@
         }
         
         .btn-primary {
-            background: var(--sapphire);
+            /* Brand colors: Blue #0D52BA, #1E6BCC and Gold #D3AF36, #E3B100 */
+            background: linear-gradient(135deg, #0D52BA 0%, #1E6BCC 25%, #D3AF36 50%, #E3B100 75%, #0D52BA 100%);
             color: white;
             padding: 12px 24px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: 2px solid var(--gold);
+            border: 2px solid transparent;
+            background-clip: padding-box;
             cursor: pointer;
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+            box-shadow: 0 6px 20px rgba(13, 82, 186, 0.5), 0 0 30px rgba(211, 175, 54, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:hover {
-            background: var(--sapphire-dark);
-            border-color: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(13, 82, 186, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(13, 82, 186, 0.6), 0 0 40px rgba(211, 175, 54, 0.4);
+            animation: gradientShift 2s ease infinite;
         }
         
         .btn-secondary {
-            background: white;
+            /* Brand colors in border: Blue #0D52BA and Gold #D3AF36, #E3B100 */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(211, 175, 54, 0.15) 50%, rgba(13, 82, 186, 0.1) 100%);
             color: var(--sapphire);
             padding: 12px 24px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: 2px solid var(--gold);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #0D52BA, #1E6BCC, #D3AF36, #E3B100, #0D52BA) 1;
+            border-image-slice: 1;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(211, 175, 54, 0.3);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
         }
         
         .btn-secondary:hover {
-            background: var(--gold);
-            color: var(--sapphire);
-            transform: translateY(-2px);
+            /* Brand colors: Blue and Gold gradient */
+            background: linear-gradient(135deg, #0D52BA 0%, #1E6BCC 25%, #D3AF36 50%, #E3B100 75%, #0D52BA 100%);
+            background-size: 300% 300%;
+            color: white;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 30px rgba(13, 82, 186, 0.6), 0 0 40px rgba(211, 175, 54, 0.4);
+            border-image: none;
+            border-color: transparent;
+            animation: gradientShift 2s ease infinite;
         }
         
         .language-dropdown {
@@ -364,6 +404,36 @@
         /* Gold accents for cards and links */
         .card-gold {
             border: 1px solid var(--gold);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(212, 175, 54, 0.05) 100%);
+        }
+        
+        /* Gradient cards */
+        .card-gradient-1 {
+            background: linear-gradient(135deg, rgba(13, 82, 186, 0.1) 0%, rgba(30, 107, 204, 0.05) 100%);
+            border: 1px solid rgba(13, 82, 186, 0.2);
+        }
+        
+        .card-gradient-2 {
+            background: linear-gradient(135deg, rgba(212, 175, 54, 0.1) 0%, rgba(230, 197, 71, 0.05) 100%);
+            border: 1px solid rgba(212, 175, 54, 0.2);
+        }
+        
+        .card-gradient-3 {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(167, 139, 250, 0.05) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        /* Section background gradients */
+        .section-gradient-1 {
+            background: linear-gradient(180deg, #ffffff 0%, rgba(13, 82, 186, 0.02) 100%);
+        }
+        
+        .section-gradient-2 {
+            background: linear-gradient(180deg, rgba(212, 175, 54, 0.02) 0%, #ffffff 100%);
+        }
+        
+        .section-gradient-3 {
+            background: linear-gradient(180deg, #ffffff 0%, rgba(139, 92, 246, 0.02) 100%);
         }
         
         .link-gold {
@@ -374,6 +444,241 @@
         
         .link-gold:hover {
             color: var(--gold-light);
+        }
+        
+        /* Animation enhancements */
+        .use-case-card,
+        .process-step,
+        .pricing-card {
+            opacity: 0;
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Performance optimization for animations */
+        .use-case-card,
+        .process-step,
+        .pricing-card,
+        .btn-primary,
+        .btn-secondary {
+            will-change: transform;
+        }
+        
+        /* Step card styling */
+        .step-card {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            min-height: 240px;
+            position: relative;
+        }
+        
+        .step-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-card:hover .step-card-content {
+            transform: scale(1.02);
+        }
+        
+        .step-card-content {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Timeline node styling - make them more visible */
+        .step-card [class*="absolute"] [class*="rounded-full"]:has(div[class*="bg-white"]) {
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.5));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        .step-card:hover [class*="absolute"] [class*="rounded-full"]:has(div[class*="bg-white"]) {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.7));
+        }
+        
+        /* Animated gradient background for hero */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .hero-bg {
+            /* Brand colors from logo: Blue #0D52BA, Gold #D3AF36, Gold variant #E3B100 */
+            background: linear-gradient(135deg, #0D52BA 0%, #1E6BCC 15%, #0D52BA 30%, #D3AF36 45%, #E3B100 60%, #D3AF36 75%, #0D52BA 90%, #1E6BCC 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(211, 175, 54, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(13, 82, 186, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(227, 177, 0, 0.3) 0%, transparent 60%),
+                radial-gradient(circle at 10% 80%, rgba(30, 107, 204, 0.3) 0%, transparent 50%);
+            animation: gradientShift 20s ease infinite reverse;
+            z-index: 0;
+        }
+        
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.2) 100%);
+            z-index: 0;
+        }
+        
+        .hero-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Animated mesh gradient overlay */
+        @keyframes meshMove {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.2) rotate(90deg);
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(0.8) rotate(180deg);
+            }
+            75% {
+                transform: translate(30px, 50px) scale(1.1) rotate(270deg);
+            }
+        }
+        
+        @keyframes meshMove2 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translate(-40px, 40px) scale(1.15) rotate(-90deg);
+            }
+            66% {
+                transform: translate(40px, -40px) scale(0.85) rotate(-180deg);
+            }
+        }
+        
+        @keyframes meshMove3 {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            50% {
+                transform: translate(60px, 60px) scale(1.3);
+            }
+        }
+        
+        .hero-gradient-mesh {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.6;
+            z-index: 0;
+        }
+        
+        .hero-gradient-mesh:nth-child(1) {
+            width: 600px;
+            height: 600px;
+            /* Brand gold: #D3AF36, #E3B100 */
+            background: radial-gradient(circle, rgba(211, 175, 54, 1), rgba(227, 177, 0, 0.8), transparent);
+            top: -300px;
+            right: -300px;
+            animation: meshMove 25s ease-in-out infinite;
+        }
+        
+        .hero-gradient-mesh:nth-child(2) {
+            width: 700px;
+            height: 700px;
+            /* Brand blue: #0D52BA, #1E6BCC */
+            background: radial-gradient(circle, rgba(13, 82, 186, 1), rgba(30, 107, 204, 0.8), transparent);
+            bottom: -350px;
+            left: -350px;
+            animation: meshMove2 30s ease-in-out infinite;
+        }
+        
+        .hero-gradient-mesh:nth-child(3) {
+            width: 500px;
+            height: 500px;
+            /* Mix of brand blue and gold */
+            background: radial-gradient(circle, rgba(13, 82, 186, 0.9), rgba(211, 175, 54, 0.7), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: meshMove3 20s ease-in-out infinite;
+        }
+        
+        /* Loading skeleton animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 2000px 100%;
+            animation: shimmer 2s infinite linear;
+        }
+        
+        /* Pulse animation for process numbers */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .process-number:hover {
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .hero-bg {
+                animation: none;
+            }
         }
     </style>
 </head>
@@ -390,11 +695,12 @@
                 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex space-x-6 items-center">
-                    <a href="#home" class="text-gray-700 hover:text-sapphire transition-colors">Home</a>
-                    <a href="#about" class="text-gray-700 hover:text-sapphire transition-colors">About</a>
-                    <a href="#solutions" class="text-gray-700 hover:text-sapphire transition-colors">Solutions</a>
-                    <a href="#test" class="text-gray-700 hover:text-sapphire transition-colors">Test</a>
-                    <a href="#contact" class="text-gray-700 hover:text-sapphire transition-colors">Contact</a>
+                    <a href="#ai-software" class="text-gray-700 hover:text-sapphire transition-colors">AI Software</a>
+                    <a href="#build-agent" class="text-gray-700 hover:text-sapphire transition-colors">AI Agents</a>
+                    <a href="#technologies" class="text-gray-700 hover:text-sapphire transition-colors">Technologies</a>
+                    <a href="#use-cases" class="text-gray-700 hover:text-sapphire transition-colors">Use Cases</a>
+                    <a href="#process" class="text-gray-700 hover:text-sapphire transition-colors">Process</a>
+                    <a href="#pricing" class="text-gray-700 hover:text-sapphire transition-colors">Pricing</a>
                     <div class="language-dropdown">
                         <button class="text-gray-700 hover:text-sapphire transition-colors flex items-center space-x-1">
                             <span>ES</span>
@@ -422,21 +728,19 @@
                 
                 <!-- Desktop CTA Button -->
                 <div class="hidden lg:block">
-                    <button onclick="openWhatsAppModal()" class="btn-primary">Get in touch</button>
+                    <button onclick="openWhatsAppModal()" class="btn-primary">Book Assessment</button>
                 </div>
             </div>
             
             <!-- Mobile Navigation Menu -->
             <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
                 <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a href="#home" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Home</a>
-                    <a href="#about" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">About</a>
-                    <a href="#solutions" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Solutions</a>
-                    <a href="mcp_information.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">MCP Tools</a>
-                    <a href="ai_assistants.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">AI Assistants</a>
-                    <a href="enterprise_integration.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Enterprise</a>
-                    <a href="#test" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Test Power</a>
-                    <a href="#ai-creation" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">AI Creation</a>
+                    <a href="#ai-software" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">AI Software</a>
+                    <a href="#build-agent" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">AI Agents</a>
+                    <a href="#technologies" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Technologies</a>
+                    <a href="#use-cases" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Use Cases</a>
+                    <a href="#process" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Process</a>
+                    <a href="#pricing" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Pricing</a>
                     <a href="#contact" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Contact</a>
                     <div class="px-3 py-2">
                         <div class="language-dropdown">
@@ -455,7 +759,7 @@
                         </div>
                     </div>
                     <div class="px-3 py-2">
-                        <button onclick="openWhatsAppModal()" class="btn-primary w-full">Get in touch</button>
+                        <button onclick="openWhatsAppModal()" class="btn-primary w-full">Book Assessment</button>
                     </div>
                 </div>
             </div>
@@ -463,54 +767,86 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-bg pt-20 pb-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="home" class="hero-bg pt-20 pb-24 relative overflow-hidden">
+        <!-- Animated gradient meshes -->
+        <div class="hero-gradient-mesh"></div>
+        <div class="hero-gradient-mesh"></div>
+        <div class="hero-gradient-mesh"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <div class="mb-6">
-                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-20 w-auto">
+                    <div class="mb-6 transform hover:scale-105 transition-transform duration-300">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-20 w-auto drop-shadow-2xl">
                     </div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
-                        Finally, someone put all the pieces together.
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight hero-title" style="color: #ffffff; text-shadow: 2px 2px 8px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.3);">
+                        Enterprise AI Software Built on <span style="color: #FFD700; text-shadow: 2px 2px 6px rgba(0,0,0,0.7), 0 0 15px rgba(255,215,0,0.5); font-weight: 700;">Cutting-Edge Technology</span>
                     </h1>
-                    <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
-                        In AX86's model, the business wins and the technology wins. Enterprise AI solutions that accelerate growth and deliver unprecedented response times.
+                    <p class="text-lg md:text-xl mb-6 leading-relaxed hero-subtitle" style="color: #ffffff; text-shadow: 1px 1px 4px rgba(0,0,0,0.6), 0 0 10px rgba(0,0,0,0.4);">
+                        We build production-ready AI Software using OpenAI v5.2, Claude (Opus & Sonnet), LlamaIndex, AWS Bedrock, MCP Servers, Perplexity, and Anthropic. Our AI software solutions integrate seamlessly into your workflows, powered by the world's most advanced AI models and frameworks.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="scrollToSection('test')" class="btn-primary text-lg px-8 py-4">Experience Our Power</button>
-                        <button onclick="scrollToSection('pricing')" class="btn-secondary text-lg px-8 py-4">Learn More</button>
+                    <!-- Trust Indicators -->
+                    <div class="flex flex-wrap gap-4 mb-8 text-sm trust-indicators">
+                        <div class="flex items-center gap-2 backdrop-blur-md rounded-full px-5 py-3 border-2 shadow-lg hover:scale-105 transition-transform" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255,255,255,0.5);">
+                            <div class="w-3 h-3 rounded-full animate-pulse shadow-lg" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);"></div>
+                            <span class="font-semibold" style="color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);"><strong>OpenAI</strong> v5.2 (GPT-4 & GPT-4 Turbo)</span>
+                        </div>
+                        <div class="flex items-center gap-2 backdrop-blur-md rounded-full px-5 py-3 border-2 shadow-lg hover:scale-105 transition-transform" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255,255,255,0.5);">
+                            <div class="w-3 h-3 rounded-full animate-pulse shadow-lg" style="background: linear-gradient(135deg, #D3AF36, #E3B100);"></div>
+                            <span class="font-semibold" style="color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);"><strong>Claude</strong> Opus & Sonnet</span>
+                        </div>
+                        <div class="flex items-center gap-2 backdrop-blur-md rounded-full px-5 py-3 border-2 shadow-lg hover:scale-105 transition-transform" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255,255,255,0.5);">
+                            <div class="w-3 h-3 rounded-full animate-pulse shadow-lg" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);"></div>
+                            <span class="font-semibold" style="color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);"><strong>AWS</strong> Bedrock & Agent AI</span>
+                        </div>
+                        <div class="flex items-center gap-2 backdrop-blur-md rounded-full px-5 py-3 border-2 shadow-lg hover:scale-105 transition-transform" style="background: rgba(0, 0, 0, 0.4); border-color: rgba(255,255,255,0.5);">
+                            <div class="w-3 h-3 rounded-full animate-pulse shadow-lg" style="background: linear-gradient(135deg, #D3AF36, #E3B100);"></div>
+                            <span class="font-semibold" style="color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);"><strong>LlamaIndex</strong> RAG Framework</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 hero-cta">
+                        <button onclick="openWhatsAppModal()" class="btn-primary text-lg px-8 py-4 shadow-2xl">Book a Free Agent Assessment</button>
+                        <button onclick="scrollToSection('use-cases')" class="text-lg px-8 py-4 backdrop-blur-sm border-2 shadow-2xl hover:bg-white hover:text-sapphire transition-all" style="background: rgba(0, 0, 0, 0.3); border-color: rgba(255,255,255,0.6); color: #ffffff; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">View Use Cases</button>
                     </div>
                 </div>
                 <div class="relative">
-                    <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-200">
-                        <div class="text-center mb-6">
-                            <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <div class="w-8 h-8 bg-sapphire rounded-full"></div>
+                    <div class="bg-gradient-to-br from-white/95 via-white/90 to-white/95 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border-2 border-white/60 transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
+                        <!-- Gradient overlay on card - Brand colors -->
+                        <div class="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(211, 175, 54, 0.2), rgba(227, 177, 0, 0.2), transparent);"></div>
+                        <div class="absolute bottom-0 left-0 w-32 h-32 rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(13, 82, 186, 0.2), rgba(30, 107, 204, 0.2), transparent);"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="text-center mb-6">
+                                <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC, #D3AF36, #E3B100);">
+                                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold" style="background: linear-gradient(to right, #0D52BA, #D3AF36, #E3B100); -webkit-background-clip: text; background-clip: text; color: transparent;">AI Assistant Demo</h3>
                             </div>
-                            <h3 class="text-xl font-semibold text-black">AI Assistant Demo</h3>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <p class="text-gray-700">"Hey Scott, I've analyzed your business data and can save you $50,000 annually in operational costs!"</p>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="flex-1 bg-sapphire text-white px-4 py-2 rounded-lg text-sm font-medium">
-                                    Optimize Operations
-                                </button>
-                                <button class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium">
-                                    Reduce Costs
-                                </button>
-                            </div>
-                            <div class="text-center">
-                                <button class="text-sapphire text-sm font-medium">View Analytics</button>
+                            <div class="space-y-4">
+                                <div class="bg-gradient-to-br from-sapphire/15 via-purple-100/50 to-pink-100/30 rounded-lg p-4 border-2 border-sapphire/30 shadow-lg">
+                                    <p class="text-gray-800 font-medium">"Hey Scott, I've analyzed your business data and can save you $50,000 annually in operational costs!"</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="flex-1 text-white px-4 py-3 rounded-lg text-sm font-semibold hover:shadow-xl hover:scale-105 transition-all" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC, #D3AF36, #E3B100);">
+                                        Optimize Operations
+                                    </button>
+                                    <button class="flex-1 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 text-gray-700 px-4 py-3 rounded-lg text-sm font-semibold hover:shadow-xl hover:scale-105 transition-all border-2 border-gray-200">
+                                        Reduce Costs
+                                    </button>
+                                </div>
+                                <div class="text-center">
+                                    <button class="text-sm font-semibold hover:scale-110 transition-transform inline-block" style="background: linear-gradient(to right, #0D52BA, #D3AF36); -webkit-background-clip: text; background-clip: text; color: transparent;">View Analytics</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Success indicator -->
-                    <div class="absolute -top-4 -right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+                    <!-- Success indicator with gradient -->
+                    <div class="absolute -top-4 -right-4 bg-gradient-to-br from-green-400 via-emerald-500 to-green-600 text-white px-5 py-3 rounded-xl shadow-2xl transform hover:scale-110 transition-all border-2 border-white/30">
                         <div class="text-center">
-                            <div class="text-2xl font-bold">$50K</div>
-                            <div class="text-xs">Saved!</div>
+                            <div class="text-3xl font-bold">$50K</div>
+                            <div class="text-xs font-semibold">Saved!</div>
                         </div>
                     </div>
                 </div>
@@ -518,169 +854,1217 @@
         </div>
     </section>
 
-    <!-- Solutions Section -->
-    <section id="solutions" class="py-20 bg-white">
+    <!-- Build Your First AI Agent Section -->
+    <section id="build-agent" class="py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden">
+        <!-- Background overlay -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(13,82,186,0.5), transparent);"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(211,175,54,0.5), transparent);"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Hero Section -->
+            <div class="text-center mb-20">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+                    Build Your First AI Agent for Your Business
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8" style="text-shadow: 1px 1px 4px rgba(0,0,0,0.5);">
+                    Automate decisions, reduce operational friction, and unlock scalable growth with AI-powered agents.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="openWhatsAppModal()" class="btn-primary text-lg px-8 py-4 shadow-2xl">Build Your First AI Agent</button>
+                    <button onclick="document.getElementById('agent-steps').scrollIntoView({behavior: 'smooth'})" class="text-lg px-8 py-4 border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all shadow-2xl rounded-lg">See How It Works</button>
+                </div>
+            </div>
+
+            <!-- What Is an AI Agent Section -->
+            <div class="mb-20">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">What Is an AI Agent?</h2>
+                        <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                            An AI Agent is an autonomous system that makes decisions, takes actions, and solves problems using artificial intelligence. Unlike simple chatbots, AI Agents understand context, access real-time data, use tools, and make intelligent decisions to automate complex workflows.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(13,82,186,0.3), rgba(211,175,54,0.2));">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Autonomous Decision-Making</h3>
+                                    <p class="text-gray-400">Agents analyze data, make decisions, and take actions without human intervention for routine tasks.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(211,175,54,0.3), rgba(13,82,186,0.2));">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Tool Integration</h3>
+                                    <p class="text-gray-400">Agents connect to APIs, databases, CRMs, and business tools to perform real work.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, rgba(13,82,186,0.3), rgba(211,175,54,0.2));">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Continuous Learning</h3>
+                                    <p class="text-gray-400">Agents learn from feedback and improve performance over time.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="rounded-2xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl" style="background: rgba(255,255,255,0.05);">
+                            <div class="space-y-6">
+                                <div class="text-center">
+                                    <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC, #D3AF36, #E3B100);">
+                                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-2">AI Agent Flow</h3>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-4 p-4 rounded-lg" style="background: rgba(13,82,186,0.2);">
+                                        <div class="text-2xl font-bold w-8">→</div>
+                                        <div>
+                                            <div class="font-semibold">Input</div>
+                                            <div class="text-sm text-gray-400">Data, queries, triggers</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 p-4 rounded-lg" style="background: rgba(211,175,54,0.2);">
+                                        <div class="text-2xl font-bold w-8">→</div>
+                                        <div>
+                                            <div class="font-semibold">Reasoning</div>
+                                            <div class="text-sm text-gray-400">AI analyzes & decides</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 p-4 rounded-lg" style="background: rgba(13,82,186,0.2);">
+                                        <div class="text-2xl font-bold w-8">→</div>
+                                        <div>
+                                            <div class="font-semibold">Tools</div>
+                                            <div class="text-sm text-gray-400">APIs, databases, systems</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-4 p-4 rounded-lg" style="background: rgba(211,175,54,0.2);">
+                                        <div class="text-2xl font-bold w-8">→</div>
+                                        <div>
+                                            <div class="font-semibold">Output</div>
+                                            <div class="text-sm text-gray-400">Actions, responses, updates</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Builder Section -->
+            <div id="agent-steps" class="mb-20">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Step-by-Step: How an AI Agent Is Built</h2>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                        Follow our proven 10-step process to build your first AI Agent. Each step builds on the previous one to create a production-ready AI Agent.
+                    </p>
+                </div>
+
+                <div class="relative max-w-6xl mx-auto">
+                    <!-- Central Timeline -->
+                    <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full" style="background: linear-gradient(to bottom, #0D52BA, #1E6BCC, #D3AF36, #E3B100, #0D52BA); height: calc(100% - 60px); top: 30px; z-index: 1;"></div>
+                    
+                    <!-- Steps Container -->
+                    <div class="relative space-y-20">
+                        <!-- Step 1 -->
+                        <div class="step-card relative flex items-center" data-step="1">
+                            <!-- Card (Left Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">1</div>
+                                        <h3 class="text-2xl font-bold">Define the Agent's Purpose</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">What problem will the agent solve? Who is the end-user? What kind of inputs and outputs are needed?</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Identify the business problem to solve</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Define the target end-user</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Specify required inputs and outputs</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Right to Node) -->
+                            <div class="hidden lg:block absolute left-1/2 transform translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to right, rgba(13,82,186,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="step-card relative flex items-center" data-step="2">
+                            <!-- Spacer for left side (empty on even steps) -->
+                            <div class="hidden lg:block w-[calc(50%-60px)]"></div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Card (Right Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">2</div>
+                                        <h3 class="text-2xl font-bold">Select Input Sources</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Choose data formats (text, voice, API, etc.). Connect to databases, CRMs, or external APIs. Define how real-time the data should be.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>APIs, databases, documents, CRMs</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Real-time vs batch data processing</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Data format selection</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Left to Node) -->
+                            <div class="hidden lg:block absolute right-1/2 transform -translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to left, rgba(211,175,54,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="step-card relative flex items-center" data-step="3">
+                            <!-- Card (Left Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">3</div>
+                                        <h3 class="text-2xl font-bold">Data Preparation & Preprocessing</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Clean and normalize the input data. Tokenize text or extract structured data. Format the data for your chosen model.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Cleaning and normalization</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Tokenization or structured extraction</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Data formatting for AI models</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Right to Node) -->
+                            <div class="hidden lg:block absolute left-1/2 transform translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to right, rgba(13,82,186,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="step-card relative flex items-center" data-step="4">
+                            <!-- Spacer for left side (empty on even steps) -->
+                            <div class="hidden lg:block w-[calc(50%-60px)]"></div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Card (Right Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">4</div>
+                                        <h3 class="text-2xl font-bold">Choose the Right Model</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Pick from LLMs (e.g., GPT-4, Claude, Gemini). Decide between hosted APIs or custom models. Ensure the model supports your task: chat, reasoning, retrieval, etc.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Select LLM (OpenAI v5.2, Claude, AWS Bedrock)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Hosted APIs vs custom models</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Task-specific model selection</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Left to Node) -->
+                            <div class="hidden lg:block absolute right-1/2 transform -translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to left, rgba(211,175,54,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 5 -->
+                        <div class="step-card relative flex items-center" data-step="5">
+                            <!-- Card (Left Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">5</div>
+                                        <h3 class="text-2xl font-bold">Design the Agent Architecture</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Decide the control flow (decision trees, planner, or tool use). Use frameworks like LangChain, CrewAI, AutoGen. Define how tools, memory, and prompts are connected.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Control flow design (decision trees, planners)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Framework selection (LlamaIndex, MCP Servers)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Connect tools, memory, and prompts</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Right to Node) -->
+                            <div class="hidden lg:block absolute left-1/2 transform translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to right, rgba(13,82,186,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 6 -->
+                        <div class="step-card relative flex items-center" data-step="6">
+                            <!-- Spacer for left side (empty on even steps) -->
+                            <div class="hidden lg:block w-[calc(50%-60px)]"></div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Card (Right Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">6</div>
+                                        <h3 class="text-2xl font-bold">Craft Prompts & Toolchains</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Create structured prompts using templates. Integrate tools like search, APIs, or calculators. Test for accurate and useful outputs.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Structured prompt templates</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Tool integration (search, APIs, calculators)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Output accuracy testing</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Left to Node) -->
+                            <div class="hidden lg:block absolute right-1/2 transform -translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to left, rgba(211,175,54,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 7 -->
+                        <div class="step-card relative flex items-center" data-step="7">
+                            <!-- Card (Left Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">7</div>
+                                        <h3 class="text-2xl font-bold">Test & Validate</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Simulate different user inputs. Evaluate agent response accuracy. Identify edge cases and unexpected outputs.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Simulate various user inputs</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Evaluate response accuracy</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Identify and handle edge cases</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Right to Node) -->
+                            <div class="hidden lg:block absolute left-1/2 transform translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to right, rgba(13,82,186,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 8 -->
+                        <div class="step-card relative flex items-center" data-step="8">
+                            <!-- Spacer for left side (empty on even steps) -->
+                            <div class="hidden lg:block w-[calc(50%-60px)]"></div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Card (Right Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">8</div>
+                                        <h3 class="text-2xl font-bold">Deploy the Agent</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Host on cloud (e.g., AWS, Vercel, Streamlit). Provide a frontend (chat UI, voice interface, etc.). Add logging for user interactions.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Cloud hosting (AWS, Vercel, etc.)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Frontend integration (chat UI, voice)</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>User interaction logging</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Left to Node) -->
+                            <div class="hidden lg:block absolute right-1/2 transform -translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to left, rgba(211,175,54,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 9 -->
+                        <div class="step-card relative flex items-center" data-step="9">
+                            <!-- Card (Left Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">9</div>
+                                        <h3 class="text-2xl font-bold">Monitor & Improve</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Track user queries and agent responses. Monitor accuracy, latency, and failure points. Improve prompts, retrain if needed.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Track queries and responses</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Monitor accuracy, latency, failures</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Continuous prompt improvement</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Right to Node) -->
+                            <div class="hidden lg:block absolute left-1/2 transform translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to right, rgba(13,82,186,0.6), transparent);"></div>
+                        </div>
+
+                        <!-- Step 10 -->
+                        <div class="step-card relative flex items-center" data-step="10">
+                            <!-- Spacer for left side (empty on even steps) -->
+                            <div class="hidden lg:block w-[calc(50%-60px)]"></div>
+                            <!-- Timeline Node (Center) -->
+                            <div class="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 z-20 items-center justify-center" style="top: 50%; margin-top: -30px;">
+                                <div class="w-16 h-16 rounded-full flex items-center justify-center border-4 border-white shadow-2xl animate-pulse" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">
+                                    <div class="w-6 h-6 rounded-full bg-white"></div>
+                                </div>
+                            </div>
+                            <!-- Card (Right Side) -->
+                            <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
+                                <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
+                                    <div class="flex items-center gap-4 mb-4">
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">10</div>
+                                        <h3 class="text-2xl font-bold">Enable Continuous Learning</h3>
+                                    </div>
+                                    <p class="text-gray-300 mb-4">Fine-tune model with feedback data. Keep tools and APIs updated. Let the agent evolve with use cases.</p>
+                                    <ul class="space-y-2 text-gray-400">
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Fine-tune with feedback data</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Keep tools and APIs updated</span>
+                                        </li>
+                                        <li class="flex items-start gap-2">
+                                            <span class="text-yellow-400 mt-1">•</span>
+                                            <span>Evolve with use cases</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Connector Line (Left to Node) -->
+                            <div class="hidden lg:block absolute right-1/2 transform -translate-x-8 z-10" style="top: 50%; width: calc(50% - 80px); height: 2px; background: linear-gradient(to left, rgba(211,175,54,0.6), transparent);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Business Results Section -->
+            <div class="mb-20">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">What This Means for Your Business</h2>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+                        Businesses using AI agents reduce operational costs, automate repetitive decision-making, and unlock new revenue streams by scaling expertise without scaling headcount.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 mb-12">
+                    <div class="text-center p-6 rounded-xl backdrop-blur-xl border-2 border-white/20 shadow-xl" style="background: rgba(255,255,255,0.05);">
+                        <div class="text-4xl font-bold mb-2" style="color: #D3AF36;">↑ 62%</div>
+                        <div class="text-gray-300 font-semibold">Operational Efficiency</div>
+                    </div>
+                    <div class="text-center p-6 rounded-xl backdrop-blur-xl border-2 border-white/20 shadow-xl" style="background: rgba(255,255,255,0.05);">
+                        <div class="text-4xl font-bold mb-2" style="color: #D3AF36;">↓ 38%</div>
+                        <div class="text-gray-300 font-semibold">Manual Workload</div>
+                    </div>
+                    <div class="text-center p-6 rounded-xl backdrop-blur-xl border-2 border-white/20 shadow-xl" style="background: rgba(255,255,255,0.05);">
+                        <div class="text-4xl font-bold mb-2" style="color: #D3AF36;">↑ 47%</div>
+                        <div class="text-gray-300 font-semibold">Revenue per Employee</div>
+                    </div>
+                    <div class="text-center p-6 rounded-xl backdrop-blur-xl border-2 border-white/20 shadow-xl" style="background: rgba(255,255,255,0.05);">
+                        <div class="text-4xl font-bold mb-2" style="color: #D3AF36;">↑ 3.2x</div>
+                        <div class="text-gray-300 font-semibold">Response Speed</div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-xl" style="background: rgba(255,255,255,0.05);">
+                        <h3 class="text-2xl font-bold mb-4">Before: Manual Workflow</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-400 mt-1">✗</span>
+                                <span>Time-consuming manual processes</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-400 mt-1">✗</span>
+                                <span>Human error and inconsistency</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-400 mt-1">✗</span>
+                                <span>Limited scalability</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-400 mt-1">✗</span>
+                                <span>High operational costs</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-xl" style="background: rgba(255,255,255,0.05);">
+                        <h3 class="text-2xl font-bold mb-4">After: AI-Driven Workflow</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-400 mt-1">✓</span>
+                                <span>Automated decision-making 24/7</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-400 mt-1">✓</span>
+                                <span>Consistent, accurate results</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-400 mt-1">✓</span>
+                                <span>Unlimited scalability</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-400 mt-1">✓</span>
+                                <span>Reduced operational costs</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Build Your First AI Agent?</h2>
+                <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
+                    Let's turn your business process into an intelligent, automated system that scales with your growth.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="openWhatsAppModal()" class="btn-primary text-lg px-8 py-4 shadow-2xl">Build Your First AI Agent</button>
+                    <a href="#contact" class="text-lg px-8 py-4 border-2 border-white/30 text-white hover:bg-white hover:text-gray-900 transition-all shadow-2xl rounded-lg inline-flex items-center justify-center">Talk to an AI Specialist</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Software Section -->
+    <section id="ai-software" class="py-20 section-gradient-1">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Our AI Solutions</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Enterprise AI Software Solutions</h2>
                 <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Custom MCP tools, intelligent assistants, and enterprise-grade AI technology that transforms how businesses operate.
+                    We develop production-grade AI Software powered by OpenAI v5.2, Claude, AWS Bedrock, LlamaIndex, and MCP Servers. Our AI software integrates seamlessly into your enterprise workflows, delivering intelligent automation with enterprise-grade reliability.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="rounded-xl p-8 border-2 shadow-lg hover:shadow-xl transition-shadow" style="background: linear-gradient(to bottom right, rgba(13,82,186,0.1), rgba(30,107,204,0.05), rgba(13,82,186,0.05)); border-color: rgba(13,82,186,0.3);">
+                    <h3 class="text-2xl font-bold text-black mb-4">AI Software Architecture</h3>
+                    <p class="text-gray-700 mb-4">
+                        Our AI software is built on a modern, scalable architecture leveraging multiple AI models and frameworks. We combine OpenAI v5.2 (GPT-4), Anthropic's Claude (Opus & Sonnet), AWS Bedrock, and LlamaIndex to create robust, production-ready AI software solutions.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Multi-model AI orchestration (OpenAI, Claude, AWS Bedrock)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>LlamaIndex RAG framework for intelligent document processing</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>MCP Servers for seamless system integrations</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Perplexity AI for real-time information retrieval</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="rounded-xl p-8 border-2 shadow-lg hover:shadow-xl transition-shadow" style="background: linear-gradient(to bottom right, rgba(211,175,54,0.1), rgba(227,177,0,0.05), rgba(211,175,54,0.05)); border-color: rgba(211,175,54,0.3);">
+                    <h3 class="text-2xl font-bold text-black mb-4">Enterprise-Grade AI Software</h3>
+                    <p class="text-gray-700 mb-4">
+                        Our AI software solutions are built for enterprise scale, with security, compliance, and reliability at the core. We leverage AWS infrastructure, Anthropic's enterprise models, and OpenAI v5.2's latest capabilities to deliver AI software that meets the highest standards.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Production-ready AI software with 99.9% uptime</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Enterprise security and compliance (SOC 2, GDPR)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Scalable AI software architecture on AWS</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-gold mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>24/7 monitoring and support for AI software</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="py-20 bg-gradient-to-b from-white via-blue-50/20 to-blue-50/10" style="background: linear-gradient(to bottom, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03));">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Our AI Technology Stack</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    We leverage the world's most advanced AI models, frameworks, and infrastructure to build enterprise-grade AI software solutions.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- OpenAI -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.4397-1.8418 6.0462 6.0462 0 0 0-1.9203-2.3778 6.0569 6.0569 0 0 0-4.3224-1.1332A5.9847 5.9847 0 0 0 13.3636 2.5a6.0569 6.0569 0 0 0-4.3193 1.1332 6.0462 6.0462 0 0 0-1.9203 2.3778 5.9948 5.9948 0 0 0-.4397 1.8418 5.9832 5.9832 0 0 0 .4397 1.8418 6.0462 6.0462 0 0 0 1.9203 2.3778 6.0569 6.0569 0 0 0 4.3224 1.1332 5.9847 5.9847 0 0 0 1.9056.2977 6.0569 6.0569 0 0 0 4.3193-1.1332 6.0462 6.0462 0 0 0 1.9203-2.3778 5.9847 5.9847 0 0 0 .4397-1.8418zm-9.7406 4.7138v7.1343h-3.0831v-7.1343H4.9562V7.8689h4.5022V5.5512a5.1282 5.1282 0 0 1 1.3092-3.7839 5.0826 5.0826 0 0 1 3.6914-1.3092h2.6242v2.3177h-1.6594a2.3429 2.3429 0 0 0-2.3177 2.3177v2.3177h4.5022l-.5512 6.666z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">OpenAI</h3>
+                    <p class="text-sm text-gray-600">OpenAI v5.2 with GPT-4, GPT-4 Turbo, GPT-3.5 for advanced language understanding and generation</p>
+                </div>
+                
+                <!-- Anthropic Claude -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">Anthropic Claude</h3>
+                    <p class="text-sm text-gray-600">Claude Opus & Sonnet for enterprise-grade reasoning and safety</p>
+                </div>
+                
+                <!-- AWS -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">AWS Bedrock</h3>
+                    <p class="text-sm text-gray-600">AWS Agent AI & Bedrock for scalable AI infrastructure</p>
+                </div>
+                
+                <!-- LlamaIndex -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">LlamaIndex</h3>
+                    <p class="text-sm text-gray-600">RAG framework for intelligent document processing and retrieval</p>
+                </div>
+                
+                <!-- MCP Servers -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">MCP Servers</h3>
+                    <p class="text-sm text-gray-600">Model Context Protocol for seamless system integrations</p>
+                </div>
+                
+                <!-- Perplexity -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">Perplexity AI</h3>
+                    <p class="text-sm text-gray-600">Real-time information retrieval and search capabilities</p>
+                </div>
+                
+                <!-- Agentcore -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">Agentcore</h3>
+                    <p class="text-sm text-gray-600">Advanced agent orchestration and workflow management</p>
+                </div>
+                
+                <!-- Anthropic -->
+                <div class="rounded-xl p-6 shadow-lg border-2 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center transform" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-16 h-16 bg-sapphire/10 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sapphire" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-black mb-2">Anthropic</h3>
+                    <p class="text-sm text-gray-600">Enterprise AI models with safety and reliability focus</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section id="use-cases" class="py-20" style="background: linear-gradient(to bottom, rgba(13,82,186,0.05), #ffffff, rgba(211,175,54,0.03));">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">AI Software Use Cases</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our AI software solutions, powered by OpenAI v5.2, Claude, AWS Bedrock, and LlamaIndex, automate critical business processes with enterprise-grade reliability.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white rounded-xl p-8 shadow-lg card-gold card-hover">
-                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-6">
-                        <div class="w-6 h-6 bg-sapphire rounded"></div>
+                <!-- Sales & Lead Qualification Agent -->
+                <div class="rounded-xl p-6 shadow-lg border-2 use-case-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sapphire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-black mb-4">Custom MCP Tools</h3>
-                    <p class="text-gray-600 mb-6">We create specialized Model Context Protocol tools for your business. From pizza sales analytics to complex data processing, our AI tools integrate seamlessly with your existing systems.</p>
-                    <a href="mcp_information.html" class="link-gold font-medium hover:underline">Learn more →</a>
+                    <h3 class="text-xl font-semibold text-black mb-3">Enterprise Sales Pipeline Management</h3>
+                    <p class="text-gray-600 mb-4">Automate B2B sales workflows for Fortune 500 companies: analyze incoming RFPs, score enterprise leads using historical data, auto-route opportunities to specialized sales teams, generate proposal responses, and sync with Salesforce/SAP. Processes 10,000+ leads monthly with 95% accuracy.</p>
+                    <div class="text-sm text-sapphire font-medium">Tech: OpenAI v5.2 (GPT-4), Claude Sonnet, LlamaIndex</div>
                 </div>
                 
-                <div class="bg-white rounded-xl p-8 shadow-lg card-gold card-hover">
-                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-6">
-                        <div class="w-6 h-6 bg-sapphire rounded-full"></div>
+                <!-- Customer Support / Ticket Triage Agent -->
+                <div class="rounded-xl p-6 shadow-lg border-2 use-case-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sapphire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-black mb-4">Intelligent Assistants</h3>
-                    <p class="text-gray-600 mb-6">Deploy AI assistants that understand your business context and provide instant, accurate responses to customer inquiries. Reduce response times from hours to seconds.</p>
-                    <a href="ai_assistants.html" class="link-gold font-medium hover:underline">Learn more →</a>
+                    <h3 class="text-xl font-semibold text-black mb-3">Enterprise Customer Service Automation</h3>
+                    <p class="text-gray-600 mb-4">Multi-channel support automation for large enterprises: triage 50,000+ monthly tickets across email, chat, phone. Auto-classify by urgency, route to specialized teams, resolve common issues instantly, escalate complex cases with full context. Integrates with ServiceNow, Zendesk, and enterprise CRMs.</p>
+                    <div class="text-sm text-sapphire font-medium">Tech: Claude Opus, AWS Bedrock, MCP Servers</div>
                 </div>
                 
-                <div class="bg-white rounded-xl p-8 shadow-lg card-gold card-hover">
-                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-6">
-                        <div class="w-6 h-6 bg-sapphire" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                <!-- Document Intelligence / Summarization Agent -->
+                <div class="rounded-xl p-6 shadow-lg border-2 use-case-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sapphire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-black mb-4">Enterprise Integration</h3>
-                    <p class="text-gray-600 mb-6">Our solutions scale from medium businesses to large enterprises. Built on x86 architecture principles, ensuring compatibility, performance, and reliability.</p>
-                    <a href="enterprise_integration.html" class="link-gold font-medium hover:underline">Learn more →</a>
+                    <h3 class="text-xl font-semibold text-black mb-3">Enterprise Contract & Document Processing</h3>
+                    <p class="text-gray-600 mb-4">Automated document processing for legal and procurement teams: extract key terms from M&A contracts, compare vendor agreements, flag non-standard clauses, generate executive summaries. Processes 1,000+ documents daily with compliance tracking. Integrates with DocuSign, SharePoint, and legal document management systems.</p>
+                    <div class="text-sm text-sapphire font-medium">Tech: LlamaIndex, OpenAI v5.2 (GPT-4 Turbo), AWS Bedrock</div>
+                </div>
+                
+                <!-- Finance Ops / Reconciliation Agent -->
+                <div class="rounded-xl p-6 shadow-lg border-2 use-case-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sapphire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-3">Financial Operations & Accounts Payable Automation</h3>
+                    <p class="text-gray-600 mb-4">Enterprise finance process automation: auto-reconcile multi-currency transactions, match invoices to POs across ERP systems, detect anomalies and fraud patterns, generate audit-ready reports. Handles $100M+ monthly transaction volume. Integrates with SAP, Oracle Financials, and NetSuite.</p>
+                    <div class="text-sm text-sapphire font-medium">Tech: Claude Opus, Anthropic, AWS Bedrock</div>
+                </div>
+                
+                <!-- Legal / Compliance Review Agent -->
+                <div class="rounded-xl p-6 shadow-lg border-2 use-case-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sapphire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-3">Regulatory Compliance & Risk Management</h3>
+                    <p class="text-gray-600 mb-4">Automated compliance monitoring for global enterprises: scan policies against GDPR, SOX, HIPAA regulations, monitor regulatory changes in real-time, assess vendor compliance risk, generate compliance reports for audit committees. Tracks 500+ regulatory requirements across multiple jurisdictions.</p>
+                    <div class="text-sm text-sapphire font-medium">Tech: Claude Opus, LlamaIndex, Perplexity AI</div>
+                </div>
+                
+                <!-- HR / Recruiting Agent -->
+                <div class="rounded-xl p-6 shadow-lg border-2 use-case-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.03)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                    <div class="w-12 h-12 bg-sapphire/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sapphire" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-black mb-3">Enterprise Talent Acquisition & HR Operations</h3>
+                    <p class="text-gray-600 mb-4">Large-scale recruitment automation: screen 5,000+ resumes per month, match candidates to job requirements, schedule interviews across time zones, conduct initial screening calls, generate candidate summaries for hiring managers. Integrates with Workday, Greenhouse, and enterprise ATS systems. Reduces time-to-hire by 60%.</p>
+                    <div class="text-sm text-sapphire font-medium">Tech: OpenAI v5.2 (GPT-4), Agentcore, MCP Servers</div>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="text-center mt-16 pt-12 border-t-2" style="border-color: rgba(13,82,186,0.2);">
+                <h3 class="text-2xl md:text-3xl font-bold text-black mb-4">Ready to Automate Your Business Processes?</h3>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                    Discover which AI software solution fits your business needs. Book a free consultation to explore use cases tailored to your industry.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="openWhatsAppModal()" class="btn-primary text-lg px-8 py-4 shadow-xl hover:shadow-2xl transition-all">
+                        Book a Free Assessment
+                    </button>
+                    <button onclick="document.getElementById('process').scrollIntoView({behavior: 'smooth'})" class="text-lg px-8 py-4 border-2 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl" style="border-color: rgba(13,82,186,0.4); color: #0D52BA; background: linear-gradient(to bottom right, rgba(13,82,186,0.05), rgba(211,175,54,0.03));" onmouseover="this.style.borderColor='rgba(13,82,186,0.6)'; this.style.background='linear-gradient(to bottom right, rgba(13,82,186,0.1), rgba(211,175,54,0.05))';" onmouseout="this.style.borderColor='rgba(13,82,186,0.4)'; this.style.background='linear-gradient(to bottom right, rgba(13,82,186,0.05), rgba(211,175,54,0.03))';">
+                        See Our Process
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Test Our Power Section -->
-    <section id="test" class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Test Our Power</h2>
-                <p class="text-lg md:text-xl text-gray-600">
-                    Create a landing page in minutes! Experience AI-powered web development with our integrated AX86 tool.
+    <!-- Process Section -->
+    <section id="process" class="py-20" style="background: linear-gradient(to bottom, rgba(211,175,54,0.03), #ffffff, rgba(13,82,186,0.05));">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6 process-title">How It Works</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto process-subtitle">
+                    Our proven process takes you from discovery to deployment in 8-12 weeks, then ongoing maintenance and iteration.
                 </p>
             </div>
             
-            <div class="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200">
-                <div class="text-center mb-6">
-                    <h3 class="text-xl font-semibold text-black mb-2">AI Website Generator</h3>
-                    <p class="text-gray-600">Describe your website and watch AI create it instantly with interactive features, forms, and animations</p>
-                </div>
-                
-                        <textarea 
-                            class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-sapphire focus:border-transparent resize-none"
-                            rows="3"
-                            placeholder="Try commands like: 'Create a modern tech startup landing page with interactive animations', 'Build a restaurant website with working order form', 'Make a portfolio site with image gallery and contact form', 'Design a fitness gym homepage with membership calculator', 'Create an e-commerce site with shopping cart functionality'..."
-                            id="websitePrompt"
-                        ></textarea>
-                
-                <div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 mt-6">
-                    <button onclick="generateWebsite()" class="btn-primary">Generate Website</button>
-                    <button onclick="clearPreview()" class="btn-secondary">Clear Preview</button>
-                    <button onclick="clearSession()" class="btn-secondary bg-red-600 hover:bg-red-700 text-white">Clear Session</button>
-                </div>
-                
-                <!-- Loading State -->
-                <div id="loadingState" class="hidden mt-6 text-center">
-                    <div class="inline-flex items-center space-x-2">
-                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-sapphire"></div>
-                        <span class="text-gray-600">Generating your website...</span>
-                    </div>
-                </div>
-                
-                        <!-- Preview Area -->
-                        <div id="previewArea" class="hidden mt-8">
-                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-4">
-                                <h4 class="text-lg font-semibold text-black mb-4">Generated Website Preview:</h4>
-                                <iframe id="websitePreview" class="w-full h-[600px] border border-gray-200 rounded-lg" frameborder="0" style="background: white; width: 80%; margin: 0 auto;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+            <div class="relative">
+                <!-- Process Steps -->
+                <div class="space-y-8">
+                    <!-- Step 1: Discovery -->
+                    <div class="rounded-xl p-8 shadow-lg border-2 process-step hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.02)); border-color: rgba(13,82,186,0.2);" data-step="1" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center text-white text-2xl font-bold process-number">1</div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <h3 class="text-2xl font-bold text-black">Discovery</h3>
+                                    <span class="text-sm text-gray-500 font-medium">Week 1-2</span>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-4">
+                                    We analyze your workflow and identify where AI software can deliver the most value. We evaluate which AI models (OpenAI v5.2, Claude, AWS Bedrock) and frameworks (LlamaIndex, MCP Servers) best fit your use case, then define success metrics and technical requirements.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Workflow analysis and mapping</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Automation opportunity identification</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Success metrics definition</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
+                    
+                    <!-- Step 2: Agent Design -->
+                    <div class="rounded-xl p-8 shadow-lg border-2 process-step hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(211,175,54,0.05), rgba(227,177,0,0.02)); border-color: rgba(211,175,54,0.2);" data-step="2" onmouseover="this.style.borderColor='rgba(211,175,54,0.4)'" onmouseout="this.style.borderColor='rgba(211,175,54,0.2)'">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center text-white text-2xl font-bold process-number">2</div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <h3 class="text-2xl font-bold text-black">Agent Design</h3>
+                                    <span class="text-sm text-gray-500 font-medium">Week 2-4</span>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-4">
+                                    We design the AI software architecture, selecting the optimal combination of OpenAI v5.2 (GPT-4), Claude Opus/Sonnet, AWS Bedrock, LlamaIndex, and MCP Servers. We design integration points, API connections, and create comprehensive test cases for each AI model interaction.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Agent architecture and model selection</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Integration points design</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Test case creation</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Build & Train -->
+                    <div class="rounded-xl p-8 shadow-lg border-2 process-step hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(211,175,54,0.03), rgba(13,82,186,0.05)); border-color: rgba(211,175,54,0.2);" data-step="3" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(211,175,54,0.2)'">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center text-white text-2xl font-bold process-number">3</div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <h3 class="text-2xl font-bold text-black">Build & Train</h3>
+                                    <span class="text-sm text-gray-500 font-medium">Week 4-8</span>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-4">
+                                    We build the AI software, configure OpenAI v5.2, Claude, and AWS Bedrock models, implement LlamaIndex RAG pipelines, set up MCP Server connections, and train on your data. Comprehensive testing across all AI models and integrations ensures reliability.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Agent development and training</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>System integrations development</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Internal testing and validation</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Deploy & Integrate -->
+                    <div class="rounded-xl p-8 shadow-lg border-2 process-step hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.02)); border-color: rgba(13,82,186,0.2);" data-step="4" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center text-white text-2xl font-bold process-number">4</div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <h3 class="text-2xl font-bold text-black">Deploy & Integrate</h3>
+                                    <span class="text-sm text-gray-500 font-medium">Week 8-10</span>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-4">
+                                    We deploy the AI software to your AWS infrastructure, establish connections to OpenAI v5.2, Claude, and AWS Bedrock APIs, configure MCP Servers, and integrate with your systems. User training and go-live support ensure smooth adoption.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Production deployment</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>System connections and testing</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>User training and go-live support</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 5: Monitor & Iterate -->
+                    <div class="rounded-xl p-8 shadow-lg border-2 process-step hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(211,175,54,0.05), rgba(227,177,0,0.02)); border-color: rgba(211,175,54,0.2);" data-step="5" onmouseover="this.style.borderColor='rgba(211,175,54,0.4)'" onmouseout="this.style.borderColor='rgba(211,175,54,0.2)'">
+                        <div class="flex flex-col md:flex-row gap-8 items-start">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-sapphire rounded-full flex items-center justify-center text-white text-2xl font-bold process-number">5</div>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <h3 class="text-2xl font-bold text-black">Monitor & Iterate</h3>
+                                    <span class="text-sm text-gray-500 font-medium">Ongoing</span>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-4">
+                                    We continuously monitor AI software performance across all models (OpenAI v5.2, Claude, AWS Bedrock), optimize LlamaIndex queries, maintain MCP Server integrations, and provide updates as new AI capabilities become available. Your AI software evolves with the latest technology.
+                                </p>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Performance monitoring and analytics</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Continuous improvement and updates</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <svg class="w-5 h-5 text-sapphire mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span>Ongoing maintenance and support</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Section -->
+            <div class="text-center mt-16 pt-12 border-t-2" style="border-color: rgba(13,82,186,0.2);">
+                <h3 class="text-2xl md:text-3xl font-bold text-black mb-4">Ready to Start Your AI Software Journey?</h3>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+                    Our proven 8-12 week process takes you from discovery to deployment. Let's discuss how we can build custom AI software for your business.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="openWhatsAppModal()" class="btn-primary text-lg px-8 py-4 shadow-xl hover:shadow-2xl transition-all">
+                        Book a Free Consultation
+                    </button>
+                    <button onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})" class="text-lg px-8 py-4 border-2 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl" style="border-color: rgba(13,82,186,0.4); color: #0D52BA; background: linear-gradient(to bottom right, rgba(13,82,186,0.05), rgba(211,175,54,0.03));" onmouseover="this.style.borderColor='rgba(13,82,186,0.6)'; this.style.background='linear-gradient(to bottom right, rgba(13,82,186,0.1), rgba(211,175,54,0.05))';" onmouseout="this.style.borderColor='rgba(13,82,186,0.4)'; this.style.background='linear-gradient(to bottom right, rgba(13,82,186,0.05), rgba(211,175,54,0.03))';">
+                        View Pricing
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <!-- Business Growth & ROI Section -->
+    <section id="business-growth" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-black mb-8">About AX86</h2>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                        AX86 is more than a technological solution: it's a revolution in customer support and sales efficiency. Inspired by x86 architecture, a milestone in computational evolution, AX86 represents a new era: autonomous AI, real-time decisions, and integrated, radically personalized experiences.
-                    </p>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        We define the identity that guides every interaction with our clients, partners, and users, under a strategic, elegant, and disruptive approach. Our mission is to empower businesses with intelligent technology that accelerates growth and delivers exceptional results.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-8">
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">99.9%</div>
-                            <div class="text-gray-600">System Uptime</div>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">How AI Software Drives Business Growth</h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    See how our AI software solutions deliver measurable improvements in revenue, efficiency, and operational costs. Real results from real implementations.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Revenue Growth Chart -->
+                <div class="rounded-xl p-8 shadow-lg border-2" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.02)); border-color: rgba(13,82,186,0.2);">
+                    <h3 class="text-2xl font-bold text-black mb-4">Revenue Growth</h3>
+                    <p class="text-gray-600 mb-6">Average revenue increase after implementing AI software solutions</p>
+                    <div class="relative h-64">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold" style="color: #0D52BA;">+47%</div>
+                            <div class="text-sm text-gray-600">Year-over-year growth</div>
                         </div>
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">50ms</div>
-                            <div class="text-gray-600">Response Time</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">500+</div>
-                            <div class="text-gray-600">Enterprise Clients</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-2xl md:text-3xl font-bold text-sapphire mb-2">24/7</div>
-                            <div class="text-gray-600">AI Support</div>
+                        <div class="text-right">
+                            <div class="text-lg font-semibold text-gray-800">$2.4M</div>
+                            <div class="text-sm text-gray-600">Additional revenue</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="relative">
-                    <div class="bg-gradient-to-br from-sapphire to-sapphire-light rounded-2xl p-8 md:p-12 text-center text-white mb-8">
-                        <div class="text-4xl md:text-6xl font-bold mb-4">AX86</div>
-                        <div class="text-lg md:text-xl opacity-90">Enterprise AI Technology Platform</div>
+                <!-- Efficiency Improvement Chart -->
+                <div class="rounded-xl p-8 shadow-lg border-2" style="background: linear-gradient(to bottom right, #ffffff, rgba(211,175,54,0.05), rgba(13,82,186,0.02)); border-color: rgba(211,175,54,0.2);">
+                    <h3 class="text-2xl font-bold text-black mb-4">Operational Efficiency</h3>
+                    <p class="text-gray-600 mb-6">Time saved and productivity gains from AI automation</p>
+                    <div class="relative h-64">
+                        <canvas id="efficiencyChart"></canvas>
                     </div>
-                    
-                    <!-- AX86 Logos Grid -->
-                    <div class="bg-gray-50 rounded-2xl p-6">
-                        <h3 class="text-xl font-semibold text-black mb-6 text-center">Our Brand Identity</h3>
-                        <div class="grid grid-cols-3 gap-4">
-                            <!-- Row 1 -->
-                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-                                <img src="resources/PNG/Logo Azul - Amarillo .png" alt="AX86 Blue Yellow Logo" class="w-full h-16 object-contain">
-                            </div>
-                            <div class="bg-black rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-                                <img src="resources/PNG/Logo Full Blanco .png" alt="AX86 White Logo" class="w-full h-16 object-contain">
-                            </div>
-                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-                                <img src="resources/PNG/Logo Full Negro.png" alt="AX86 Black Logo" class="w-full h-16 object-contain">
-                            </div>
-                            
-                            <!-- Row 2 -->
-                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-                                <img src="resources/PNG/Logo Marfil + Amarillo .png" alt="AX86 Ivory Yellow Logo" class="w-full h-16 object-contain">
-                            </div>
-                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-                                <img src="resources/PNG/Logo Negro - Amarillo.png" alt="AX86 Black Yellow Logo" class="w-full h-16 object-contain">
-                            </div>
-                            <div class="bg-white rounded-lg p-3 shadow-sm hover:shadow-md transition-shadow">
-                                <img src="resources/PNG/Logo Verde - Amarillo .png" alt="AX86 Green Yellow Logo" class="w-full h-16 object-contain">
-                            </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold" style="color: #D3AF36;">+62%</div>
+                            <div class="text-sm text-gray-600">Efficiency increase</div>
                         </div>
-                        <p class="text-sm text-gray-600 text-center mt-4">Professional branding for every application</p>
+                        <div class="text-right">
+                            <div class="text-lg font-semibold text-gray-800">18 hrs/week</div>
+                            <div class="text-sm text-gray-600">Time saved per employee</div>
+                        </div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Cost Savings Chart -->
+                <div class="rounded-xl p-8 shadow-lg border-2" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.02)); border-color: rgba(13,82,186,0.2);">
+                    <h3 class="text-2xl font-bold text-black mb-4">Cost Reduction</h3>
+                    <p class="text-gray-600 mb-6">Annual operational cost savings from AI automation</p>
+                    <div class="relative h-64">
+                        <canvas id="costSavingsChart"></canvas>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold" style="color: #0D52BA;">-38%</div>
+                            <div class="text-sm text-gray-600">Cost reduction</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-semibold text-gray-800">$850K</div>
+                            <div class="text-sm text-gray-600">Annual savings</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ROI Chart -->
+                <div class="rounded-xl p-8 shadow-lg border-2" style="background: linear-gradient(to bottom right, #ffffff, rgba(211,175,54,0.05), rgba(13,82,186,0.02)); border-color: rgba(211,175,54,0.2);">
+                    <h3 class="text-2xl font-bold text-black mb-4">Return on Investment</h3>
+                    <p class="text-gray-600 mb-6">ROI timeline showing payback period and long-term value</p>
+                    <div class="relative h-64">
+                        <canvas id="roiChart"></canvas>
+                    </div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <div>
+                            <div class="text-3xl font-bold" style="color: #D3AF36;">4.2x</div>
+                            <div class="text-sm text-gray-600">Average ROI</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-lg font-semibold text-gray-800">8 months</div>
+                            <div class="text-sm text-gray-600">Payback period</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Metrics Summary -->
+            <div class="grid md:grid-cols-4 gap-6 mt-12">
+                <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, rgba(13,82,186,0.1), rgba(13,82,186,0.05));">
+                    <div class="text-4xl font-bold mb-2" style="color: #0D52BA;">92%</div>
+                    <div class="text-gray-700 font-medium">Client Satisfaction</div>
+                </div>
+                <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, rgba(211,175,54,0.1), rgba(211,175,54,0.05));">
+                    <div class="text-4xl font-bold mb-2" style="color: #D3AF36;">15+</div>
+                    <div class="text-gray-700 font-medium">AI Agents Deployed</div>
+                </div>
+                <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, rgba(13,82,186,0.1), rgba(13,82,186,0.05));">
+                    <div class="text-4xl font-bold mb-2" style="color: #0D52BA;">$5.2M</div>
+                    <div class="text-gray-700 font-medium">Total Revenue Generated</div>
+                </div>
+                <div class="text-center p-6 rounded-xl" style="background: linear-gradient(135deg, rgba(211,175,54,0.1), rgba(211,175,54,0.05));">
+                    <div class="text-4xl font-bold mb-2" style="color: #D3AF36;">99.9%</div>
+                    <div class="text-gray-700 font-medium">Uptime SLA</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-white">
+    <section id="pricing" class="py-20" style="background: linear-gradient(to bottom, rgba(13,82,186,0.05), #ffffff, rgba(211,175,54,0.05));">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">Pricing Plans</h2>
@@ -691,13 +2075,13 @@
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Basic AI Agent Plan -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-gold card-hover">
+                <div class="rounded-2xl p-8 shadow-lg border-2 card-hover pricing-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.02)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
                     <div class="text-center mb-8">
                         <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <div class="w-8 h-8 bg-sapphire rounded"></div>
                         </div>
-                        <h3 class="text-2xl font-bold text-black mb-2">Basic AI Agent</h3>
-                        <p class="text-gray-600">Perfect for small to medium businesses</p>
+                        <h3 class="text-2xl font-bold text-black mb-2">Basic AI Software</h3>
+                        <p class="text-gray-600">OpenAI v5.2 (GPT-4) + LlamaIndex for small to medium businesses</p>
                     </div>
                     
                     <div class="text-center mb-8">
@@ -713,19 +2097,19 @@
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Custom AI Agent</span>
+                            <span class="text-gray-700">AI Software with OpenAI v5.2 (GPT-4)</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Up to 50 documents for training</span>
+                            <span class="text-gray-700">LlamaIndex RAG with up to 50 documents</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Natural language processing</span>
+                            <span class="text-gray-700">OpenAI v5.2 (GPT-4) natural language processing</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
@@ -741,21 +2125,21 @@
                         </li>
                     </ul>
                     
-                    <button class="w-full btn-secondary">Get Started</button>
+                    <button onclick="openWhatsAppModal()" class="w-full btn-secondary">Get Started</button>
                 </div>
                 
                 <!-- Advanced AI Agent Plan -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-gold card-hover relative">
+                <div class="rounded-2xl p-8 shadow-lg border-2 card-hover relative pricing-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(211,175,54,0.1), rgba(227,177,0,0.03)); border-color: rgba(211,175,54,0.3);" onmouseover="this.style.borderColor='rgba(211,175,54,0.5)'" onmouseout="this.style.borderColor='rgba(211,175,54,0.3)'">
                     <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-gold text-black px-4 py-2 rounded-full text-sm font-bold">Most Popular</span>
+                        <span class="bg-gradient-to-r from-gold to-yellow-400 text-black px-4 py-2 rounded-full text-sm font-bold shadow-lg">Most Popular</span>
                     </div>
                     
                     <div class="text-center mb-8">
                         <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <div class="w-8 h-8 bg-sapphire rounded-full"></div>
                         </div>
-                        <h3 class="text-2xl font-bold text-black mb-2">Advanced AI Agent</h3>
-                        <p class="text-gray-600">Ideal for growing businesses</p>
+                        <h3 class="text-2xl font-bold text-black mb-2">Advanced AI Software</h3>
+                        <p class="text-gray-600">OpenAI v5.2 + Claude Sonnet + LlamaIndex + MCP Servers</p>
                     </div>
                     
                     <div class="text-center mb-8">
@@ -771,19 +2155,19 @@
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Custom AI Agent</span>
+                            <span class="text-gray-700">AI Software with OpenAI v5.2 + Claude Sonnet</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Up to 100 documents for training</span>
+                            <span class="text-gray-700">LlamaIndex RAG with up to 100 documents</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Advanced natural language processing</span>
+                            <span class="text-gray-700">OpenAI v5.2 (GPT-4) + Claude Sonnet processing</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
@@ -805,17 +2189,17 @@
                         </li>
                     </ul>
                     
-                    <button class="w-full btn-primary">Get Started</button>
+                    <button onclick="openWhatsAppModal()" class="w-full btn-primary">Get Started</button>
                 </div>
                 
                 <!-- MCP Tool Integration Plan -->
-                <div class="bg-white rounded-2xl p-8 shadow-lg card-gold card-hover">
+                <div class="rounded-2xl p-8 shadow-lg border-2 card-hover pricing-card hover:shadow-2xl transition-all duration-300" style="background: linear-gradient(to bottom right, #ffffff, rgba(13,82,186,0.05), rgba(211,175,54,0.02)); border-color: rgba(13,82,186,0.2);" onmouseover="this.style.borderColor='rgba(13,82,186,0.4)'" onmouseout="this.style.borderColor='rgba(13,82,186,0.2)'">
                     <div class="text-center mb-8">
                         <div class="w-16 h-16 bg-sapphire/10 rounded-full flex items-center justify-center mx-auto mb-4">
                             <div class="w-8 h-8 bg-sapphire" style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
                         </div>
-                        <h3 class="text-2xl font-bold text-black mb-2">MCP Tool Integration</h3>
-                        <p class="text-gray-600">For businesses needing API integration</p>
+                        <h3 class="text-2xl font-bold text-black mb-2">Enterprise AI Software</h3>
+                        <p class="text-gray-600">Full stack: OpenAI v5.2, Claude Opus, AWS Bedrock, LlamaIndex, MCP, Perplexity</p>
                     </div>
                     
                     <div class="text-center mb-8">
@@ -828,19 +2212,19 @@
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">Custom MCP Tool Integration</span>
+                            <span class="text-gray-700">Full MCP Server integration</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">API integration with your systems</span>
+                            <span class="text-gray-700">AWS Bedrock + MCP Server API integration</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
                                 <div class="w-2 h-2 bg-white rounded-full"></div>
                             </div>
-                            <span class="text-gray-700">AI agent with action capabilities</span>
+                            <span class="text-gray-700">AI software with Agentcore orchestration</span>
                         </li>
                         <li class="flex items-center">
                             <div class="w-5 h-5 bg-gold rounded-full flex items-center justify-center mr-3">
@@ -868,7 +2252,7 @@
                         </li>
                     </ul>
                     
-                    <button class="w-full btn-secondary">Get Started</button>
+                    <button onclick="openWhatsAppModal()" class="w-full btn-secondary">Get Started</button>
                 </div>
             </div>
             
@@ -941,7 +2325,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button class="bg-gold text-sapphire px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold-light transition-colors">
+                        <button onclick="openWhatsAppModal()" class="bg-gold text-sapphire px-8 py-4 rounded-lg font-bold text-lg hover:bg-gold-light transition-colors shadow-lg hover:shadow-xl">
                             Schedule a Meeting
                         </button>
                         <p class="text-sm mt-4 opacity-80">
@@ -1411,50 +2795,75 @@
             const t = translations[lang];
             if (!t) return;
 
-            // Update navigation
-            document.querySelector('a[href="#home"]').textContent = t.nav.home;
-            document.querySelector('a[href="#about"]').textContent = t.nav.about;
-            document.querySelector('a[href="#solutions"]').textContent = t.nav.solutions;
-            document.querySelector('a[href="#test"]').textContent = t.nav.test;
-            document.querySelector('a[href="#ai-creation"]').textContent = t.nav.aiCreation;
-            document.querySelector('a[href="#contact"]').textContent = t.nav.contact;
+            // Update navigation - with null checks
+            const navHome = document.querySelector('a[href="#home"]');
+            if (navHome && t.nav && t.nav.home) navHome.textContent = t.nav.home;
+            
+            const navAI = document.querySelector('a[href="#ai-software"]');
+            if (navAI && t.nav && t.nav.aiSoftware) navAI.textContent = t.nav.aiSoftware;
+            
+            const navTech = document.querySelector('a[href="#technologies"]');
+            if (navTech && t.nav && t.nav.technologies) navTech.textContent = t.nav.technologies;
+            
+            const navUseCases = document.querySelector('a[href="#use-cases"]');
+            if (navUseCases && t.nav && t.nav.useCases) navUseCases.textContent = t.nav.useCases;
+            
+            const navProcess = document.querySelector('a[href="#process"]');
+            if (navProcess && t.nav && t.nav.process) navProcess.textContent = t.nav.process;
+            
+            const navPricing = document.querySelector('a[href="#pricing"]');
+            if (navPricing && t.nav && t.nav.pricing) navPricing.textContent = t.nav.pricing;
+            
+            const navContact = document.querySelector('a[href="#contact"]');
+            if (navContact && t.nav && t.nav.contact) navContact.textContent = t.nav.contact;
 
-            // Update hero section
-            document.querySelector('#home h1').textContent = t.hero.title;
-            document.querySelector('#home p').textContent = t.hero.subtitle;
-            document.querySelector('#home .btn-primary').textContent = t.hero.cta1;
-            document.querySelector('#home .btn-secondary').textContent = t.hero.cta2;
-
-            // Update solutions section
-            document.querySelector('#solutions h2').textContent = t.solutions.title;
-            document.querySelector('#solutions p').textContent = t.solutions.subtitle;
-
-            // Update about section
-            document.querySelector('#about h2').textContent = t.about.title;
-            const aboutParagraphs = document.querySelectorAll('#about p');
-            if (aboutParagraphs.length >= 2) {
-                aboutParagraphs[0].textContent = t.about.description1;
-                aboutParagraphs[1].textContent = t.about.description2;
+            // Update hero section - with null checks
+            const heroTitle = document.querySelector('#home h1');
+            if (heroTitle && t.hero && t.hero.title) {
+                // Preserve the gradient span structure if it exists
+                const titleText = t.hero.title;
+                if (titleText.includes('Cutting-Edge Technology')) {
+                    const parts = titleText.split('Cutting-Edge Technology');
+                    heroTitle.innerHTML = parts[0] + '<span style="color: #FFD700; text-shadow: 2px 2px 6px rgba(0,0,0,0.7), 0 0 15px rgba(255,215,0,0.5); font-weight: 700;">Cutting-Edge Technology</span>';
+                } else {
+                    heroTitle.textContent = titleText;
+                }
             }
+            
+            const heroSubtitle = document.querySelector('#home .hero-subtitle');
+            if (heroSubtitle && t.hero && t.hero.subtitle) heroSubtitle.textContent = t.hero.subtitle;
+            
+            const heroCta1 = document.querySelector('#home .btn-primary');
+            if (heroCta1 && t.hero && t.hero.cta1) heroCta1.textContent = t.hero.cta1;
+            
+            const heroCta2 = document.querySelector('#home .btn-secondary');
+            if (heroCta2 && t.hero && t.hero.cta2) heroCta2.textContent = t.hero.cta2;
 
-            // Update test section
-            document.querySelector('#test h2').textContent = t.test.title;
-            document.querySelector('#test p').textContent = t.test.subtitle;
+            // Update sections - with null checks
+            const aiSoftwareTitle = document.querySelector('#ai-software h2');
+            if (aiSoftwareTitle && t.aiSoftware && t.aiSoftware.title) aiSoftwareTitle.textContent = t.aiSoftware.title;
+            
+            const technologiesTitle = document.querySelector('#technologies h2');
+            if (technologiesTitle && t.technologies && t.technologies.title) technologiesTitle.textContent = t.technologies.title;
+            
+            const useCasesTitle = document.querySelector('#use-cases h2');
+            if (useCasesTitle && t.useCases && t.useCases.title) useCasesTitle.textContent = t.useCases.title;
+            
+            const processTitle = document.querySelector('#process h2');
+            if (processTitle && t.process && t.process.title) processTitle.textContent = t.process.title;
+            
+            const pricingTitle = document.querySelector('#pricing h2');
+            if (pricingTitle && t.pricing && t.pricing.title) pricingTitle.textContent = t.pricing.title;
+            
+            const contactTitle = document.querySelector('#contact h2');
+            if (contactTitle && t.contact && t.contact.title) contactTitle.textContent = t.contact.title;
+            
+            const contactSubtitle = document.querySelector('#contact p');
+            if (contactSubtitle && t.contact && t.contact.subtitle) contactSubtitle.textContent = t.contact.subtitle;
 
-            // Update AI creation section
-            document.querySelector('#ai-creation h2').textContent = t.aiCreation.title;
-            const aiParagraphs = document.querySelectorAll('#ai-creation p');
-            if (aiParagraphs.length >= 2) {
-                aiParagraphs[0].textContent = t.aiCreation.description1;
-                aiParagraphs[1].textContent = t.aiCreation.description2;
-            }
-
-            // Update contact section
-            document.querySelector('#contact h2').textContent = t.contact.title;
-            document.querySelector('#contact p').textContent = t.contact.subtitle;
-
-            // Update language dropdown button
-            document.querySelector('.language-dropdown button span').textContent = lang.toUpperCase();
+            // Update language dropdown button - with null check
+            const langButton = document.querySelector('.language-dropdown button span');
+            if (langButton) langButton.textContent = lang.toUpperCase();
             
             // Update WhatsApp modal text
             const whatsappTitle = document.getElementById('whatsapp-modal-title');
@@ -1512,10 +2921,569 @@
             }
         }
 
+        // Register GSAP ScrollTrigger plugin
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+
+        // GSAP Animations
+        function initAnimations() {
+            // Respect reduced motion preference
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) return;
+
+            // Hero section animations
+            const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+            heroTimeline
+                .from('.hero-title', { y: 50, opacity: 0, duration: 0.8 })
+                .from('.hero-subtitle', { y: 30, opacity: 0, duration: 0.6 }, "-=0.4")
+                .from('.hero-cta', { y: 20, opacity: 0, duration: 0.5 }, "-=0.3")
+                .from('.trust-indicators > *', { y: 20, opacity: 0, duration: 0.4, stagger: 0.1 }, "-=0.3");
+
+            // Use Cases cards scroll animation
+            gsap.utils.toArray('.use-case-card').forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 60,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: "power3.out"
+                });
+            });
+
+            // Process steps scroll animation
+            gsap.utils.toArray('.process-step').forEach((step, index) => {
+                gsap.from(step, {
+                    scrollTrigger: {
+                        trigger: step,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    x: -50,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: index * 0.15,
+                    ease: "power3.out"
+                });
+                
+                // Animate process numbers
+                const number = step.querySelector('.process-number');
+                if (number) {
+                    gsap.from(number, {
+                        scrollTrigger: {
+                            trigger: step,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        scale: 0,
+                        rotation: -180,
+                        duration: 0.6,
+                        delay: index * 0.15,
+                        ease: "back.out(1.7)"
+                    });
+                }
+            });
+
+            // Process title animation
+            gsap.from('.process-title', {
+                scrollTrigger: {
+                    trigger: '.process-title',
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            });
+
+            gsap.from('.process-subtitle', {
+                scrollTrigger: {
+                    trigger: '.process-subtitle',
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                delay: 0.2,
+                ease: "power3.out"
+            });
+
+            // Pricing cards animation
+            gsap.utils.toArray('.pricing-card').forEach((card, index) => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    scale: 0.9,
+                    duration: 0.7,
+                    delay: index * 0.1,
+                    ease: "power3.out"
+                });
+            });
+            
+            // Business Growth section animation
+            const businessGrowthSection = document.getElementById('business-growth');
+            if (businessGrowthSection) {
+                gsap.from('#business-growth .rounded-xl', {
+                    scrollTrigger: {
+                        trigger: businessGrowthSection,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.2,
+                    ease: "power3.out"
+                });
+            }
+            
+            // Build Agent section step animations
+            const agentStepsSection = document.getElementById('agent-steps');
+            if (agentStepsSection && typeof gsap !== 'undefined') {
+                gsap.utils.toArray('.step-card').forEach((card, index) => {
+                    // Animate the entire step card
+                    gsap.from(card, {
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 60,
+                        opacity: 0,
+                        duration: 0.9,
+                        delay: index * 0.15,
+                        ease: "power3.out"
+                    });
+                    
+                    // Animate timeline nodes (circular dots)
+                    const node = card.querySelector('[class*="absolute"] > div[class*="rounded-full"]');
+                    if (node) {
+                        gsap.from(node, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 85%",
+                                toggleActions: "play none none reverse"
+                            },
+                            scale: 0,
+                            opacity: 0,
+                            duration: 0.6,
+                            delay: index * 0.15 + 0.4,
+                            ease: "back.out(1.7)"
+                        });
+                    }
+                    
+                    // Animate card content
+                    const cardContent = card.querySelector('.step-card-content');
+                    if (cardContent) {
+                        gsap.from(cardContent, {
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top 85%",
+                                toggleActions: "play none none reverse"
+                            },
+                            x: index % 2 === 0 ? -30 : 30,
+                            opacity: 0,
+                            duration: 0.8,
+                            delay: index * 0.15 + 0.2,
+                            ease: "power3.out"
+                        });
+                    }
+                });
+            }
+
+            // Section titles fade-in
+            gsap.utils.toArray('section h2').forEach((title) => {
+                gsap.from(title, {
+                    scrollTrigger: {
+                        trigger: title,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.7,
+                    ease: "power3.out"
+                });
+            });
+
+            // Parallax effect for hero background (subtle)
+            gsap.to('.hero-bg', {
+                scrollTrigger: {
+                    trigger: '.hero-bg',
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                },
+                y: 50,
+                ease: "none"
+            });
+        }
+
+        // Enhanced hover effects
+        function initHoverEffects() {
+            // Use case cards hover effect
+            document.querySelectorAll('.use-case-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    gsap.to(this, {
+                        y: -8,
+                        scale: 1.02,
+                        boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    gsap.to(this, {
+                        y: 0,
+                        scale: 1,
+                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+            });
+
+            // Button hover effects
+            document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    gsap.to(this, {
+                        y: -2,
+                        scale: 1.02,
+                        duration: 0.2,
+                        ease: "power2.out"
+                    });
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    gsap.to(this, {
+                        y: 0,
+                        scale: 1,
+                        duration: 0.2,
+                        ease: "power2.out"
+                    });
+                });
+            });
+
+            // Process cards hover
+            document.querySelectorAll('.process-step').forEach(step => {
+                step.addEventListener('mouseenter', function() {
+                    gsap.to(this, {
+                        y: -4,
+                        boxShadow: "0 20px 40px rgba(0,0,0,0.12)",
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+                
+                step.addEventListener('mouseleave', function() {
+                    gsap.to(this, {
+                        y: 0,
+                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+            });
+        }
+
+        // Initialize Business Growth Charts
+        function initBusinessCharts() {
+            // Brand colors
+            const brandBlue = '#0D52BA';
+            const brandBlueLight = '#1E6BCC';
+            const brandGold = '#D3AF36';
+            const brandGoldLight = '#E3B100';
+            
+            // Revenue Growth Chart
+            const revenueCtx = document.getElementById('revenueChart');
+            if (revenueCtx) {
+                new Chart(revenueCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Month 1', 'Month 3', 'Month 6', 'Month 9', 'Month 12', 'Month 15', 'Month 18'],
+                        datasets: [{
+                            label: 'Revenue ($M)',
+                            data: [1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 2.4],
+                            borderColor: brandBlue,
+                            backgroundColor: `rgba(13, 82, 186, 0.1)`,
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: brandBlue,
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: 12,
+                                titleFont: { size: 14, weight: 'bold' },
+                                bodyFont: { size: 13 }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 0.8,
+                                max: 2.6,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toFixed(1) + 'M';
+                                    },
+                                    color: '#666'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#666'
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Efficiency Chart
+            const efficiencyCtx = document.getElementById('efficiencyChart');
+            if (efficiencyCtx) {
+                new Chart(efficiencyCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6'],
+                        datasets: [{
+                            label: 'Efficiency %',
+                            data: [100, 115, 130, 145, 158, 162],
+                            backgroundColor: [
+                                brandGold,
+                                brandGoldLight,
+                                brandBlue,
+                                brandBlueLight,
+                                brandGold,
+                                brandGoldLight
+                            ],
+                            borderRadius: 8,
+                            borderSkipped: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Efficiency: ' + context.parsed.y + '%';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 180,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    },
+                                    color: '#666'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#666'
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Cost Savings Chart
+            const costSavingsCtx = document.getElementById('costSavingsChart');
+            if (costSavingsCtx) {
+                new Chart(costSavingsCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Before', 'Month 3', 'Month 6', 'Month 9', 'Month 12'],
+                        datasets: [{
+                            label: 'Costs ($K)',
+                            data: [100, 85, 72, 65, 62],
+                            borderColor: brandBlue,
+                            backgroundColor: `rgba(13, 82, 186, 0.1)`,
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointBackgroundColor: brandBlue,
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Costs: $' + context.parsed.y + 'K';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 50,
+                                max: 110,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value + 'K';
+                                    },
+                                    color: '#666'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#666'
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // ROI Chart
+            const roiCtx = document.getElementById('roiChart');
+            if (roiCtx) {
+                new Chart(roiCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Month 0', 'Month 2', 'Month 4', 'Month 6', 'Month 8', 'Month 10', 'Month 12'],
+                        datasets: [{
+                            label: 'ROI Multiple',
+                            data: [0, 0.5, 1.2, 2.1, 3.0, 3.8, 4.2],
+                            borderColor: brandGold,
+                            backgroundColor: `rgba(211, 175, 54, 0.1)`,
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointBackgroundColor: brandGold,
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                padding: 12,
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'ROI: ' + context.parsed.y.toFixed(1) + 'x';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 5,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + 'x';
+                                    },
+                                    color: '#666'
+                                },
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#666'
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        
         // Initialize page with Spanish as default
         document.addEventListener('DOMContentLoaded', function() {
             // Set Spanish as default language
             changeLanguage('es');
+            
+            // Initialize animations
+            if (typeof gsap !== 'undefined') {
+                initAnimations();
+                initHoverEffects();
+            }
+            
+            // Initialize charts when Chart.js is loaded
+            if (typeof Chart !== 'undefined') {
+                // Wait a bit for the section to be rendered
+                setTimeout(initBusinessCharts, 500);
+            }
             
             // Mobile menu toggle
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
