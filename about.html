@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | AX86 - Meet Our Engineering Team</title>
+    <meta name="description" content="Meet the AX86 team - 20 expert engineers building enterprise AI solutions. Led by CEO Carlos Montiel, a hands-on technical leader who codes alongside the team.">
+    
+    <!-- Helvetica Font -->
+    <style>
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/Helvetica-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Helvetica';
+            src: url('resources/Typograhy/Helvetica_Font/helvetica-light-587ebe5a59211.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+    </style>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --sapphire: #0D52BA;
+            --sapphire-light: #1E6BCC;
+            --sapphire-dark: #0A4296;
+            --gold: #D4AF36;
+            --yellow: #FFD700;
+            --black: #000000;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            font-family: 'Helvetica', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gold-gradient-text {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .sapphire-button {
+            background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .sapphire-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(13, 82, 186, 0.3);
+        }
+        
+        .gold-button {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--yellow) 100%);
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+        
+        .gold-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(212, 175, 54, 0.3);
+        }
+        
+        .team-card {
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #ffffff 0%, rgba(13,82,186,0.03) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .value-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--sapphire), var(--gold));
+        }
+        
+        /* Solutions Dropdown */
+        .solutions-dropdown {
+            position: relative;
+        }
+        .solutions-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 280px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 100;
+            border: 1px solid #e5e7eb;
+        }
+        .solutions-dropdown:hover .solutions-dropdown-content {
+            display: block;
+        }
+        .solutions-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .solutions-dropdown-content a:hover {
+            background: rgba(13, 82, 186, 0.05);
+        }
+        
+        .expertise-badge {
+            background: linear-gradient(135deg, rgba(13, 82, 186, 0.1) 0%, rgba(212, 175, 54, 0.1) 100%);
+            border: 1px solid rgba(13, 82, 186, 0.2);
+        }
+        
+        /* Language Dropdown */
+        .language-dropdown {
+            position: relative;
+        }
+        .language-dropdown:hover .language-dropdown-content {
+            display: block !important;
+        }
+        .language-dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            transition: background 0.2s;
+        }
+        .language-dropdown-content a:hover {
+            background: rgba(13, 82, 186, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex space-x-6 items-center">
+                    <a href="index.html" class="text-gray-700 hover:text-sapphire transition-colors">Home</a>
+                    <div class="solutions-dropdown relative">
+                        <button class="text-gray-700 hover:text-sapphire transition-colors flex items-center space-x-1">
+                            <span>Solutions</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="solutions-dropdown-content absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 min-w-[220px] hidden">
+                            <a href="ai_assistants.html" class="block px-4 py-3 text-gray-700 hover:bg-sapphire/5 hover:text-sapphire transition-colors">
+                                <div class="font-medium">🤖 AI Assistants</div>
+                                <div class="text-xs text-gray-500">Sales & customer support AI</div>
+                            </a>
+                            <a href="mcp_information.html" class="block px-4 py-3 text-gray-700 hover:bg-sapphire/5 hover:text-sapphire transition-colors">
+                                <div class="font-medium">🔧 MCP Tools</div>
+                                <div class="text-xs text-gray-500">Custom API integrations</div>
+                            </a>
+                            <a href="enterprise_integration.html" class="block px-4 py-3 text-gray-700 hover:bg-sapphire/5 hover:text-sapphire transition-colors">
+                                <div class="font-medium">🏢 Enterprise</div>
+                                <div class="text-xs text-gray-500">Large-scale AI solutions</div>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="text-sapphire font-medium">About Us</a>
+                    <a href="process.html" class="text-gray-700 hover:text-sapphire transition-colors">How We Work</a>
+                    <a href="index.html#pricing" class="text-gray-700 hover:text-sapphire transition-colors">Pricing</a>
+                    <a href="index.html#contact" class="text-gray-700 hover:text-sapphire transition-colors">Contact</a>
+                    <div class="language-dropdown">
+                        <button id="lang-btn-desktop" class="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                            <span class="text-xl" id="current-flag-desktop">🇪🇸</span>
+                            <span class="text-sm font-medium text-gray-700" id="current-lang-desktop">ES</span>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown-content">
+                            <a href="#" onclick="changeLanguage('en')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇺🇸</span> <span>English</span></a>
+                            <a href="#" onclick="changeLanguage('es')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇪🇸</span> <span>Español</span></a>
+                            <a href="#" onclick="changeLanguage('zh')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇨🇳</span> <span>中文</span></a>
+                            <a href="#" onclick="changeLanguage('fr')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇫🇷</span> <span>Français</span></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-sapphire transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop CTA Button -->
+                <div class="hidden lg:block">
+                    <button onclick="openCalendlyModal()" class="bg-sapphire text-white px-5 py-2 rounded-lg font-semibold hover:bg-sapphire-dark transition-colors">Book Free Consultation</button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🏠 Home</a>
+                    
+                    <div class="px-3 py-2 text-gray-500 font-medium text-sm uppercase tracking-wide">Solutions</div>
+                    <a href="ai_assistants.html" class="block px-6 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🤖 AI Assistants</a>
+                    <a href="mcp_information.html" class="block px-6 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🔧 MCP Tools</a>
+                    <a href="enterprise_integration.html" class="block px-6 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🏢 Enterprise</a>
+                    
+                    <div class="border-t border-gray-100 my-2"></div>
+                    <a href="about.html" class="block px-3 py-2 text-sapphire font-medium bg-blue-50 rounded-lg">About Us</a>
+                    <a href="process.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">How We Work</a>
+                    <a href="index.html#pricing" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Pricing</a>
+                    <a href="index.html#contact" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Contact</a>
+                    
+                    <div class="border-t border-gray-100 my-2"></div>
+                    <div class="px-3 py-2">
+                        <div class="language-dropdown">
+                            <button id="lang-btn-mobile" class="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors w-full justify-center">
+                                <span class="text-xl" id="current-flag-mobile">🇪🇸</span>
+                                <span class="text-sm font-medium text-gray-700" id="current-lang-mobile">Español</span>
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown-content">
+                                <a href="#" onclick="changeLanguage('en')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇺🇸</span> <span>English</span></a>
+                                <a href="#" onclick="changeLanguage('es')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇪🇸</span> <span>Español</span></a>
+                                <a href="#" onclick="changeLanguage('zh')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇨🇳</span> <span>中文</span></a>
+                                <a href="#" onclick="changeLanguage('fr')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇫🇷</span> <span>Français</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-3 py-2">
+                        <button onclick="openCalendlyModal()" class="bg-sapphire text-white w-full px-5 py-2 rounded-lg font-semibold hover:bg-sapphire-dark transition-colors">📅 Book Free Consultation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16" style="background: linear-gradient(135deg, #000000 0%, #1a1a2e 50%, #16213e 100%);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto py-16">
+                <span class="inline-block px-4 py-2 bg-gold/20 text-white rounded-full text-sm font-semibold mb-6">
+                    👋 Meet the Team
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    We're <span class="gold-gradient-text">Engineers</span> Who Build
+                    <span class="gradient-text">AI That Works</span>
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    A team of 20 passionate engineers, led by a CEO who still writes code every day. 
+                    We don't just sell AI solutions—we build them from the ground up.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="openCalendlyModal()" class="gold-button px-8 py-4 rounded-xl font-bold text-lg">
+                        📅 Meet Our Team
+                    </button>
+                    <a href="process.html" class="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all border border-white/20">
+                        See How We Work
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Presence Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="inline-block px-4 py-2 bg-sapphire/10 text-sapphire rounded-full text-sm font-semibold mb-4">
+                    🌎 Our Roots
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+                    Born in <span class="gradient-text">Guatemala</span>, Operating <span class="gold-gradient-text">Globally</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    AX86 was founded in Guatemala and has grown to serve clients across the Americas. 
+                    With operations in Guatemala and Canada, we bring Latin American innovation and North American enterprise standards together.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Guatemala -->
+                <div class="bg-gradient-to-br from-white to-blue-50 rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all">
+                    <div class="text-6xl mb-4">🇬🇹</div>
+                    <h3 class="text-2xl font-bold text-black mb-2">Guatemala</h3>
+                    <p class="text-sapphire font-semibold mb-3">Headquarters & Founded</p>
+                    <p class="text-gray-600">
+                        Where it all began. Our engineering team is headquartered in Guatemala City, 
+                        bringing world-class AI development from the heart of Central America.
+                    </p>
+                    <div class="mt-4 flex justify-center gap-2">
+                        <span class="px-3 py-1 bg-sapphire/10 text-sapphire rounded-full text-sm font-medium">Engineering Hub</span>
+                        <span class="px-3 py-1 bg-gold/10 text-gold rounded-full text-sm font-medium">R&D Center</span>
+                    </div>
+                </div>
+                
+                <!-- Canada -->
+                <div class="bg-gradient-to-br from-white to-red-50 rounded-2xl p-8 shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all">
+                    <div class="text-6xl mb-4">🇨🇦</div>
+                    <h3 class="text-2xl font-bold text-black mb-2">Canada</h3>
+                    <p class="text-red-600 font-semibold mb-3">North American Operations</p>
+                    <p class="text-gray-600">
+                        Expanding our reach to serve enterprise clients across North America with 
+                        local presence and support in the Canadian market.
+                    </p>
+                    <div class="mt-4 flex justify-center gap-2">
+                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-medium">Enterprise Sales</span>
+                        <span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-medium">Client Success</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <div class="inline-flex items-center gap-4 bg-gray-50 rounded-full px-6 py-3">
+                    <span class="text-3xl">🇬🇹</span>
+                    <span class="text-gray-400 font-bold">+</span>
+                    <span class="text-3xl">🇨🇦</span>
+                    <span class="text-gray-600 font-medium ml-2">= Global AI Excellence</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="stat-card rounded-2xl p-6 text-center border border-gray-100">
+                    <div class="text-4xl md:text-5xl font-bold gradient-text mb-2">20</div>
+                    <div class="text-gray-600 font-medium">Expert Engineers</div>
+                </div>
+                <div class="stat-card rounded-2xl p-6 text-center border border-gray-100">
+                    <div class="text-4xl md:text-5xl font-bold gold-gradient-text mb-2">50+</div>
+                    <div class="text-gray-600 font-medium">AI Projects Delivered</div>
+                </div>
+                <div class="stat-card rounded-2xl p-6 text-center border border-gray-100">
+                    <div class="text-4xl md:text-5xl font-bold gradient-text mb-2">2</div>
+                    <div class="text-gray-600 font-medium">Countries 🇬🇹 🇨🇦</div>
+                </div>
+                <div class="stat-card rounded-2xl p-6 text-center border border-gray-100">
+                    <div class="text-4xl md:text-5xl font-bold gold-gradient-text mb-2">99%</div>
+                    <div class="text-gray-600 font-medium">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CEO Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="inline-block px-3 py-1 bg-sapphire/10 text-sapphire rounded-full text-sm font-semibold mb-4">
+                        Leadership
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-black mb-6">
+                        A CEO Who <span class="gradient-text">Codes</span>
+                    </h2>
+                    <div class="space-y-4 text-gray-600 text-lg">
+                        <p>
+                            <strong class="text-black">Carlos Montiel</strong>, our founder and CEO, isn't your typical executive. 
+                            While many tech CEOs step away from the code, Carlos remains an active member of our development team.
+                        </p>
+                        <p>
+                            Every day, he writes code alongside our engineers, reviews pull requests, and stays hands-on with every project. 
+                            This isn't just leadership—it's commitment to craftsmanship.
+                        </p>
+                        <p>
+                            His philosophy is simple: <em>"You can't build great AI solutions from a boardroom. 
+                            You build them in the trenches, debugging at 2 AM, optimizing prompts until they're perfect."</em>
+                        </p>
+                    </div>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">OpenAI / GPT-4</span>
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">Claude AI</span>
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">AWS Bedrock</span>
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">LlamaIndex</span>
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">MCP Servers</span>
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">Python</span>
+                        <span class="expertise-badge px-4 py-2 rounded-full text-sm font-semibold text-sapphire">Full-Stack</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="rounded-2xl p-8" style="background: linear-gradient(135deg, #0D52BA 0%, #0A4296 100%);">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center text-4xl">
+                                👨‍💻
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Carlos Montiel</h3>
+                                <p class="text-white" style="opacity: 0.9;">Founder & CEO</p>
+                            </div>
+                        </div>
+                        <blockquote class="text-lg italic text-white border-l-4 border-gold pl-4 mb-6" style="opacity: 0.95;">
+                            "The best AI solutions come from teams where leadership understands the technology deeply. 
+                            I code every day because that's how I ensure we deliver excellence."
+                        </blockquote>
+                        <div class="flex gap-4">
+                            <a href="https://linkedin.com" target="_blank" class="text-white hover:text-gold transition-colors" style="opacity: 0.8;">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                            </a>
+                            <a href="mailto:carlos@ax86.tech" class="text-white hover:text-gold transition-colors" style="opacity: 0.8;">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Decorative elements -->
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-gold/20 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-sapphire/20 rounded-full blur-2xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engineering Team Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-gold/10 text-gold rounded-full text-sm font-semibold mb-4">
+                    Our Strength
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+                    20 Engineers, <span class="gold-gradient-text">One Mission</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our team combines deep expertise in AI/ML, cloud infrastructure, and enterprise software to deliver solutions that transform businesses.
+                </p>
+            </div>
+            
+            <!-- Team Capabilities -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="team-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 bg-sapphire/10 rounded-xl flex items-center justify-center text-3xl mb-6">
+                        🤖
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-3">AI/ML Engineers</h3>
+                    <p class="text-gray-600 mb-4">
+                        8 specialists in machine learning, natural language processing, and AI model optimization. Expert in OpenAI, Claude, and custom model development.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">GPT-4</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Claude</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">LlamaIndex</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">RAG</span>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center text-3xl mb-6">
+                        ☁️
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-3">Cloud & Infrastructure</h3>
+                    <p class="text-gray-600 mb-4">
+                        6 cloud architects specializing in AWS, scalable infrastructure, and enterprise-grade deployments. Certified in AWS Bedrock and cloud security.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">AWS</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Bedrock</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Docker</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Kubernetes</span>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 bg-sapphire/10 rounded-xl flex items-center justify-center text-3xl mb-6">
+                        🔌
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-3">Integration Specialists</h3>
+                    <p class="text-gray-600 mb-4">
+                        4 engineers focused on MCP server development, API integrations, and connecting AI systems with enterprise databases and workflows.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">MCP</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">REST APIs</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">GraphQL</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Webhooks</span>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center text-3xl mb-6">
+                        💻
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-3">Full-Stack Development</h3>
+                    <p class="text-gray-600 mb-4">
+                        Full-stack capabilities across the team, building beautiful interfaces and robust backends that seamlessly integrate with AI systems.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">React</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Node.js</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">FastAPI</span>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 bg-sapphire/10 rounded-xl flex items-center justify-center text-3xl mb-6">
+                        🔒
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-3">Security & Compliance</h3>
+                    <p class="text-gray-600 mb-4">
+                        Dedicated security practices ensuring all AI solutions meet enterprise standards for data protection, compliance, and privacy.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">SOC 2</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">GDPR</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Encryption</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Audit</span>
+                    </div>
+                </div>
+                
+                <div class="team-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="w-14 h-14 bg-gold/10 rounded-xl flex items-center justify-center text-3xl mb-6">
+                        📊
+                    </div>
+                    <h3 class="text-xl font-bold text-black mb-3">Data Engineering</h3>
+                    <p class="text-gray-600 mb-4">
+                        Expert data pipeline development, ETL processes, and analytics systems that power intelligent AI decision-making.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">PostgreSQL</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Vector DBs</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Pinecone</span>
+                        <span class="text-xs bg-gray-100 px-2 py-1 rounded">Redis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-sapphire/10 text-sapphire rounded-full text-sm font-semibold mb-4">
+                    What Drives Us
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold text-black mb-4">
+                    Our Core <span class="gradient-text">Values</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="value-card bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-black mb-3 pl-4">🎯 Results Over Rhetoric</h3>
+                    <p class="text-gray-600 pl-4">
+                        We measure success by business outcomes, not buzzwords. Every AI solution we build is designed to deliver measurable ROI and real competitive advantage.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-black mb-3 pl-4">🔬 Engineering Excellence</h3>
+                    <p class="text-gray-600 pl-4">
+                        We don't take shortcuts. Our code is clean, documented, and built to last. When our CEO reviews your pull request, he expects the same standards he holds himself to.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-black mb-3 pl-4">🤝 True Partnership</h3>
+                    <p class="text-gray-600 pl-4">
+                        We're not vendors—we're partners. Your success is our success. We work alongside your team, transfer knowledge, and build solutions you can own.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white rounded-xl p-8 shadow-sm">
+                    <h3 class="text-xl font-bold text-black mb-3 pl-4">🚀 Continuous Innovation</h3>
+                    <p class="text-gray-600 pl-4">
+                        AI evolves daily. So do we. Our team constantly experiments with the latest models, frameworks, and techniques to bring you cutting-edge solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-black to-gray-900 rounded-3xl p-8 md:p-12 text-white">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                            Why Companies <span class="gold-gradient-text">Choose AX86</span>
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                                    <span class="text-gold">✓</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Technical Leadership</h4>
+                                    <p class="text-gray-400">A CEO who codes means decisions come from deep technical understanding, not sales decks.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                                    <span class="text-gold">✓</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Proven Expertise</h4>
+                                    <p class="text-gray-400">50+ AI projects delivered. We've solved complex problems across industries.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                                    <span class="text-gold">✓</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Full-Stack AI Team</h4>
+                                    <p class="text-gray-400">20 engineers covering every aspect—from AI models to cloud deployment to security.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center">
+                                    <span class="text-gold">✓</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white mb-1">Enterprise Ready</h4>
+                                    <p class="text-gray-400">SOC 2 compliance, GDPR readiness, and enterprise-grade security built into everything we do.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-white/5 rounded-2xl p-8 border border-white/10">
+                            <div class="text-6xl mb-4">🤝</div>
+                            <h3 class="text-2xl font-bold mb-4">Ready to Work Together?</h3>
+                            <p class="text-gray-400 mb-6">
+                                Let's discuss how our team can help transform your business with AI.
+                            </p>
+                            <button onclick="openCalendlyModal()" class="gold-button px-8 py-4 rounded-xl font-bold text-lg w-full">
+                                📅 Schedule a Call with Carlos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20" style="background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-dark) 100%);">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Let's Build Something Amazing Together
+            </h2>
+            <p class="text-xl text-white/80 mb-8">
+                Join the companies that trust AX86 to transform their operations with AI. 
+                Book a free consultation and meet the team that will make it happen.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="openCalendlyModal()" class="gold-button px-8 py-4 rounded-xl font-bold text-lg">
+                    📅 Book Free Consultation
+                </button>
+                <a href="process.html" class="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all border border-white/20">
+                    See Our Process
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-8 w-auto">
+                        <span class="text-xl font-bold">AX86</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Enterprise AI Software Factory</p>
+                    <p class="text-gray-500 text-xs mb-3">We build AI agents that automate your workflows using GPT-4, Claude, AWS Bedrock & LlamaIndex.</p>
+                    <div class="flex items-center gap-2 text-sm text-gray-400">
+                        <span>🇬🇹 Guatemala</span>
+                        <span class="text-gray-600">•</span>
+                        <span>🇨🇦 Canada</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 text-gold">Solutions</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="ai_assistants.html" class="hover:text-white transition-colors">🤖 AI Assistants</a></li>
+                        <li><a href="mcp_information.html" class="hover:text-white transition-colors">🔧 MCP Tools</a></li>
+                        <li><a href="enterprise_integration.html" class="hover:text-white transition-colors">🏢 Enterprise Integration</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 text-gold">Company</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="process.html" class="hover:text-white transition-colors">How We Work</a></li>
+                        <li><a href="index.html#pricing" class="hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="index.html#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 text-gold">Get in Touch</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="mailto:admin@ax86.tech" class="hover:text-white transition-colors">📧 admin@ax86.tech</a></li>
+                        <li><a href="https://wa.me/50259307820" target="_blank" class="hover:text-white transition-colors">💬 WhatsApp</a></li>
+                        <li><a href="https://ax86.tech" class="hover:text-white transition-colors">🌐 ax86.tech</a></li>
+                    </ul>
+                    <button onclick="openCalendlyModal()" class="mt-4 bg-gold text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-400 transition-colors">
+                        📅 Book Consultation
+                    </button>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2026 AX86 - AssemblerX86. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <span class="text-xs">Built with 💛 using AI Technology</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Calendly Modal -->
+    <div id="calendlyModal" class="fixed inset-0 z-50 hidden">
+        <div class="fixed inset-0 bg-black/50" onclick="closeCalendlyModal()"></div>
+        <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl w-full max-w-4xl h-[80vh] overflow-hidden">
+            <div class="flex items-center justify-between p-4 border-b">
+                <h3 class="text-xl font-bold">Book a Free Consultation</h3>
+                <button onclick="closeCalendlyModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="h-[calc(100%-60px)]">
+                <div id="calendly-loading" class="flex items-center justify-center h-full">
+                    <p class="text-gray-500">Loading calendar...</p>
+                </div>
+                <div class="calendly-inline-widget" data-url="https://calendly.com/ownstrpk4/free-consultation" style="min-width:320px;height:100%;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Calendly modal functions
+        function openCalendlyModal() {
+            document.getElementById('calendlyModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeCalendlyModal() {
+            document.getElementById('calendlyModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeCalendlyModal();
+            }
+        });
+    </script>
+    
+    <!-- i18n Translation System -->
+    <script src="translations/i18n.js"></script>
+</body>
+</html>

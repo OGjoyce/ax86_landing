@@ -71,6 +71,68 @@
             box-shadow: 0 8px 25px rgba(13, 82, 186, 0.3);
         }
         
+        /* Solutions Dropdown */
+        .solutions-dropdown {
+            position: relative;
+        }
+        .solutions-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 280px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 1rem;
+            z-index: 100;
+        }
+        .solutions-dropdown:hover .solutions-dropdown-content {
+            display: block;
+        }
+        .solutions-dropdown-content a {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .solutions-dropdown-content a:hover {
+            background: rgba(13, 82, 186, 0.05);
+        }
+        
+        /* Language Dropdown */
+        .language-dropdown {
+            position: relative;
+        }
+        .language-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 0.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem;
+            min-width: 150px;
+            z-index: 100;
+        }
+        .language-dropdown:hover .language-dropdown-content {
+            display: block;
+        }
+        .language-dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #374151;
+            transition: all 0.2s;
+        }
+        .language-dropdown-content a:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
         .floating-chat {
             position: fixed;
             bottom: 20px;
@@ -161,7 +223,7 @@
 </head>
 <body class="bg-white text-black">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b-2 border-sapphire">
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
@@ -169,12 +231,105 @@
                         <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto hover:opacity-80 transition-opacity">
                     </a>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex space-x-6 items-center">
                     <a href="index.html" class="text-gray-700 hover:text-sapphire transition-colors">Home</a>
-                    <a href="mcp_information.html" class="text-gray-700 hover:text-sapphire transition-colors">MCP Tools</a>
-                    <a href="ai_assistants.html" class="text-sapphire font-medium">AI Assistants</a>
-                    <a href="enterprise_integration.html" class="text-gray-700 hover:text-sapphire transition-colors">Enterprise</a>
+                    <div class="solutions-dropdown relative">
+                        <button class="text-sapphire font-medium flex items-center space-x-1">
+                            <span>Solutions</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="solutions-dropdown-content absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl border border-gray-200 py-2 min-w-[220px] hidden">
+                            <a href="ai_assistants.html" class="block px-4 py-3 bg-sapphire/5 text-sapphire">
+                                <div class="font-medium">🤖 AI Assistants</div>
+                                <div class="text-xs text-sapphire/70">Sales & customer support AI</div>
+                            </a>
+                            <a href="mcp_information.html" class="block px-4 py-3 text-gray-700 hover:bg-sapphire/5 hover:text-sapphire transition-colors">
+                                <div class="font-medium">🔧 MCP Tools</div>
+                                <div class="text-xs text-gray-500">Custom API integrations</div>
+                            </a>
+                            <a href="enterprise_integration.html" class="block px-4 py-3 text-gray-700 hover:bg-sapphire/5 hover:text-sapphire transition-colors">
+                                <div class="font-medium">🏢 Enterprise</div>
+                                <div class="text-xs text-gray-500">Large-scale AI solutions</div>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="text-gray-700 hover:text-sapphire transition-colors">About Us</a>
+                    <a href="process.html" class="text-gray-700 hover:text-sapphire transition-colors">How We Work</a>
+                    <a href="index.html#pricing" class="text-gray-700 hover:text-sapphire transition-colors">Pricing</a>
                     <a href="index.html#contact" class="text-gray-700 hover:text-sapphire transition-colors">Contact</a>
+                    <div class="language-dropdown">
+                        <button id="lang-btn-desktop" class="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors">
+                            <span class="text-xl" id="current-flag-desktop">🇪🇸</span>
+                            <span class="text-sm font-medium text-gray-700" id="current-lang-desktop">ES</span>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="language-dropdown-content">
+                            <a href="#" onclick="changeLanguage('en')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇺🇸</span> <span>English</span></a>
+                            <a href="#" onclick="changeLanguage('es')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇪🇸</span> <span>Español</span></a>
+                            <a href="#" onclick="changeLanguage('zh')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇨🇳</span> <span>中文</span></a>
+                            <a href="#" onclick="changeLanguage('fr')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇫🇷</span> <span>Français</span></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-sapphire transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop CTA Button -->
+                <div class="hidden lg:block">
+                    <button onclick="openCalendlyModal()" class="bg-sapphire text-white px-5 py-2 rounded-lg font-semibold hover:bg-sapphire-dark transition-colors">Book Free Consultation</button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-200">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🏠 Home</a>
+                    
+                    <div class="px-3 py-2 text-gray-500 font-medium text-sm uppercase tracking-wide">Solutions</div>
+                    <a href="ai_assistants.html" class="block px-6 py-2 text-sapphire font-medium bg-blue-50 rounded-lg">🤖 AI Assistants</a>
+                    <a href="mcp_information.html" class="block px-6 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🔧 MCP Tools</a>
+                    <a href="enterprise_integration.html" class="block px-6 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">🏢 Enterprise</a>
+                    
+                    <div class="border-t border-gray-100 my-2"></div>
+                    <a href="about.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">About Us</a>
+                    <a href="process.html" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">How We Work</a>
+                    <a href="index.html#pricing" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Pricing</a>
+                    <a href="index.html#contact" class="block px-3 py-2 text-gray-700 hover:text-sapphire hover:bg-gray-50 transition-colors">Contact</a>
+                    
+                    <div class="border-t border-gray-100 my-2"></div>
+                    <div class="px-3 py-2">
+                        <div class="language-dropdown">
+                            <button id="lang-btn-mobile" class="flex items-center gap-2 px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors w-full justify-center">
+                                <span class="text-xl" id="current-flag-mobile">🇪🇸</span>
+                                <span class="text-sm font-medium text-gray-700" id="current-lang-mobile">Español</span>
+                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="language-dropdown-content">
+                                <a href="#" onclick="changeLanguage('en')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇺🇸</span> <span>English</span></a>
+                                <a href="#" onclick="changeLanguage('es')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇪🇸</span> <span>Español</span></a>
+                                <a href="#" onclick="changeLanguage('zh')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇨🇳</span> <span>中文</span></a>
+                                <a href="#" onclick="changeLanguage('fr')" class="flex items-center gap-3 hover:bg-blue-50"><span class="text-xl">🇫🇷</span> <span>Français</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-3 py-2">
+                        <button onclick="openCalendlyModal()" class="bg-sapphire text-white w-full px-5 py-2 rounded-lg font-semibold hover:bg-sapphire-dark transition-colors">📅 Book Free Consultation</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -492,9 +647,9 @@
                         </li>
                     </ul>
                     
-                    <a href="index.html#contact" class="w-full border-2 border-sapphire text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-sapphire hover:text-white transition-colors text-center block">
+                    <button onclick="openCalendlyModal()" class="w-full border-2 border-sapphire text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-sapphire hover:text-white transition-colors text-center block">
                         Get Started
-                    </a>
+                    </button>
                 </div>
                 
                 <!-- Professional Plan -->
@@ -539,9 +694,9 @@
                         </li>
                     </ul>
                     
-                    <a href="index.html#contact" class="w-full sapphire-button px-8 py-3 rounded-lg font-semibold text-center block">
+                    <button onclick="openCalendlyModal()" class="w-full sapphire-button px-8 py-3 rounded-lg font-semibold text-center block">
                         Get Started
-                    </a>
+                    </button>
                 </div>
             </div>
             
@@ -564,9 +719,9 @@
                 Join thousands of businesses already using AI assistants to boost sales performance and customer satisfaction.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="index.html#contact" class="bg-white text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Schedule Demo
-                </a>
+                <button onclick="openCalendlyModal()" class="bg-white text-sapphire px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                    📅 Book Free Consultation
+                </button>
                 <a href="mcp_information.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-sapphire transition-colors">
                     Learn About MCP Tools
                 </a>
@@ -577,9 +732,59 @@
     <!-- Footer -->
     <footer class="bg-black text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-12 w-auto mx-auto mb-4">
-                <p class="text-gray-400">&copy; 2025 AX86 - AssemblerX86. All rights reserved.</p>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="resources/SVG/Logo Azul - Amarillo .svg" alt="AX86 Logo" class="h-8 w-auto">
+                        <span class="text-xl font-bold">AX86</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Enterprise AI Software Factory</p>
+                    <p class="text-gray-500 text-xs mb-3">We build AI agents that automate your workflows using GPT-4, Claude, AWS Bedrock & LlamaIndex.</p>
+                    <div class="flex items-center gap-2 text-sm text-gray-400">
+                        <span>🇬🇹 Guatemala</span>
+                        <span class="text-gray-600">•</span>
+                        <span>🇨🇦 Canada</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 text-gold">Solutions</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="ai_assistants.html" class="hover:text-white transition-colors">🤖 AI Assistants</a></li>
+                        <li><a href="mcp_information.html" class="hover:text-white transition-colors">🔧 MCP Tools</a></li>
+                        <li><a href="enterprise_integration.html" class="hover:text-white transition-colors">🏢 Enterprise Integration</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 text-gold">Company</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="process.html" class="hover:text-white transition-colors">How We Work</a></li>
+                        <li><a href="index.html#pricing" class="hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="index.html#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-semibold mb-4 text-gold">Get in Touch</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="mailto:admin@ax86.tech" class="hover:text-white transition-colors">📧 admin@ax86.tech</a></li>
+                        <li><a href="https://wa.me/50259307820" target="_blank" class="hover:text-white transition-colors">💬 WhatsApp</a></li>
+                        <li><a href="https://ax86.tech" class="hover:text-white transition-colors">🌐 ax86.tech</a></li>
+                    </ul>
+                    <button onclick="openCalendlyModal()" class="mt-4 bg-gold text-black px-4 py-2 rounded-lg text-sm font-semibold hover:bg-yellow-400 transition-colors">
+                        📅 Book Consultation
+                    </button>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <p>&copy; 2026 AX86 - AssemblerX86. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <span class="text-xs">Built with 💛 using AI Technology</span>
+                </div>
             </div>
         </div>
     </footer>
@@ -604,6 +809,33 @@
         </div>
     </div>
 
+    <!-- Calendly Booking Modal -->
+    <div id="calendlyModal" class="modal">
+        <div class="modal-content" style="max-width: 900px; height: 90%; margin: 3% auto; border-color: var(--sapphire);">
+            <div class="modal-header" style="background: linear-gradient(135deg, var(--sapphire) 0%, var(--sapphire-light) 100%);">
+                <h3>📅 Book a Free Consultation</h3>
+                <span class="close" onclick="closeCalendlyModal()">&times;</span>
+            </div>
+            <div class="modal-body" style="padding: 0; height: calc(100% - 60px);">
+                <div id="calendly-loading" style="display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; gap: 20px;">
+                    <div style="width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid var(--sapphire); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <p style="color: #666; font-size: 16px;">Loading calendar...</p>
+                </div>
+                <div class="calendly-inline-widget" data-url="https://calendly.com/ownstrpk4/free-consultation?hide_gdpr_banner=1&primary_color=0D52BA" style="width: 100%; height: 100%; display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calendly Widget Script -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
     <script>
         function openChat() {
             document.getElementById('chatModal').style.display = 'block';
@@ -612,13 +844,76 @@
         function closeChat() {
             document.getElementById('chatModal').style.display = 'none';
         }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('chatModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Calendly functionality
+        function openCalendlyModal() {
+            const modal = document.getElementById('calendlyModal');
+            const loading = document.getElementById('calendly-loading');
+            const widget = document.querySelector('.calendly-inline-widget');
+            
+            modal.style.display = 'block';
+            loading.style.display = 'flex';
+            widget.style.display = 'none';
+            
+            if (typeof Calendly !== 'undefined') {
+                Calendly.initInlineWidget({
+                    url: 'https://calendly.com/ownstrpk4/free-consultation?hide_gdpr_banner=1&primary_color=0D52BA',
+                    parentElement: widget,
+                    prefill: {},
+                    utm: {}
+                });
+                setTimeout(() => {
+                    loading.style.display = 'none';
+                    widget.style.display = 'block';
+                }, 1500);
+            } else {
+                setTimeout(() => {
+                    if (typeof Calendly !== 'undefined') {
+                        Calendly.initInlineWidget({
+                            url: 'https://calendly.com/ownstrpk4/free-consultation?hide_gdpr_banner=1&primary_color=0D52BA',
+                            parentElement: widget,
+                            prefill: {},
+                            utm: {}
+                        });
+                        loading.style.display = 'none';
+                        widget.style.display = 'block';
+                    } else {
+                        window.open('https://calendly.com/ownstrpk4/free-consultation', '_blank');
+                        modal.style.display = 'none';
+                    }
+                }, 2000);
             }
         }
+
+        function closeCalendlyModal() {
+            document.getElementById('calendlyModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const chatModal = document.getElementById('chatModal');
+            const calendlyModal = document.getElementById('calendlyModal');
+            if (event.target == chatModal) {
+                chatModal.style.display = 'none';
+            }
+            if (event.target == calendlyModal) {
+                calendlyModal.style.display = 'none';
+            }
+        }
+    </script>
+    
+    <!-- i18n Translation System -->
+    <script src="translations/i18n.js"></script>
+    <script>
+        // Page-specific translations for AI Assistants
+        document.addEventListener('DOMContentLoaded', function() {
+            // Additional page-specific translation logic can be added here
+        });
     </script>
 </body>
 </html>
