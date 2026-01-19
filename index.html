@@ -518,6 +518,289 @@
             filter: drop-shadow(0 0 20px rgba(255,255,255,0.7));
         }
         
+        /* Energy/Electricity Flow Animation */
+        .energy-flow {
+            animation: energyPulse 2s ease-in-out infinite;
+        }
+        
+        .energy-glow {
+            animation: energyFlow 3s linear infinite;
+            box-shadow: 0 0 20px rgba(211,175,54,0.6), 0 0 40px rgba(30,107,204,0.4), 0 0 60px rgba(211,175,54,0.2);
+        }
+        
+        @keyframes energyFlow {
+            0% {
+                opacity: 0.3;
+                transform: translateX(-50%) scaleY(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateX(-50%) scaleY(1);
+            }
+            100% {
+                opacity: 0.3;
+                transform: translateX(-50%) scaleY(0.8);
+            }
+        }
+        
+        @keyframes energyPulse {
+            0%, 100% {
+                filter: brightness(1) contrast(1);
+            }
+            50% {
+                filter: brightness(1.3) contrast(1.2);
+            }
+        }
+        
+        .energy-wave {
+            animation-timing-function: linear;
+        }
+        
+        .energy-pulse {
+            animation-timing-function: linear;
+        }
+        
+        /* Magnetic field animation */
+        .magnetic-field {
+            animation: magneticPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes magneticPulse {
+            0%, 100% {
+                opacity: 0.4;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+        
+        /* Enhanced particle visibility */
+        .energy-flow circle {
+            will-change: transform, opacity;
+        }
+        
+        /* Heat Distortion Effect for Step Numbers */
+        .step-number {
+            position: relative;
+            overflow: visible;
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(255,255,255,0.5);
+        }
+        
+        .heat-distortion {
+            animation: heatWave 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6)) drop-shadow(0 0 15px rgba(211,175,54,0.4));
+        }
+        
+        .heat-distortion::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, 
+                rgba(255,255,255,0.1) 0%, 
+                rgba(211,175,54,0.3) 25%, 
+                rgba(255,255,255,0.1) 50%, 
+                rgba(30,107,204,0.3) 75%, 
+                rgba(255,255,255,0.1) 100%);
+            background-size: 200% 200%;
+            animation: heatShimmer 2s linear infinite;
+            opacity: 0.6;
+            z-index: -1;
+            filter: blur(8px);
+        }
+        
+        .heat-distortion::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: radial-gradient(circle, 
+                rgba(255,255,255,0.2) 0%, 
+                rgba(211,175,54,0.4) 30%, 
+                rgba(30,107,204,0.3) 60%, 
+                transparent 100%);
+            animation: heatPulse 2.5s ease-in-out infinite;
+            opacity: 0.8;
+            z-index: -1;
+        }
+        
+        @keyframes heatWave {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+                filter: drop-shadow(0 0 8px rgba(255,255,255,0.6)) drop-shadow(0 0 15px rgba(211,175,54,0.4)) blur(0px);
+            }
+            25% {
+                transform: scale(1.05) translateY(-1px);
+                filter: drop-shadow(0 0 12px rgba(255,255,255,0.8)) drop-shadow(0 0 20px rgba(211,175,54,0.6)) blur(0.5px);
+            }
+            50% {
+                transform: scale(1.08) translateY(-2px);
+                filter: drop-shadow(0 0 15px rgba(255,255,255,1)) drop-shadow(0 0 25px rgba(211,175,54,0.8)) blur(1px);
+            }
+            75% {
+                transform: scale(1.05) translateY(-1px);
+                filter: drop-shadow(0 0 12px rgba(255,255,255,0.8)) drop-shadow(0 0 20px rgba(211,175,54,0.6)) blur(0.5px);
+            }
+        }
+        
+        @keyframes heatShimmer {
+            0% {
+                background-position: 0% 0%;
+                transform: rotate(0deg);
+            }
+            50% {
+                background-position: 100% 100%;
+                transform: rotate(180deg);
+            }
+            100% {
+                background-position: 0% 0%;
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes heatPulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+        
+        /* Individual step number variations for staggered effect */
+        .step-card[data-step="1"] .heat-distortion,
+        .step-card[data-step="3"] .heat-distortion,
+        .step-card[data-step="5"] .heat-distortion,
+        .step-card[data-step="7"] .heat-distortion,
+        .step-card[data-step="9"] .heat-distortion {
+            animation-delay: 0s;
+        }
+        
+        .step-card[data-step="2"] .heat-distortion,
+        .step-card[data-step="4"] .heat-distortion,
+        .step-card[data-step="6"] .heat-distortion,
+        .step-card[data-step="8"] .heat-distortion,
+        .step-card[data-step="10"] .heat-distortion {
+            animation-delay: 0.5s;
+        }
+        
+        /* AI Agent Flow Card Border Animation */
+        .agent-flow-border {
+            animation: borderPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes borderFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+        
+        @keyframes borderParticle1 {
+            0% { top: 0; left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            25% { top: 0; left: calc(100% - 8px); }
+            50% { top: calc(100% - 8px); left: calc(100% - 8px); }
+            75% { top: calc(100% - 8px); left: 0; }
+            90% { opacity: 1; }
+            100% { top: 0; left: 0; opacity: 0; }
+        }
+        
+        @keyframes borderParticle2 {
+            0% { top: 0; right: 0; opacity: 0; }
+            10% { opacity: 1; }
+            25% { top: calc(100% - 6px); right: 0; }
+            50% { top: calc(100% - 6px); right: calc(100% - 6px); }
+            75% { top: 0; right: calc(100% - 6px); }
+            90% { opacity: 1; }
+            100% { top: 0; right: 0; opacity: 0; }
+        }
+        
+        @keyframes borderParticle3 {
+            0% { bottom: 0; left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            25% { bottom: 0; left: calc(100% - 7px); }
+            50% { bottom: calc(100% - 7px); left: calc(100% - 7px); }
+            75% { bottom: calc(100% - 7px); left: 0; }
+            90% { opacity: 1; }
+            100% { bottom: 0; left: 0; opacity: 0; }
+        }
+        
+        @keyframes borderParticle4 {
+            0% { bottom: 0; right: 0; opacity: 0; }
+            10% { opacity: 1; }
+            25% { bottom: calc(100% - 6px); right: 0; }
+            50% { bottom: calc(100% - 6px); right: calc(100% - 6px); }
+            75% { bottom: 0; right: calc(100% - 6px); }
+            90% { opacity: 1; }
+            100% { bottom: 0; right: 0; opacity: 0; }
+        }
+        
+        @keyframes borderPulse {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+        
+        /* Scroll Down Arrow with Magnetic Field */
+        .scroll-down-indicator {
+            animation: floatArrow 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatArrow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+        }
+        
+        .scroll-arrow {
+            animation: arrowBounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6)) drop-shadow(0 0 20px rgba(255,215,0,0.5));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        @keyframes arrowBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+        
+        .scroll-down-indicator:hover .scroll-arrow {
+            transform: translateY(12px) scale(1.15);
+            filter: drop-shadow(0 6px 16px rgba(0,0,0,0.8)) drop-shadow(0 0 30px rgba(255,215,0,0.7));
+        }
+        
+        .magnetic-field-ring {
+            animation: magneticPulseRing 3s ease-in-out infinite;
+        }
+        
+        @keyframes magneticPulseRing {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+        
         /* Animated gradient background for hero */
         @keyframes gradientShift {
             0% {
@@ -937,6 +1220,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </section>
 
@@ -1008,7 +1292,20 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="rounded-2xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl" style="background: rgba(255,255,255,0.05);">
+                        <!-- Animated Border Flow -->
+                        <div class="agent-flow-border" style="position: absolute; inset: -3px; border-radius: 1rem; overflow: hidden; pointer-events: none; z-index: 1;">
+                            <!-- Animated Border Gradient -->
+                            <div style="position: absolute; inset: 0; border: 3px solid transparent; border-radius: 1rem; background: linear-gradient(90deg, #0D52BA, #1E6BCC, #D3AF36, #E3B100, #0D52BA) border-box; background-size: 200% 200%; animation: borderFlow 3s linear infinite; opacity: 0.8; -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); -webkit-mask-composite: destination-out; mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0); mask-composite: exclude;">
+                            </div>
+                            
+                            <!-- Particle Circles on Border -->
+                            <div style="position: absolute; top: 0; left: 0; width: 8px; height: 8px; border-radius: 50%; background: #D3AF36; box-shadow: 0 0 10px rgba(211,175,54,0.8); animation: borderParticle1 4s linear infinite;"></div>
+                            <div style="position: absolute; top: 0; right: 0; width: 6px; height: 6px; border-radius: 50%; background: #1E6BCC; box-shadow: 0 0 8px rgba(30,107,204,0.7); animation: borderParticle2 5s linear infinite;"></div>
+                            <div style="position: absolute; bottom: 0; left: 0; width: 7px; height: 7px; border-radius: 50%; background: #E3B100; box-shadow: 0 0 9px rgba(227,177,0,0.8); animation: borderParticle3 4.5s linear infinite;"></div>
+                            <div style="position: absolute; bottom: 0; right: 0; width: 6px; height: 6px; border-radius: 50%; background: #D3AF36; box-shadow: 0 0 8px rgba(211,175,54,0.7); animation: borderParticle4 5.5s linear infinite;"></div>
+                        </div>
+                        
+                        <div class="rounded-2xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl relative z-10" style="background: rgba(255,255,255,0.05);">
                             <div class="space-y-6">
                                 <div class="text-center">
                                     <div class="w-20 h-20 mx-auto mb-4 rounded-full flex items-center justify-center shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC, #D3AF36, #E3B100);">
@@ -1067,6 +1364,223 @@
                     <!-- Central Timeline -->
                     <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full" style="background: linear-gradient(to bottom, #0D52BA, #1E6BCC, #D3AF36, #E3B100, #0D52BA); height: calc(100% - 60px); top: 30px; z-index: 1;"></div>
                     
+                    <!-- Animated Electricity/Energy Flow -->
+                    <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 energy-flow" style="width: 120px; height: calc(100% - 60px); top: 30px; z-index: 2; pointer-events: none; overflow: visible;">
+                        <!-- Main Energy Wave -->
+                        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 120 2000" preserveAspectRatio="none" style="overflow: visible;">
+                            <defs>
+                                <linearGradient id="energyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0D52BA; stop-opacity:0" />
+                                    <stop offset="30%" style="stop-color:#1E6BCC; stop-opacity:0.8" />
+                                    <stop offset="50%" style="stop-color:#D3AF36; stop-opacity:1" />
+                                    <stop offset="70%" style="stop-color:#E3B100; stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#0D52BA; stop-opacity:0" />
+                                </linearGradient>
+                                <linearGradient id="energyGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#E3B100; stop-opacity:0" />
+                                    <stop offset="30%" style="stop-color:#D3AF36; stop-opacity:0.8" />
+                                    <stop offset="50%" style="stop-color:#1E6BCC; stop-opacity:1" />
+                                    <stop offset="70%" style="stop-color:#0D52BA; stop-opacity:0.8" />
+                                    <stop offset="100%" style="stop-color:#E3B100; stop-opacity:0" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            
+                            <!-- Sine Wave 1 -->
+                            <path class="energy-wave" d="M60,0 Q70,50 60,100 T60,200 T60,300 T60,400 T60,500 T60,600 T60,700 T60,800 T60,900 T60,1000 T60,1100 T60,1200 T60,1300 T60,1400 T60,1500 T60,1600 T60,1700 T60,1800 T60,1900 T60,2000" 
+                                  fill="none" 
+                                  stroke="url(#energyGradient)" 
+                                  stroke-width="3" 
+                                  opacity="0.7"
+                                  filter="url(#glow)"
+                                  style="stroke-dasharray: 200, 200;">
+                                <animate attributeName="stroke-dashoffset" 
+                                         values="0;400" 
+                                         dur="3s" 
+                                         repeatCount="indefinite"/>
+                                <animate attributeName="opacity" 
+                                         values="0.4;0.9;0.4" 
+                                         dur="2s" 
+                                         repeatCount="indefinite"/>
+                            </path>
+                            
+                            <!-- Sine Wave 2 (offset) -->
+                            <path class="energy-wave" d="M60,0 Q50,50 60,100 T60,200 T60,300 T60,400 T60,500 T60,600 T60,700 T60,800 T60,900 T60,1000 T60,1100 T60,1200 T60,1300 T60,1400 T60,1500 T60,1600 T60,1700 T60,1800 T60,1900 T60,2000" 
+                                  fill="none" 
+                                  stroke="url(#energyGradient2)" 
+                                  stroke-width="2.5" 
+                                  opacity="0.6"
+                                  filter="url(#glow)"
+                                  style="stroke-dasharray: 150, 150;">
+                                <animate attributeName="stroke-dashoffset" 
+                                         values="400;0" 
+                                         dur="2.5s" 
+                                         repeatCount="indefinite"/>
+                                <animate attributeName="opacity" 
+                                         values="0.3;0.8;0.3" 
+                                         dur="1.8s" 
+                                         repeatCount="indefinite"/>
+                            </path>
+                            
+                            <!-- Electrical Particles Following Sine Wave Path -->
+                            <g id="wavePath1">
+                                <path id="electricityPath1" d="M60,0 Q70,50 60,100 T60,200 T60,300 T60,400 T60,500 T60,600 T60,700 T60,800 T60,900 T60,1000 T60,1100 T60,1200 T60,1300 T60,1400 T60,1500 T60,1600 T60,1700 T60,1800 T60,1900 T60,2000" fill="none" stroke="none"/>
+                                
+                                <!-- Particles following the sine wave -->
+                                <circle r="3" fill="#D3AF36" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="3.5s" repeatCount="indefinite">
+                                        <mpath href="#electricityPath1"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;1;1;0" dur="3.5s" repeatCount="indefinite"/>
+                                    <animate attributeName="r" values="2;4;3;2" dur="0.6s" repeatCount="indefinite"/>
+                                </circle>
+                                
+                                <circle r="2.5" fill="#1E6BCC" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="4s" repeatCount="indefinite" begin="0.3s">
+                                        <mpath href="#electricityPath1"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;0.9;0.9;0" dur="4s" repeatCount="indefinite" begin="0.3s"/>
+                                    <animate attributeName="r" values="1.5;4;3;1.5" dur="0.5s" repeatCount="indefinite" begin="0.3s"/>
+                                </circle>
+                                
+                                <circle r="2.8" fill="#E3B100" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="3.8s" repeatCount="indefinite" begin="0.6s">
+                                        <mpath href="#electricityPath1"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;1;1;0" dur="3.8s" repeatCount="indefinite" begin="0.6s"/>
+                                    <animate attributeName="r" values="2;4.5;3;2" dur="0.55s" repeatCount="indefinite" begin="0.6s"/>
+                                </circle>
+                                
+                                <circle r="2.2" fill="#D3AF36" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="4.2s" repeatCount="indefinite" begin="0.9s">
+                                        <mpath href="#electricityPath1"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;0.8;0.8;0" dur="4.2s" repeatCount="indefinite" begin="0.9s"/>
+                                    <animate attributeName="r" values="1.8;3.5;2.5;1.8" dur="0.65s" repeatCount="indefinite" begin="0.9s"/>
+                                </circle>
+                                
+                                <circle r="3.2" fill="#1E6BCC" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="3.6s" repeatCount="indefinite" begin="1.2s">
+                                        <mpath href="#electricityPath1"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;1;1;0" dur="3.6s" repeatCount="indefinite" begin="1.2s"/>
+                                    <animate attributeName="r" values="2;5;3.5;2" dur="0.7s" repeatCount="indefinite" begin="1.2s"/>
+                                </circle>
+                            </g>
+                            
+                            <g id="wavePath2">
+                                <path id="electricityPath2" d="M60,0 Q50,50 60,100 T60,200 T60,300 T60,400 T60,500 T60,600 T60,700 T60,800 T60,900 T60,1000 T60,1100 T60,1200 T60,1300 T60,1400 T60,1500 T60,1600 T60,1700 T60,1800 T60,1900 T60,2000" fill="none" stroke="none"/>
+                                
+                                <circle r="2.8" fill="#E3B100" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="3.4s" repeatCount="indefinite" begin="0.5s">
+                                        <mpath href="#electricityPath2"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;0.9;0.9;0" dur="3.4s" repeatCount="indefinite" begin="0.5s"/>
+                                    <animate attributeName="r" values="2;4;3;2" dur="0.58s" repeatCount="indefinite" begin="0.5s"/>
+                                </circle>
+                                
+                                <circle r="3" fill="#D3AF36" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="3.9s" repeatCount="indefinite" begin="0.8s">
+                                        <mpath href="#electricityPath2"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;1;1;0" dur="3.9s" repeatCount="indefinite" begin="0.8s"/>
+                                    <animate attributeName="r" values="1.5;4.5;3;1.5" dur="0.62s" repeatCount="indefinite" begin="0.8s"/>
+                                </circle>
+                                
+                                <circle r="2.5" fill="#1E6BCC" opacity="0" filter="url(#glow)">
+                                    <animateMotion dur="4.1s" repeatCount="indefinite" begin="1.1s">
+                                        <mpath href="#electricityPath2"/>
+                                    </animateMotion>
+                                    <animate attributeName="opacity" values="0;0.85;0.85;0" dur="4.1s" repeatCount="indefinite" begin="1.1s"/>
+                                    <animate attributeName="r" values="2;3.8;2.8;2" dur="0.52s" repeatCount="indefinite" begin="1.1s"/>
+                                </circle>
+                            </g>
+                            
+                            <!-- Straight falling particles for added effect -->
+                            <circle cx="60" cy="0" r="2" fill="#D3AF36" opacity="0" filter="url(#glow)">
+                                <animate attributeName="cy" values="0;2000" dur="4.5s" repeatCount="indefinite" begin="0.2s"/>
+                                <animate attributeName="opacity" values="0;0.7;0.7;0" dur="4.5s" repeatCount="indefinite" begin="0.2s"/>
+                                <animate attributeName="r" values="1.5;3;2;1.5" dur="0.8s" repeatCount="indefinite" begin="0.2s"/>
+                            </circle>
+                            
+                            <circle cx="60" cy="0" r="2.3" fill="#1E6BCC" opacity="0" filter="url(#glow)">
+                                <animate attributeName="cy" values="0;2000" dur="5s" repeatCount="indefinite" begin="1.5s"/>
+                                <animate attributeName="opacity" values="0;0.6;0.6;0" dur="5s" repeatCount="indefinite" begin="1.5s"/>
+                                <animate attributeName="r" values="1.8;3.5;2.5;1.8" dur="0.75s" repeatCount="indefinite" begin="1.5s"/>
+                            </circle>
+                        </svg>
+                        
+                        <!-- Magnetic Field Lines Spinning Around Timeline -->
+                        <div class="magnetic-field" style="position: absolute; left: 50%; top: 0; width: 200px; height: 100%; transform: translateX(-50%); pointer-events: none;">
+                            <!-- Magnetic Field Circle 1 -->
+                            <svg class="absolute" style="width: 100%; height: 100%; overflow: visible;" viewBox="0 0 200 2000" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="magneticGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#0D52BA; stop-opacity:0.3" />
+                                        <stop offset="50%" style="stop-color:#D3AF36; stop-opacity:0.5" />
+                                        <stop offset="100%" style="stop-color:#1E6BCC; stop-opacity:0.3" />
+                                    </linearGradient>
+                                    <filter id="magneticGlow">
+                                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                        <feMerge>
+                                            <feMergeNode in="coloredBlur"/>
+                                        </feMerge>
+                                    </filter>
+                                </defs>
+                                
+                                <!-- Spinning magnetic field lines -->
+                                <ellipse cx="100" cy="0" rx="40" ry="8" fill="none" stroke="url(#magneticGradient1)" stroke-width="2" opacity="0.6" filter="url(#magneticGlow)" transform-origin="100 0">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 0;360 100 0" dur="8s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="200" rx="35" ry="7" fill="none" stroke="url(#magneticGradient1)" stroke-width="1.8" opacity="0.5" filter="url(#magneticGlow)" transform-origin="100 200">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 200;-360 100 200" dur="10s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="400" rx="38" ry="8.5" fill="none" stroke="url(#magneticGradient1)" stroke-width="2" opacity="0.6" filter="url(#magneticGlow)" transform-origin="100 400">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 400;360 100 400" dur="9s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="600" rx="33" ry="7.5" fill="none" stroke="url(#magneticGradient1)" stroke-width="1.7" opacity="0.5" filter="url(#magneticGlow)" transform-origin="100 600">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 600;-360 100 600" dur="11s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="800" rx="36" ry="8" fill="none" stroke="url(#magneticGradient1)" stroke-width="1.9" opacity="0.55" filter="url(#magneticGlow)" transform-origin="100 800">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 800;360 100 800" dur="8.5s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="1000" rx="34" ry="7.2" fill="none" stroke="url(#magneticGradient1)" stroke-width="1.8" opacity="0.5" filter="url(#magneticGlow)" transform-origin="100 1000">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 1000;-360 100 1000" dur="9.5s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="1200" rx="37" ry="8.2" fill="none" stroke="url(#magneticGradient1)" stroke-width="2" opacity="0.6" filter="url(#magneticGlow)" transform-origin="100 1200">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 1200;360 100 1200" dur="8.8s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="1400" rx="35" ry="7.8" fill="none" stroke="url(#magneticGradient1)" stroke-width="1.9" opacity="0.52" filter="url(#magneticGlow)" transform-origin="100 1400">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 1400;-360 100 1400" dur="10.2s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="1600" rx="39" ry="8.5" fill="none" stroke="url(#magneticGradient1)" stroke-width="2.1" opacity="0.58" filter="url(#magneticGlow)" transform-origin="100 1600">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 1600;360 100 1600" dur="8.3s" repeatCount="indefinite"/>
+                                </ellipse>
+                                
+                                <ellipse cx="100" cy="1800" rx="36" ry="8" fill="none" stroke="url(#magneticGradient1)" stroke-width="2" opacity="0.55" filter="url(#magneticGlow)" transform-origin="100 1800">
+                                    <animateTransform attributeName="transform" type="rotate" values="0 100 1800;-360 100 1800" dur="9.2s" repeatCount="indefinite"/>
+                                </ellipse>
+                            </svg>
+                        </div>
+                        
+                        <!-- Additional CSS-based glow effect -->
+                        <div class="absolute left-1/2 transform -translate-x-1/2 energy-glow" style="width: 8px; height: 100%; background: linear-gradient(to bottom, rgba(211,175,54,0), rgba(30,107,204,0.6), rgba(211,175,54,0.8), rgba(227,177,0,0.6), rgba(13,82,186,0)); border-radius: 50%;"></div>
+                    </div>
+                    
                     <!-- Steps Container -->
                     <div class="relative space-y-20">
                         <!-- Step 1 -->
@@ -1075,7 +1589,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">1</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">1</div>
                                         <h3 class="text-2xl font-bold">Define the Agent's Purpose</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">What problem will the agent solve? Who is the end-user? What kind of inputs and outputs are needed?</p>
@@ -1119,7 +1633,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">2</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">2</div>
                                         <h3 class="text-2xl font-bold">Select Input Sources</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Choose data formats (text, voice, API, etc.). Connect to databases, CRMs, or external APIs. Define how real-time the data should be.</p>
@@ -1149,7 +1663,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">3</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">3</div>
                                         <h3 class="text-2xl font-bold">Data Preparation & Preprocessing</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Clean and normalize the input data. Tokenize text or extract structured data. Format the data for your chosen model.</p>
@@ -1193,7 +1707,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">4</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">4</div>
                                         <h3 class="text-2xl font-bold">Choose the Right Model</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Pick from LLMs (e.g., GPT-4, Claude, Gemini). Decide between hosted APIs or custom models. Ensure the model supports your task: chat, reasoning, retrieval, etc.</p>
@@ -1223,7 +1737,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">5</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">5</div>
                                         <h3 class="text-2xl font-bold">Design the Agent Architecture</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Decide the control flow (decision trees, planner, or tool use). Use frameworks like LangChain, CrewAI, AutoGen. Define how tools, memory, and prompts are connected.</p>
@@ -1267,7 +1781,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">6</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">6</div>
                                         <h3 class="text-2xl font-bold">Craft Prompts & Toolchains</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Create structured prompts using templates. Integrate tools like search, APIs, or calculators. Test for accurate and useful outputs.</p>
@@ -1297,7 +1811,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">7</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">7</div>
                                         <h3 class="text-2xl font-bold">Test & Validate</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Simulate different user inputs. Evaluate agent response accuracy. Identify edge cases and unexpected outputs.</p>
@@ -1341,7 +1855,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">8</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">8</div>
                                         <h3 class="text-2xl font-bold">Deploy the Agent</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Host on cloud (e.g., AWS, Vercel, Streamlit). Provide a frontend (chat UI, voice interface, etc.). Add logging for user interactions.</p>
@@ -1371,7 +1885,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pr-8 order-2 lg:order-1">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">9</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #0D52BA, #1E6BCC);">9</div>
                                         <h3 class="text-2xl font-bold">Monitor & Improve</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Track user queries and agent responses. Monitor accuracy, latency, and failure points. Improve prompts, retrain if needed.</p>
@@ -1415,7 +1929,7 @@
                             <div class="w-full lg:w-[calc(50%-60px)] lg:pl-20 order-2">
                                 <div class="rounded-xl p-8 backdrop-blur-xl border-2 border-white/20 shadow-2xl hover:border-white/40 transition-all step-card-content" style="background: rgba(255,255,255,0.05);">
                                     <div class="flex items-center gap-4 mb-4">
-                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">10</div>
+                                        <div class="w-14 h-14 rounded-full flex items-center justify-center text-xl font-bold shadow-xl step-number heat-distortion" style="background: linear-gradient(135deg, #D3AF36, #E3B100);">10</div>
                                         <h3 class="text-2xl font-bold">Enable Continuous Learning</h3>
                                     </div>
                                     <p class="text-gray-300 mb-4">Fine-tune model with feedback data. Keep tools and APIs updated. Let the agent evolve with use cases.</p>
@@ -3707,8 +4221,12 @@
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Skip if href is just "#" (invalid selector)
+                if (!href || href === '#') return;
+                
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',

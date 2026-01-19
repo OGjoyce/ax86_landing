@@ -9,14 +9,50 @@ let currentLang = localStorage.getItem('ax86-language') || 'es';
 
 /**
  * Load translations from JSON file
+ * Uses XMLHttpRequest for file:// protocol compatibility (local files)
  */
 async function loadTranslations(lang) {
     try {
-        const response = await fetch(`translations/${lang}.json`);
-        if (!response.ok) throw new Error(`Failed to load ${lang}.json`);
-        currentTranslations = await response.json();
-        console.log(`[i18n] Loaded translations for: ${lang}`);
-        return true;
+        // Try fetch first (for http/https)
+        if (window.location.protocol === 'http:' || window.location.protocol === 'https:') {
+            const response = await fetch(`translations/${lang}.json`);
+            if (!response.ok) throw new Error(`Failed to load ${lang}.json`);
+            currentTranslations = await response.json();
+            console.log(`[i18n] Loaded translations for: ${lang}`);
+            return true;
+        }
+        
+        // Use XMLHttpRequest for file:// protocol (local files)
+        return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `translations/${lang}.json`, true);
+            xhr.overrideMimeType('application/json');
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200 || xhr.status === 0) {
+                        try {
+                            currentTranslations = JSON.parse(xhr.responseText);
+                            console.log(`[i18n] Loaded translations for: ${lang}`);
+                            resolve(true);
+                        } catch (parseError) {
+                            console.error(`[i18n] Error parsing translations:`, parseError);
+                            reject(parseError);
+                        }
+                    } else {
+                        console.error(`[i18n] Failed to load ${lang}.json: Status ${xhr.status}`);
+                        reject(new Error(`Failed to load ${lang}.json`));
+                    }
+                }
+            };
+            
+            xhr.onerror = function() {
+                console.error(`[i18n] Network error loading translations`);
+                reject(new Error('Network error'));
+            };
+            
+            xhr.send(null);
+        });
     } catch (error) {
         console.error(`[i18n] Error loading translations:`, error);
         return false;
@@ -70,6 +106,9 @@ function updateLanguageButton(lang) {
 
 async function changeLanguage(lang) {
     console.log(`[i18n] Changing language to: ${lang}`);
+    
+    // Preload the new language file
+    preloadTranslationFile(lang);
     
     const loaded = await loadTranslations(lang);
     if (!loaded) {
@@ -461,11 +500,46 @@ function updateUseCases(tr) {
         }
     });
     
+    // Stats in use cases section
+    const statsContainer = section.querySelector('.grid, .flex');
+    if (statsContainer) {
+        const statLabels = statsContainer.querySelectorAll('.text-sm.text-gray-600, .text-gray-700');
+        statLabels.forEach(label => {
+            const text = label.textContent.trim();
+            if (text.includes('Agents Deployed') || text.includes('Agentes') || text.includes('Agents')) {
+                label.textContent = tr.useCases.statAgentsDeployed;
+            } else if (text.includes('Tasks Automated') || text.includes('Tareas') || text.includes('Tâches')) {
+                label.textContent = tr.useCases.statTasksAutomated;
+            } else if (text.includes('Average Time Saved') || text.includes('Tiempo Promedio') || text.includes('Temps Moyen')) {
+                label.textContent = tr.useCases.statAvgTimeSaved;
+            } else if (text.includes('Deployment Time') || text.includes('Despliegue') || text.includes('Déploiement')) {
+                label.textContent = tr.useCases.statAvgDeploymentTime;
+            }
+        });
+    }
+    
     // CTA in use cases section
-    const ctaTitle = section.querySelector('.use-cases-cta h3, .text-center h3');
-    const ctaSubtitle = section.querySelector('.use-cases-cta p, .text-center p');
-    if (ctaTitle && tr.useCases.ctaTitle) ctaTitle.textContent = tr.useCases.ctaTitle;
-    if (ctaSubtitle && tr.useCases.ctaSubtitle) ctaSubtitle.textContent = tr.useCases.ctaSubtitle;
+    const ctaSection = section.querySelector('.text-center.mt-16, .text-center.pt-12');
+    if (ctaSection) {
+        const ctaTitle = ctaSection.querySelector('h3');
+        const ctaSubtitle = ctaSection.querySelector('p');
+        const ctaButtons = ctaSection.querySelectorAll('button');
+        
+        if (ctaTitle && tr.useCases.ctaTitle) ctaTitle.textContent = tr.useCases.ctaTitle;
+        if (ctaSubtitle && tr.useCases.ctaSubtitle) ctaSubtitle.textContent = tr.useCases.ctaSubtitle;
+        
+        // Update CTA buttons
+        ctaButtons.forEach((btn, idx) => {
+            const btnText = btn.textContent.toLowerCase();
+            if (btnText.includes('consultation') || btnText.includes('consulta') || btnText.includes('consultation')) {
+                btn.textContent = '📅 ' + tr.useCases.ctaBtn1;
+            } else if (btnText.includes('process') || btnText.includes('proceso') || btnText.includes('processus')) {
+                btn.textContent = tr.useCases.ctaBtn2Process + ' →';
+            } else if (btnText.includes('pricing') || btnText.includes('precio') || btnText.includes('tarif')) {
+                btn.textContent = tr.useCases.ctaBtn2;
+            }
+        });
+    }
 }
 
 function updateProcess(tr) {
@@ -499,6 +573,27 @@ function updateProcess(tr) {
         items.forEach((item, idx) => {
             const key = `step${num}Item${idx + 1}`;
             if (tr.process[key]) item.textContent = tr.process[key];
+        });
+    }
+    
+    // CTA section in process
+    const ctaSection = section.querySelector('.text-center.mt-16, .text-center.pt-12');
+    if (ctaSection && tr.process.ctaTitle) {
+        const ctaTitle = ctaSection.querySelector('h3');
+        const ctaSubtitle = ctaSection.querySelector('p');
+        const ctaButtons = ctaSection.querySelectorAll('button');
+        
+        if (ctaTitle) ctaTitle.textContent = tr.process.ctaTitle;
+        if (ctaSubtitle && tr.process.ctaSubtitle) ctaSubtitle.textContent = tr.process.ctaSubtitle;
+        
+        // Update CTA buttons
+        ctaButtons.forEach((btn) => {
+            const btnText = btn.textContent.toLowerCase();
+            if (btnText.includes('consultation') || btnText.includes('consulta') || btnText.includes('consultation')) {
+                btn.textContent = tr.process.ctaBtn1;
+            } else if (btnText.includes('pricing') || btnText.includes('precio') || btnText.includes('tarif')) {
+                btn.textContent = tr.process.ctaBtn2;
+            }
         });
     }
 }
@@ -587,6 +682,21 @@ function updateContact(tr) {
     // CTA button
     const cta = section.querySelector('button');
     if (cta) cta.textContent = tr.contact.cta;
+    
+    // WhatsApp link
+    const whatsappLink = section.querySelector('a[href*="whatsapp"], a[href*="wa.me"]');
+    if (whatsappLink && tr.contact.ctaWhatsApp) {
+        whatsappLink.textContent = tr.contact.ctaWhatsApp;
+    }
+    
+    // Disclaimer text
+    const disclaimer = section.querySelector('p.text-sm, .text-gray-400, .disclaimer');
+    if (disclaimer && tr.contact.disclaimer) {
+        const disclaimerText = disclaimer.textContent.toLowerCase();
+        if (disclaimerText.includes('credit card') || disclaimerText.includes('tarjeta') || disclaimerText.includes('carte')) {
+            disclaimer.textContent = tr.contact.disclaimer;
+        }
+    }
 }
 
 function updateFooter(tr) {
@@ -594,6 +704,16 @@ function updateFooter(tr) {
     
     const footer = document.querySelector('footer');
     if (!footer) return;
+    
+    // Footer tagline/description
+    footer.querySelectorAll('p').forEach(p => {
+        const text = p.textContent.toLowerCase();
+        if (text.includes('enterprise ai software factory') || text.includes('fábrica de software') || text.includes('usine de logiciels')) {
+            if (tr.footer.tagline) p.textContent = tr.footer.tagline;
+        } else if (text.includes('build ai agents') || text.includes('construimos agentes') || text.includes('construisons des agents') || text.includes('构建ai代理')) {
+            if (tr.footer.description) p.textContent = tr.footer.description;
+        }
+    });
     
     // Footer section titles (h3 or h4)
     const headings = footer.querySelectorAll('h3, h4');
@@ -985,12 +1105,91 @@ function updateConsultationButtons(tr) {
     });
 }
 
+// ==================== BROWSER LANGUAGE DETECTION ====================
+
+/**
+ * Detect browser language and return supported language code
+ * Defaults to Spanish (es) if browser language is not supported
+ */
+function detectBrowserLanguage() {
+    const browserLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+    const langCode = browserLang.split('-')[0]; // Extract 'en' from 'en-US'
+    const supportedLangs = ['en', 'es', 'fr', 'zh'];
+    return supportedLangs.includes(langCode) ? langCode : 'es';
+}
+
+/**
+ * Preload translation file by adding link rel="preload" to head
+ */
+function preloadTranslationFile(lang) {
+    // Remove existing preload link if any
+    const existingPreload = document.getElementById('i18n-preload');
+    if (existingPreload) {
+        existingPreload.remove();
+    }
+    
+    // Create new preload link
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.href = `translations/${lang}.json`;
+    preloadLink.as = 'fetch';
+    preloadLink.crossOrigin = 'anonymous';
+    preloadLink.id = 'i18n-preload';
+    
+    // Insert into head
+    document.head.appendChild(preloadLink);
+    console.log(`[i18n] Preloaded translation file: ${lang}.json`);
+}
+
+/**
+ * Initialize language system with browser detection
+ */
+async function initializeLanguage() {
+    // Check localStorage first (user preference)
+    const savedLang = localStorage.getItem('ax86-language');
+    
+    // If no saved preference, detect browser language
+    const lang = savedLang || detectBrowserLanguage();
+    
+    // Preload translation file
+    preloadTranslationFile(lang);
+    
+    // Load translations
+    const loaded = await loadTranslations(lang);
+    if (!loaded) {
+        console.error(`[i18n] Failed to load translations for ${lang}, falling back to Spanish`);
+        await loadTranslations('es');
+        currentLang = 'es';
+    } else {
+        currentLang = lang;
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('ax86-language', currentLang);
+    
+    // Set HTML lang attribute
+    document.documentElement.lang = currentLang;
+    
+    // Update language button
+    updateLanguageButton(currentLang);
+    
+    // Update all texts
+    updateAllTexts();
+    
+    console.log(`[i18n] Initialized with language: ${currentLang}`);
+}
+
 // ==================== INITIALIZATION ====================
 
-document.addEventListener('DOMContentLoaded', async function() {
-    const savedLang = localStorage.getItem('ax86-language') || 'es';
-    await changeLanguage(savedLang);
-});
+// Initialize language as early as possible (before DOMContentLoaded)
+// This allows preloading to happen early
+if (document.readyState === 'loading') {
+    // DOM is still loading, wait for it
+    document.addEventListener('DOMContentLoaded', initializeLanguage);
+} else {
+    // DOM is already loaded, initialize immediately
+    initializeLanguage();
+}
 
 // Export for global access
 window.changeLanguage = changeLanguage;
